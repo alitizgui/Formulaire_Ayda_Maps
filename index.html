@@ -1,60 +1,21 @@
-<!DOCTYPE html>
-<html dir="rtl" lang="ar">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج بيانات احترافي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <div class="form-container">
-        <div class="form-header">
-            <i class="fas fa-qrcode"></i>
-            <h1>نموذج البيانات</h1>
-        </div>
+<!-- Remplacez votre bouton par ceci -->
+<button type="button" onclick="generateQR()" class="submit-btn" id="generateBtn">
+    <i class="fas fa-qrcode"></i> إنشاء رمز الاستجابة
+</button>
 
-        <form id="dataForm">
-            <div class="form-group">
-                <label for="douar">الدوار</label>
-                <input type="text" id="douar" required>
-            </div>
-
-            <div class="form-group">
-                <label for="afous">أَفُوس</label>
-                <input type="text" id="afous" required>
-            </div>
-
-            <div class="form-group">
-                <label for="famille">العائلة</label>
-                <input type="text" id="famille" required>
-            </div>
-
-            <div class="form-group">
-                <label for="nom_complet">الاسم الكامل</label>
-                <input type="text" id="nom_complet" required>
-            </div>
-
-            <div class="form-group">
-                <label for="telephone">رقم الهاتف (واتساب)</label>
-                <input type="tel" id="telephone" required>
-            </div>
-
-            <button type="button" onclick="generateQR()" class="submit-btn">
-                <i class="fas fa-qrcode"></i> إنشاء رمز الاستجابة
-            </button>
-        </form>
-
-        <div class="qr-section">
-            <h2>رمز البيانات</h2>
-            <div id="qrcode"></div>
-            <button onclick="downloadQR()" class="download-btn" id="downloadBtn" disabled>
-                <i class="fas fa-download"></i> تحميل الرمز
-            </button>
-        </div>
-    </div>
-
-    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+<!-- Et ajoutez ce style dans le head -->
+<style>
+    #qrcode {
+        min-height: 220px; /* Empêche le collapse du div */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #f5f5f5;
+        border-radius: 8px;
+        margin: 15px 0;
+    }
+    
+    #qrcode img {
+        max-width: 100%;
+    }
+</style>
