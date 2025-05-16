@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulaire Ayda Maps - FR/AR</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1 data-lang="fr">Formulaire Client</h1>
+        <h1 data-lang="ar" style="display:none">استمارة العميل</h1>
+        
+        <div class="form-group">
+            <label data-lang="fr">Nom Complet</label>
+            <label data-lang="ar" style="display:none">الاسم الكامل</label>
+            <input type="text" id="nom" required>
+        </div>
+
+        <!-- Ajoutez d'autres champs ici -->
+
+        <button onclick="generateQR()" data-lang="fr">Générer QR Code</button>
+        <button onclick="generateQR()" data-lang="ar" style="display:none">إنشاء رمز الاستجابة</button>
+
+        <div id="qrcode"></div>
+    </div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
