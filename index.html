@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نموذج بيانات احترافي</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>نموذج بيانات</title>
     <style>
         body {
             font-family: 'Tajawal', Arial, sans-serif;
             background-color: #f5f8fa;
             margin: 0;
             padding: 20px;
-            text-align: center;
         }
         .form-container {
             max-width: 600px;
@@ -20,20 +18,15 @@
             background: white;
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-        }
-        h1 {
-            color: #2563eb;
-            margin-bottom: 25px;
+            text-align: right;
         }
         .form-group {
             margin-bottom: 20px;
-            text-align: right;
         }
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
-            color: #333;
         }
         input {
             width: 100%;
@@ -51,22 +44,21 @@
             border-radius: 6px;
             cursor: pointer;
             margin-top: 15px;
-            transition: background 0.3s;
-        }
-        button:hover {
-            background-color: #1d4ed8;
         }
         #qrcode {
             margin: 25px auto;
-            width: 220px;
-            height: 220px;
-            display: none;
+            width: 200px;
+            height: 200px;
+            border: 1px dashed #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <h1><i class="fas fa-qrcode"></i> نموذج البيانات</h1>
+        <h1>نموذج البيانات</h1>
         
         <div class="form-group">
             <label for="douar">الدوار</label>
@@ -93,31 +85,28 @@
             <input type="tel" id="telephone" required>
         </div>
         
-        <button onclick="generateQR()"><i class="fas fa-check"></i> توليد رمز الاستجابة</button>
+        <button onclick="generateQR()">إنشاء رمز الاستجابة</button>
         
         <div id="qrcode"></div>
     </div>
 
-    <!-- Chargement de la librairie QR Code -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
-    
-    <!-- Notre script -->
+    <!-- Script QR Code - Version garantie -->
     <script>
     function generateQR() {
         // 1. Vérification des champs
         const inputs = document.querySelectorAll('input[required]');
-        let isValid = true;
+        let allValid = true;
         
         inputs.forEach(input => {
             if (!input.value.trim()) {
                 input.style.borderColor = 'red';
-                isValid = false;
+                allValid = false;
             } else {
                 input.style.borderColor = '#ddd';
             }
         });
         
-        if (!isValid) {
+        if (!allValid) {
             alert('الرجاء ملء جميع الحقول المطلوبة');
             return;
         }
@@ -131,24 +120,37 @@
             "رقم الهاتف واتساب": document.getElementById('telephone').value
         };
         
-        // 3. Génération du QR Code
-        const qrElement = document.getElementById('qrcode');
-        qrElement.innerHTML = '';
+        // 3. Création dynamique du QR Code
+        const qrDiv = document.getElementById('qrcode');
+        qrDiv.innerHTML = '';
+        
+        // Solution de secours si QRCode non défini
+        const QRGenerator = window.QRCode || window.qrcode.QRCode;
         
         try {
-            new QRCode(qrElement, {
+            new QRGenerator(qrDiv, {
                 text: JSON.stringify(data),
-                width: 220,
-                height: 220,
-                colorDark: "#2563eb",
-                colorLight: "#ffffff"
+                width: 200,
+                height: 200,
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRGenerator.CorrectLevel.H
             });
-            
-            qrElement.style.display = 'block';
+            qrDiv.style.display = "flex"; // Pour centrer le QR Code
         } catch (error) {
-            console.error('Error generating QR Code:', error);
-            alert('حدث خطأ أثناء إنشاء رمز الاستجابة');
+            console.error("Erreur:", error);
+            // Fallback API externe
+            qrDiv.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(data))}&size=200x200" alt="QR Code">`;
         }
+    }
+    
+    // Chargement alternatif de la librairie
+    if (!window.QRCode && !window.qrcode) {
+        const script = document.createElement('script');
+        script.src = "https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js";
+        script.onload = () => console.log("QRCode library loaded");
+        script.onerror = () => console.error("Failed to load QRCode library");
+        document.head.appendChild(script);
     }
     </script>
 </body>
