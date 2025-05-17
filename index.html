@@ -1,14 +1,11 @@
-<!DOCTYPE html>
+: <!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web</title>
-    <!-- Chargement des polices et icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <!-- Chargement des scripts -->
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
@@ -76,9 +73,9 @@
         
         label {
             display: block;
-            margin-bottom: 1.2rem;
+            margin-bottom: 0.8rem;
             color: #ffffff;
-            font-size: 1.5rem;
+            font-size: 2.0rem;
             font-weight: 500;
         }
         
@@ -159,25 +156,24 @@
         .registration-code {
             text-align: center;
             margin-top: 1rem;
-            font-size: 2.2rem;
+            font-size: 2.2rem; /* Taille doublée */
         }
         .registration-code span {
             color: var(--primary);
             font-weight: bold;
         }
-
-        .form-container h1 {
-            font-size: 2.0rem;
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
-            gap: 15px;
-            margin-bottom: 2rem;
-        }
-        .form-container h1 i {
-            font-size: 2.0rem;
-            order: 0;
-        }
+.form-container h1 {
+    font-size: 2.0rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alignement à gauche */
+    gap: 15px;
+    margin-bottom: 2rem;
+}
+.form-container h1 i {
+    font-size: 2.0rem;
+    order: 0; /* Réinitialiser l'ordre */
+}
 
         /* Page de remerciement */
         #thank-you-page {
@@ -226,26 +222,6 @@
         #download-pdf:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Styles spécifiques pour l'impression PDF */
-        @media print {
-            body * {
-                visibility: hidden;
-            }
-            .form-container, .form-container * {
-                visibility: visible;
-            }
-            .form-container {
-                position: absolute;
-                left: 0;
-                top: 0;
-                width: 100%;
-                margin: 0;
-                padding: 20px;
-                background: white;
-                color: black;
-            }
         }
     </style>
 </head>
@@ -296,7 +272,7 @@
                     <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات</div>
                 </div>
                 
-                <button type="button" id="generate-btn">
+                <button type="button" id="generate-btn" onclick="generateQR()">
                     <i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات
                 </button>
                 
@@ -322,27 +298,17 @@
                 <p>سيتم استخدام هذه البيانات لتحسين خدماتنا وتقديم تجربة أفضل لكم.</p>
             </div>
             
-            <button id="download-pdf">
-                <i class="fas fa-file-pdf"></i> تحميل الوثيقة PDF
+            <button id="download-pdf" onclick="generatePDF()">
+                <i class="fas fa-download"></i> تحميل الوثيقة PDF
             </button>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script>
-    // Configuration globale
-    let qrCodeInstance = null;
+    // Variables pour le timer
     let inactivityTimer;
     let userInteracted = false;
-    const arabicRegex = /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s\u064B-\u065F\u0670]+$/;
-
-    // Initialisation après chargement du DOM
-    document.addEventListener('DOMContentLoaded', function() {
-        // Génération du code unique
-        document.getElementById('uniqueCode').textContent = generateUniqueCode();
-        
-        // Configuration des écouteurs d'événements
-        setupEventListeners();
-    });
 
     // Fonction pour générer le code unique
     function generateUniqueCode() {
@@ -357,34 +323,64 @@
         return seconds + minutes + hours + day + month + year;
     }
 
-    // Configuration des écouteurs d'événements
-    function setupEventListeners() {
-        // Validation en temps réel
-        document.querySelectorAll('input[type="text"]').forEach(input => {
-            input.addEventListener('input', function() {
-                validateArabicInput(this);
-            });
-        });
-
-        // Validation téléphone
-        document.getElementById('telephone').addEventListener('input', function() {
-            this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-            document.getElementById('phoneError').style.display = 'none';
-        });
-
-        // Bouton de génération QR
-        document.getElementById('generate-btn').addEventListener('click', generateQR);
-
-        // Bouton de téléchargement PDF
-        document.getElementById('download-pdf').addEventListener('click', generatePDF);
-
-        // Timer d'inactivité
+    // Afficher le code au chargement
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('uniqueCode').textContent = generateUniqueCode();
+        
+        // Écouteurs d'événements pour les interactions utilisateur
         document.addEventListener('mousedown', resetInactivityTimer);
         document.addEventListener('touchstart', resetInactivityTimer);
         document.addEventListener('keydown', resetInactivityTimer);
+        document.addEventListener('scroll', resetInactivityTimer);
+    });
+
+    function validatePhone() {
+        const phone = document.getElementById('telephone').value;
+        const errorElement = document.getElementById('phoneError');
+        
+        if (phone.startsWith('+') || phone.startsWith('00')) {
+            errorElement.style.display = 'none';
+            return true;
+        }
+        
+        if (phone.startsWith('0')) {
+            if (/^0[0-9]{9}$/.test(phone)) {
+                errorElement.style.display = 'none';
+                return true;
+            } else {
+                errorElement.style.display = 'block';
+                return false;
+            }
+        }
+        
+        errorElement.style.display = 'block';
+        return false;
     }
 
-    // Fonction de génération QR
+    function validateForm() {
+        let isValid = true;
+        const inputs = document.querySelectorAll('input[required]');
+        
+        inputs.forEach(input => {
+            const errorElement = document.getElementById(`${input.id}Error`);
+            
+            if (!input.value.trim()) {
+                input.style.borderColor = '#f87171';
+                if (errorElement) errorElement.style.display = 'block';
+                isValid = false;
+            } else if (!input.validity.valid) {
+                input.style.borderColor = '#f87171';
+                if (errorElement) errorElement.style.display = 'block';
+                isValid = false;
+            } else {
+                input.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                if (errorElement) errorElement.style.display = 'none';
+            }
+        });
+        
+        return isValid && validatePhone();
+    }
+
     function generateQR() {
         if (!validateForm()) {
             alert("الرجاء ملء جميع البيانات المطلوبة بشكل صحيح");
@@ -404,7 +400,7 @@
         qrElement.innerHTML = '';
         
         try {
-            qrCodeInstance = new QRCode(qrElement, {
+            new QRCode(qrElement, {
                 text: JSON.stringify(formData),
                 width: 300,
                 height: 300,
@@ -412,173 +408,38 @@
                 colorLight: "#1e1e1e"
             });
             
-            // Animation
+            // Animation du QR code
             setTimeout(() => {
                 qrElement.classList.add('blink');
+                
                 setTimeout(() => {
                     qrElement.classList.remove('blink');
+                    // Démarrer le timer après l'animation
                     startInactivityTimer();
                 }, 3000);
             }, 500);
         } catch (error) {
-            console.error("Erreur QR Code:", error);
             qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+            // Démarrer le timer si erreur
             startInactivityTimer();
         }
     }
 
-    // Fonction de génération PDF optimisée
-    async function generatePDF() {
-        try {
-            // Préparation du contenu
-            const element = document.getElementById('main-content');
-            const clone = element.cloneNode(true);
-            document.body.appendChild(clone);
-
-            // Optimisation pour l'impression
-            clone.style.width = '100%';
-            clone.style.padding = '0';
-            clone.style.margin = '0';
-            clone.style.backgroundColor = '#fff';
-
-            // Ajustement des styles
-            const formContainer = clone.querySelector('.form-container');
-            if (formContainer) {
-                formContainer.style.maxWidth = '100%';
-                formContainer.style.padding = '15px';
-                formContainer.style.margin = '0 auto';
-                formContainer.style.background = '#fff';
-                formContainer.style.color = '#000';
-                formContainer.style.boxShadow = 'none';
-            }
-
-            // Ajustement typographique
-            clone.querySelectorAll('label').forEach(label => {
-                label.style.fontSize = '1.1rem';
-                label.style.color = '#000';
-            });
-
-            clone.querySelectorAll('input').forEach(input => {
-                input.style.fontSize = '1rem';
-                input.style.width = '100%';
-                input.style.backgroundColor = '#f9f9f9';
-                input.style.color = '#000';
-                input.style.border = '1px solid #ddd';
-            });
-
-            // Optimisation du QR Code
-            const qrcode = clone.querySelector('#qrcode');
-            if (qrcode) {
-                qrcode.style.width = '120px';
-                qrcode.style.height = '120px';
-                qrcode.style.margin = '10px auto';
-                qrcode.style.border = '1px solid #eee';
-            }
-
-            // Configuration PDF
-            const opt = {
-                margin: [5, 5, 5, 5],
-                filename: `AydaMaps_${document.getElementById('uniqueCode').textContent}.pdf`,
-                image: { 
-                    type: 'jpeg', 
-                    quality: 0.95 
-                },
-                html2canvas: { 
-                    scale: 1.8,
-                    logging: false,
-                    useCORS: true,
-                    scrollX: 0,
-                    scrollY: 0,
-                    windowWidth: document.documentElement.offsetWidth,
-                    windowHeight: document.documentElement.offsetHeight
-                },
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                }
-            };
-
-            // Génération du PDF
-            await html2pdf().set(opt).from(clone).save();
-            
-            // Nettoyage
-            document.body.removeChild(clone);
-            
-            // Affichage page de remerciement
-            showThankYouPage();
-
-        } catch (error) {
-            console.error('Erreur PDF:', error);
-            alert('حدث خطأ أثناء إنشاء ملف PDF. يرجى المحاولة مرة أخرى');
-            
-            // Nettoyage en cas d'erreur
-            const clone = document.querySelector('body > #main-content[style*="width: 100%"]');
-            if (clone) document.body.removeChild(clone);
-        }
-    }
-
-    // Fonctions de validation
-    function validateForm() {
-        let isValid = true;
-        const inputs = document.querySelectorAll('input[required]');
-        
-        inputs.forEach(input => {
-            const errorElement = document.getElementById(`${input.id}Error`);
-            
-            if (!input.value.trim()) {
-                markInputAsInvalid(input, errorElement);
-                isValid = false;
-            } else if (input.id === 'telephone') {
-                if (!validatePhone(input)) {
-                    markInputAsInvalid(input, errorElement);
-                    isValid = false;
-                }
-            } else if (!arabicRegex.test(input.value.trim())) {
-                markInputAsInvalid(input, errorElement);
-                isValid = false;
-            } else {
-                markInputAsValid(input, errorElement);
-            }
-        });
-        
-        return isValid;
-    }
-
-    function validatePhone(input) {
-        const phone = input.value;
-        if (phone.startsWith('+') || phone.startsWith('00')) {
-            return true;
-        }
-        return phone.startsWith('0') ? /^0[0-9]{9}$/.test(phone) : false;
-    }
-
-    function validateArabicInput(input) {
-        const errorElement = input.nextElementSibling;
-        if (!arabicRegex.test(input.value)) {
-            markInputAsInvalid(input, errorElement);
-        } else {
-            markInputAsValid(input, errorElement);
-        }
-    }
-
-    function markInputAsInvalid(input, errorElement) {
-        input.style.borderColor = '#f87171';
-        if (errorElement) errorElement.style.display = 'block';
-    }
-
-    function markInputAsValid(input, errorElement) {
-        input.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-        if (errorElement) errorElement.style.display = 'none';
-    }
-
-    // Gestion du timer d'inactivité
     function startInactivityTimer() {
-        if (inactivityTimer) clearTimeout(inactivityTimer);
+        // Réinitialiser le timer s'il existe déjà
+        if (inactivityTimer) {
+            clearTimeout(inactivityTimer);
+        }
+        
+        // Réinitialiser le flag d'interaction
         userInteracted = false;
-        inactivityTimer = setTimeout(() => {
-            if (!userInteracted) showThankYouPage();
-        }, 5000);
+        
+        // Démarrer un nouveau timer de 5 secondes
+        inactivityTimer = setTimeout(function() {
+            if (!userInteracted) {
+                showThankYouPage();
+            }
+        }, 5000); // 5 secondes
     }
 
     function resetInactivityTimer() {
@@ -593,6 +454,73 @@
         document.getElementById('main-content').style.display = 'none';
         document.getElementById('thank-you-page').style.display = 'block';
     }
+
+    function generatePDF() {
+        // Afficher à nouveau le contenu principal avant la génération du PDF
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('thank-you-page').style.display = 'none';
+        
+        // Créer un clone du contenu principal pour l'impression
+        const element = document.getElementById('main-content');
+        const clone = element.cloneNode(true);
+        
+        // Appliquer des styles spécifiques pour l'impression
+        clone.style.width = '100%';
+        clone.style.margin = '0';
+        clone.style.padding = '0';
+        clone.querySelector('.form-container').style.maxWidth = '100%';
+        clone.querySelector('.form-container').style.margin = '0';
+        clone.querySelector('.form-container').style.padding = '20px';
+        clone.querySelector('#qrcode').style.width = '200px';
+        clone.querySelector('#qrcode').style.height = '200px';
+        
+        // Ajouter le clone au corps temporairement
+        document.body.appendChild(clone);
+        
+        const opt = {
+            margin: 5,
+            filename: 'وثيقة_أيدا_مابس.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 1,
+                logging: true,
+                useCORS: true,
+                width: clone.offsetWidth,
+                height: clone.offsetHeight
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait'
+            }
+        };
+
+        // Générer le PDF
+        html2pdf().set(opt).from(clone).save().then(() => {
+            // Supprimer le clone après la génération du PDF
+            document.body.removeChild(clone);
+            
+            // Re-cacher le contenu principal et réafficher la page de remerciement
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('thank-you-page').style.display = 'block';
+        });
+    }
+    
+    document.getElementById('telephone').addEventListener('input', function() {
+        this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+        document.getElementById('phoneError').style.display = 'none';
+    });
+
+    // Validation en temps réel pour les champs arabes
+    document.querySelectorAll('input[pattern="[\\u0600-\\u06FF\\s]+"]').forEach(input => {
+        input.addEventListener('input', function() {
+            const errorElement = document.getElementById(`${this.id}Error`);
+            if (this.validity.valid) {
+                this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                errorElement.style.display = 'none';
+            }
+        });
+    });
     </script>
 </body>
 </html>
