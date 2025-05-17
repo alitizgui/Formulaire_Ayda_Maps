@@ -141,6 +141,17 @@
             margin-top: 0.5rem;
             display: none;
         }
+
+        /* Style ajouté uniquement pour le code */
+        .registration-code {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+        .registration-code span {
+            color: var(--primary);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -176,7 +187,7 @@
             </div>
             
             <div class="form-group">
-                <label for="nom"><i class="fas fa-user"></i> الاسم والنَّسَب</label>
+                <label for="nom"><i class="fas fa-user"></i> الاسم و النَّسَب</label>
                 <input type="text" id="nom" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
                 <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
             </div>
@@ -197,11 +208,34 @@
                 <div id="qrcode"></div>
                 <div class="qrcode-title">نظام البيانات الذكية أيدا مابس</div>
             </div>
+
+            <!-- Ajout du code d'enregistrement -->
+            <div class="registration-code">
+                رقم التسجيل: <span id="uniqueCode"></span>
+            </div>
         </form>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script>
+    // Fonction pour générer le code unique (ajoutée sans modifier le reste)
+    function generateUniqueCode() {
+        const now = new Date();
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = String(now.getFullYear()).slice(-2);
+        
+        return seconds + minutes + hours + day + month + year;
+    }
+
+    // Afficher le code au chargement (ajouté sans modifier le reste)
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('uniqueCode').textContent = generateUniqueCode();
+    });
+
     function validatePhone() {
         const phone = document.getElementById('telephone').value;
         const errorElement = document.getElementById('phoneError');
@@ -256,6 +290,7 @@
         }
         
         const formData = {
+            "رقم التسجيل": document.getElementById('uniqueCode').textContent, // Ajout du code unique
             "الدوار": document.getElementById('douar').value,
             "أَفُوس": document.getElementById('afous').value,
             "العائلة": document.getElementById('famille').value,
