@@ -237,7 +237,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label for="nom"><i class="fas fa-user"></i> الاسم واللقب</label>
+                    <label for="nom"><i class="fas fa-user"></i> الاسم و اللقب</label>
                     <input type="text" id="nom" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
                     <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
                 </div>
@@ -272,7 +272,7 @@
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>نشكركم على تقديم معلوماتكم وثقتكم بخدماتنا.</p>
+                <p>نشكركم على تقديم معلوماتكم و على ثقتكم بخدماتنا.</p>
                 <p>سيتم استخدام هذه البيانات لتحسين خدماتنا وتقديم تجربة أفضل لكم.</p>
             </div>
             
@@ -412,12 +412,12 @@
         // Réinitialiser le flag d'interaction
         userInteracted = false;
         
-        // Démarrer un nouveau timer de 10 secondes
+        // Démarrer un nouveau timer de 5 secondes
         inactivityTimer = setTimeout(function() {
             if (!userInteracted) {
                 showThankYouPage();
             }
-        }, 10000); // 10 secondes
+        }, 5000); // 5 secondes
     }
 
     function resetInactivityTimer() {
