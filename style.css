@@ -113,3 +113,9 @@ button {
         margin: 1rem;
     }
 }
+.arabic-only-error {
+    color: #f87171;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    display: none;
+}
