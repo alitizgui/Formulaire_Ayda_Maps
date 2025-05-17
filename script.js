@@ -1,6 +1,11 @@
 // Configuration globale
 let qrCodeInstance = null;
 const arabicRegex = /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s\u064B-\u065F\u0670]+$/;
+const PDF_CONFIG = {
+    margin: [5, 5, 5, 5],
+    imageQuality: 0.95,
+    scale: 1.8
+};
 
 // Initialisation après chargement du DOM
 document.addEventListener('DOMContentLoaded', function() {
@@ -10,8 +15,11 @@ document.addEventListener('DOMContentLoaded', function() {
     // Configuration des écouteurs d'événements
     setupEventListeners();
     
-    // Chargement préventif de la librairie QRCode
-    loadQRCodeLibrary().catch(console.error);
+    // Chargement préventif des librairies
+    Promise.all([
+        loadQRCodeLibrary(),
+        loadHtml2PdfLibrary()
+    ]).catch(console.error);
 });
 
 // Fonctions principales
@@ -72,6 +80,87 @@ function validateForm() {
     return isValid;
 }
 
+async function generatePDF() {
+    try {
+        // 1. Préparation du contenu
+        const element = document.getElementById('main-content');
+        const clone = element.cloneNode(true);
+        document.body.appendChild(clone);
+
+        // 2. Optimisation pour l'impression
+        clone.style.width = '100%';
+        clone.style.padding = '0';
+        clone.style.margin = '0';
+        clone.style.backgroundColor = '#fff';
+
+        // 3. Ajustement des styles
+        const formContainer = clone.querySelector('.form-container');
+        if (formContainer) {
+            formContainer.style.maxWidth = '100%';
+            formContainer.style.padding = '15px';
+            formContainer.style.margin = '0 auto';
+            formContainer.style.background = '#fff';
+            formContainer.style.color = '#000';
+            formContainer.style.boxShadow = 'none';
+        }
+
+        // 4. Ajustement typographique
+        clone.querySelectorAll('label').forEach(label => {
+            label.style.fontSize = '1.1rem';
+            label.style.color = '#000';
+        });
+
+        clone.querySelectorAll('input').forEach(input => {
+            input.style.fontSize = '1rem';
+            input.style.width = '100%';
+            input.style.backgroundColor = '#f9f9f9';
+            input.style.color = '#000';
+            input.style.border = '1px solid #ddd';
+        });
+
+        // 5. Optimisation du QR Code
+        const qrcode = clone.querySelector('#qrcode');
+        if (qrcode) {
+            qrcode.style.width = '120px';
+            qrcode.style.height = '120px';
+            qrcode.style.margin = '10px auto';
+            qrcode.style.border = '1px solid #eee';
+        }
+
+        // 6. Génération du PDF
+        await html2pdf()
+            .set({
+                ...PDF_CONFIG,
+                filename: `AydaMaps_${document.getElementById('uniqueCode')?.textContent || new Date().getTime()}.pdf`,
+                html2canvas: {
+                    ...PDF_CONFIG,
+                    windowWidth: document.documentElement.offsetWidth,
+                    windowHeight: document.documentElement.offsetHeight,
+                    scrollX: 0,
+                    scrollY: 0
+                }
+            })
+            .from(clone)
+            .save();
+
+        // 7. Nettoyage
+        document.body.removeChild(clone);
+        
+        // 8. Retour utilisateur
+        if (typeof showThankYouPage === 'function') {
+            showThankYouPage();
+        }
+
+    } catch (error) {
+        console.error('Erreur PDF:', error);
+        showAlert('حدث خطأ أثناء إنشاء ملف PDF. يرجى المحاولة مرة أخرى');
+        
+        // Nettoyage en cas d'erreur
+        const clone = document.querySelector('body > #main-content[style*="width: 100%"]');
+        if (clone) document.body.removeChild(clone);
+    }
+}
+
 // Fonctions utilitaires
 function loadFonts() {
     const fontLink = document.createElement('link');
@@ -94,10 +183,16 @@ function setupEventListeners() {
         generateBtn.addEventListener('click', generateQR);
     }
 
-    // Bouton de téléchargement
+    // Bouton de téléchargement QR
     const downloadBtn = document.getElementById('downloadBtn');
     if (downloadBtn) {
         downloadBtn.addEventListener('click', downloadQR);
+    }
+
+    // Bouton de génération PDF
+    const pdfBtn = document.getElementById('download-pdf');
+    if (pdfBtn) {
+        pdfBtn.addEventListener('click', generatePDF);
     }
 }
 
@@ -213,6 +308,27 @@ function loadQRCodeLibrary() {
     });
 }
 
+function loadHtml2PdfLibrary() {
+    return new Promise((resolve, reject) => {
+        if (typeof html2pdf !== 'undefined') {
+            resolve();
+            return;
+        }
+
+        console.warn("Chargement de la librairie html2pdf...");
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js';
+        script.onload = resolve;
+        script.onerror = () => reject(new Error("Échec du chargement de la librairie html2pdf"));
+        document.head.appendChild(script);
+    });
+}
+
 function showAlert(message) {
     alert(message);
+}
+
+function showThankYouPage() {
+    document.getElementById('main-content').style.display = 'none';
+    document.getElementById('thank-you-page').style.display = 'block';
 }
