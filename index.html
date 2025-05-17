@@ -1,4 +1,4 @@
-: <!DOCTYPE html>
+<!DOCTYPE html>
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <style>
         :root {
             --primary: #dc2626;
@@ -156,24 +157,26 @@
         .registration-code {
             text-align: center;
             margin-top: 1rem;
-            font-size: 2.2rem; /* Taille doublée */
+            font-size: 2.2rem;
         }
         .registration-code span {
             color: var(--primary);
             font-weight: bold;
         }
-.form-container h1 {
-    font-size: 2.0rem;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start; /* Alignement à gauche */
-    gap: 15px;
-    margin-bottom: 2rem;
-}
-.form-container h1 i {
-    font-size: 2.0rem;
-    order: 0; /* Réinitialiser l'ordre */
-}
+        
+        .form-container h1 {
+            font-size: 2.0rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .form-container h1 i {
+            font-size: 2.0rem;
+            order: 0;
+        }
 
         /* Page de remerciement */
         #thank-you-page {
@@ -272,7 +275,7 @@
                     <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات</div>
                 </div>
                 
-                <button type="button" id="generate-btn" onclick="generateQR()">
+                <button type="button" id="generate-btn">
                     <i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات
                 </button>
                 
@@ -298,89 +301,105 @@
                 <p>سيتم استخدام هذه البيانات لتحسين خدماتنا وتقديم تجربة أفضل لكم.</p>
             </div>
             
-            <button id="download-pdf" onclick="generatePDF()">
+            <button id="download-pdf">
                 <i class="fas fa-download"></i> تحميل الوثيقة PDF
             </button>
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script>
-    // Variables pour le timer
+    // Variables globales
     let inactivityTimer;
     let userInteracted = false;
+
+    // Initialisation de l'application
+    document.addEventListener('DOMContentLoaded', function() {
+        initApp();
+    });
+
+    function initApp() {
+        // Générer le code unique
+        document.getElementById('uniqueCode').textContent = generateUniqueCode();
+        
+        // Configurer les écouteurs d'événements
+        setupEventListeners();
+    }
+
+    function setupEventListeners() {
+        // Écouteurs pour le timer d'inactivité
+        ['mousedown', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer);
+        });
+
+        // Validation en temps réel
+        document.getElementById('telephone').addEventListener('input', function() {
+            this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+            document.getElementById('phoneError').style.display = 'none';
+        });
+
+        document.querySelectorAll('input[pattern="[\\u0600-\\u06FF\\s]+"]').forEach(input => {
+            input.addEventListener('input', function() {
+                const errorElement = document.getElementById(`${this.id}Error`);
+                if (this.validity.valid) {
+                    this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                    errorElement.style.display = 'none';
+                }
+            });
+        });
+
+        // Bouton de génération QR
+        document.getElementById('generate-btn').addEventListener('click', generateQR);
+        
+        // Bouton de téléchargement PDF
+        document.getElementById('download-pdf').addEventListener('click', generatePDF);
+    }
 
     // Fonction pour générer le code unique
     function generateUniqueCode() {
         const now = new Date();
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = String(now.getFullYear()).slice(-2);
+        const parts = [
+            now.getSeconds(),
+            now.getMinutes(),
+            now.getHours(),
+            now.getDate(),
+            now.getMonth() + 1,
+            now.getFullYear() % 100
+        ];
         
-        return seconds + minutes + hours + day + month + year;
+        return parts.map(part => String(part).padStart(2, '0')).join('');
     }
 
-    // Afficher le code au chargement
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('uniqueCode').textContent = generateUniqueCode();
-        
-        // Écouteurs d'événements pour les interactions utilisateur
-        document.addEventListener('mousedown', resetInactivityTimer);
-        document.addEventListener('touchstart', resetInactivityTimer);
-        document.addEventListener('keydown', resetInactivityTimer);
-        document.addEventListener('scroll', resetInactivityTimer);
-    });
-
+    // Fonction de validation du téléphone
     function validatePhone() {
         const phone = document.getElementById('telephone').value;
         const errorElement = document.getElementById('phoneError');
         
-        if (phone.startsWith('+') || phone.startsWith('00')) {
-            errorElement.style.display = 'none';
-            return true;
-        }
+        const isValid = phone.startsWith('+') || phone.startsWith('00') || 
+                      (phone.startsWith('0') && /^0[0-9]{9}$/.test(phone));
         
-        if (phone.startsWith('0')) {
-            if (/^0[0-9]{9}$/.test(phone)) {
-                errorElement.style.display = 'none';
-                return true;
-            } else {
-                errorElement.style.display = 'block';
-                return false;
-            }
-        }
-        
-        errorElement.style.display = 'block';
-        return false;
+        errorElement.style.display = isValid ? 'none' : 'block';
+        return isValid;
     }
 
+    // Fonction de validation du formulaire
     function validateForm() {
         let isValid = true;
         const inputs = document.querySelectorAll('input[required]');
         
         inputs.forEach(input => {
             const errorElement = document.getElementById(`${input.id}Error`);
+            const fieldValid = input.value.trim() && input.validity.valid;
             
-            if (!input.value.trim()) {
-                input.style.borderColor = '#f87171';
-                if (errorElement) errorElement.style.display = 'block';
-                isValid = false;
-            } else if (!input.validity.valid) {
-                input.style.borderColor = '#f87171';
-                if (errorElement) errorElement.style.display = 'block';
-                isValid = false;
-            } else {
-                input.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-                if (errorElement) errorElement.style.display = 'none';
-            }
+            input.style.borderColor = fieldValid ? 'rgba(239, 68, 68, 0.3)' : '#f87171';
+            if (errorElement) errorElement.style.display = fieldValid ? 'none' : 'block';
+            
+            if (!fieldValid) isValid = false;
         });
         
         return isValid && validatePhone();
     }
 
+    // Fonction pour générer le QR code
     function generateQR() {
         if (!validateForm()) {
             alert("الرجاء ملء جميع البيانات المطلوبة بشكل صحيح");
@@ -414,32 +433,92 @@
                 
                 setTimeout(() => {
                     qrElement.classList.remove('blink');
-                    // Démarrer le timer après l'animation
                     startInactivityTimer();
                 }, 3000);
             }, 500);
         } catch (error) {
+            console.error("Erreur de génération QR:", error);
             qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
-            // Démarrer le timer si erreur
             startInactivityTimer();
         }
     }
 
-    function startInactivityTimer() {
-        // Réinitialiser le timer s'il existe déjà
-        if (inactivityTimer) {
-            clearTimeout(inactivityTimer);
+    // Fonction pour générer le PDF
+    function generatePDF() {
+        // Afficher le contenu principal
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('thank-you-page').style.display = 'none';
+        
+        // Créer un clone pour l'impression
+        const element = document.getElementById('main-content');
+        const clone = element.cloneNode(true);
+        
+        // Supprimer l'en-tête
+        const header = clone.querySelector('.tech-header');
+        if (header) header.remove();
+        
+        // Appliquer les styles d'impression
+        clone.style.width = '100%';
+        clone.style.margin = '0';
+        clone.style.padding = '0';
+        clone.style.background = 'white';
+        clone.style.color = 'black';
+        
+        const formContainer = clone.querySelector('.form-container');
+        if (formContainer) {
+            formContainer.style.maxWidth = '100%';
+            formContainer.style.margin = '0';
+            formContainer.style.padding = '20px';
+            formContainer.style.background = 'white';
+            formContainer.style.color = 'black';
         }
         
-        // Réinitialiser le flag d'interaction
+        const qrcode = clone.querySelector('#qrcode');
+        if (qrcode) {
+            qrcode.style.width = '200px';
+            qrcode.style.height = '200px';
+        }
+        
+        clone.querySelectorAll('label').forEach(label => {
+            label.style.color = 'black';
+        });
+        
+        document.body.appendChild(clone);
+        
+        const opt = {
+            margin: 5,
+            filename: 'وثيقة_أيدا_مابس.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 1,
+                logging: true,
+                useCORS: true,
+                width: clone.offsetWidth,
+                height: clone.offsetHeight,
+                backgroundColor: 'white'
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait'
+            }
+        };
+
+        html2pdf().set(opt).from(clone).save().then(() => {
+            document.body.removeChild(clone);
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('thank-you-page').style.display = 'block';
+        });
+    }
+
+    // Gestion du timer d'inactivité
+    function startInactivityTimer() {
+        if (inactivityTimer) clearTimeout(inactivityTimer);
         userInteracted = false;
         
-        // Démarrer un nouveau timer de 5 secondes
         inactivityTimer = setTimeout(function() {
-            if (!userInteracted) {
-                showThankYouPage();
-            }
-        }, 5000); // 5 secondes
+            if (!userInteracted) showThankYouPage();
+        }, 5000);
     }
 
     function resetInactivityTimer() {
@@ -454,73 +533,6 @@
         document.getElementById('main-content').style.display = 'none';
         document.getElementById('thank-you-page').style.display = 'block';
     }
-
-    function generatePDF() {
-        // Afficher à nouveau le contenu principal avant la génération du PDF
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('thank-you-page').style.display = 'none';
-        
-        // Créer un clone du contenu principal pour l'impression
-        const element = document.getElementById('main-content');
-        const clone = element.cloneNode(true);
-        
-        // Appliquer des styles spécifiques pour l'impression
-        clone.style.width = '100%';
-        clone.style.margin = '0';
-        clone.style.padding = '0';
-        clone.querySelector('.form-container').style.maxWidth = '100%';
-        clone.querySelector('.form-container').style.margin = '0';
-        clone.querySelector('.form-container').style.padding = '20px';
-        clone.querySelector('#qrcode').style.width = '200px';
-        clone.querySelector('#qrcode').style.height = '200px';
-        
-        // Ajouter le clone au corps temporairement
-        document.body.appendChild(clone);
-        
-        const opt = {
-            margin: 5,
-            filename: 'وثيقة_أيدا_مابس.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { 
-                scale: 1,
-                logging: true,
-                useCORS: true,
-                width: clone.offsetWidth,
-                height: clone.offsetHeight
-            },
-            jsPDF: { 
-                unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait'
-            }
-        };
-
-        // Générer le PDF
-        html2pdf().set(opt).from(clone).save().then(() => {
-            // Supprimer le clone après la génération du PDF
-            document.body.removeChild(clone);
-            
-            // Re-cacher le contenu principal et réafficher la page de remerciement
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('thank-you-page').style.display = 'block';
-        });
-    }
-    
-    document.getElementById('telephone').addEventListener('input', function() {
-        this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-        document.getElementById('phoneError').style.display = 'none';
-    });
-
-    // Validation en temps réel pour les champs arabes
-    document.querySelectorAll('input[pattern="[\\u0600-\\u06FF\\s]+"]').forEach(input => {
-        input.addEventListener('input', function() {
-            const errorElement = document.getElementById(`${this.id}Error`);
-            if (this.validity.valid) {
-                this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-                errorElement.style.display = 'none';
-            }
-        });
-    });
     </script>
 </body>
 </html>
