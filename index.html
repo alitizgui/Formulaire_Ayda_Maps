@@ -226,6 +226,26 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #main-content, #main-content * {
+                visibility: visible;
+            }
+            #main-content {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                background: white;
+                color: black;
+            }
+            .tech-header {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
@@ -443,13 +463,12 @@
         }
     }
 
-    // Fonction pour générer le PDF
     function generatePDF() {
         // Afficher le contenu principal
         document.getElementById('main-content').style.display = 'block';
         document.getElementById('thank-you-page').style.display = 'none';
         
-        // Créer un clone pour l'impression
+        // Créer un clone optimisé pour l'impression
         const element = document.getElementById('main-content');
         const clone = element.cloneNode(true);
         
@@ -460,54 +479,95 @@
         // Appliquer les styles d'impression
         clone.style.width = '100%';
         clone.style.margin = '0';
-        clone.style.padding = '0';
+        clone.style.padding = '20px';
         clone.style.background = 'white';
         clone.style.color = 'black';
         
+        // Optimiser le conteneur du formulaire
         const formContainer = clone.querySelector('.form-container');
         if (formContainer) {
             formContainer.style.maxWidth = '100%';
-            formContainer.style.margin = '0';
+            formContainer.style.margin = '0 auto';
             formContainer.style.padding = '20px';
             formContainer.style.background = 'white';
-            formContainer.style.color = 'black';
+            formContainer.style.boxShadow = 'none';
+            formContainer.style.borderRadius = '0';
         }
         
+        // Optimiser la taille du QR code
         const qrcode = clone.querySelector('#qrcode');
         if (qrcode) {
-            qrcode.style.width = '200px';
-            qrcode.style.height = '200px';
+            qrcode.style.width = '150px';
+            qrcode.style.height = '150px';
+            qrcode.style.margin = '15px auto';
         }
         
+        // Optimiser les textes
+        clone.querySelectorAll('label, .registration-code, .qrcode-title').forEach(el => {
+            el.style.color = 'black';
+        });
+        
         clone.querySelectorAll('label').forEach(label => {
-            label.style.color = 'black';
+            label.style.fontSize = '1.5rem';
+        });
+        
+        clone.querySelectorAll('input').forEach(input => {
+            input.style.fontSize = '1.3rem';
+            input.style.padding = '0.8rem';
         });
         
         document.body.appendChild(clone);
         
         const opt = {
-            margin: 5,
+            margin: [15, 15, 15, 15], // Marges égales
             filename: 'وثيقة_أيدا_مابس.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
+            image: { 
+                type: 'jpeg', 
+                quality: 0.98 
+            },
             html2canvas: { 
-                scale: 1,
-                logging: true,
+                scale: 2,
+                logging: false,
                 useCORS: true,
-                width: clone.offsetWidth,
-                height: clone.offsetHeight,
+                scrollX: 0,
+                scrollY: 0,
+                windowWidth: clone.scrollWidth,
+                width: clone.scrollWidth,
+                height: clone.scrollHeight,
                 backgroundColor: 'white'
             },
             jsPDF: { 
                 unit: 'mm', 
-                format: 'a4', 
-                orientation: 'portrait'
+                format: 'a4',
+                orientation: 'portrait',
+                hotfixes: ["px_scaling"]
+            },
+            pagebreak: { 
+                mode: 'avoid-all'
             }
         };
 
-        html2pdf().set(opt).from(clone).save().then(() => {
+        // Génération du PDF avec vérification
+        html2pdf().set(opt).from(clone).toPdf().get('pdf').then((pdf) => {
+            const totalPages = pdf.internal.getNumberOfPages();
+            if (totalPages > 1) {
+                // Si plus d'une page, réduire encore la taille
+                clone.querySelector('#qrcode').style.width = '120px';
+                clone.querySelector('#qrcode').style.height = '120px';
+                clone.querySelectorAll('label').forEach(label => {
+                    label.style.fontSize = '1.3rem';
+                });
+                // Regénérer avec les nouvelles tailles
+                return html2pdf().set(opt).from(clone).save();
+            }
+            return pdf.save(opt.filename);
+        }).then(() => {
             document.body.removeChild(clone);
             document.getElementById('main-content').style.display = 'none';
             document.getElementById('thank-you-page').style.display = 'block';
+        }).catch((error) => {
+            console.error("Erreur de génération PDF:", error);
+            document.body.removeChild(clone);
         });
     }
 
