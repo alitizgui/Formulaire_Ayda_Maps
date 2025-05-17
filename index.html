@@ -6,6 +6,7 @@
     <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         :root {
             --primary: #dc2626;
@@ -33,7 +34,7 @@
             display: flex;
             align-items: center;
             width: 100%;
-            padding-right: 30%;
+            padding-right: 0%;
         }
         
         .logo-wrapper {
@@ -74,7 +75,7 @@
         }
         
         input {
-            width: 90%; /* Largeur réduite à 90% */
+            width: 90%;
             padding: 1rem;
             background: rgba(50, 50, 50, 0.5);
             border: 1px solid rgba(239, 68, 68, 0.3);
@@ -142,7 +143,6 @@
             display: none;
         }
 
-        /* Style ajouté uniquement pour le code */
         .registration-code {
             text-align: center;
             margin-top: 1rem;
@@ -152,73 +152,143 @@
             color: var(--primary);
             font-weight: bold;
         }
+
+        /* Page de remerciement */
+        #thank-you-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .thank-you-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 15px;
+            border: 1px solid var(--primary);
+        }
+
+        .thank-you-message {
+            margin-bottom: 2rem;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        #download-pdf {
+            background: var(--tech-gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        #download-pdf:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
-    <header class="tech-header">
-        <div class="header-content">
-            <div class="logo-wrapper">
-                <img src="aydammaps logo.jpg" alt="Logo Ayda Maps" class="tech-logo">
-                <i class="fas fa-map-marked-alt surveyor-icon"></i>
+    <div id="main-content">
+        <header class="tech-header">
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <img src="aydammaps logo.jpg" alt="Logo Ayda Maps" class="tech-logo">
+                    <i class="fas fa-map-marked-alt surveyor-icon"></i>
+                </div>
             </div>
-        </div>
-    </header>
-    
-    <div class="form-container">
-        <h1><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
+        </header>
         
-        <form id="dataForm">
-            <div class="form-group">
-                <label for="douar"><i class="fas fa-location-dot"></i> الدوار</label>
-                <input type="text" id="douar" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                <div class="error" id="douarError">يسمح فقط بالأحرف العربية</div>
-            </div>
+        <div class="form-container">
+            <h1><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
             
-            <div class="form-group">
-                <label for="afous"><i class="fas fa-users"></i> أَفُوس</label>
-                <input type="text" id="afous" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                <div class="error" id="afousError">يسمح فقط بالأحرف العربية</div>
-            </div>
+            <form id="dataForm">
+                <div class="form-group">
+                    <label for="douar"><i class="fas fa-location-dot"></i> الدوار</label>
+                    <input type="text" id="douar" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="douarError">يسمح فقط بالأحرف العربية</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="afous"><i class="fas fa-sitemap"></i> أَفُوس</label>
+                    <input type="text" id="afous" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="afousError">يسمح فقط بالأحرف العربية</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="famille"><i class="fas fa-users"></i> العائلة</label>
+                    <input type="text" id="famille" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="familleError">يسمح فقط بالأحرف العربية</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nom"><i class="fas fa-user"></i> الاسم واللقب</label>
+                    <input type="text" id="nom" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
+                </div>
             
-            <div class="form-group">
-                <label for="famille"><i class="fas fa-home"></i> العائلة</label>
-                <input type="text" id="famille" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                <div class="error" id="familleError">يسمح فقط بالأحرف العربية</div>
-            </div>
-            
-            <div class="form-group">
-                <label for="nom"><i class="fas fa-user"></i> الاسم و النَّسَب</label>
-                <input type="text" id="nom" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
-            </div>
-        
-            <div class="form-group">
-                <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
-                <input type="tel" id="telephone" required style="direction: ltr; text-align: right;"
-                       pattern="(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})"
-                       title="يجب أن يحتوي الرقم على 10 خانات ">
-                <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات </div>
-            </div>
-            
-            <button type="button" onclick="generateQR()">
-                <i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات
-            </button>
-            
-            <div class="qrcode-container">
-                <div id="qrcode"></div>
-                <div class="qrcode-title">نظام البيانات الذكية أيدا مابس</div>
-            </div>
+                <div class="form-group">
+                    <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
+                    <input type="tel" id="telephone" required style="direction: ltr; text-align: right;"
+                           pattern="(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})"
+                           title="يجب أن يحتوي الرقم على 10 خانات">
+                    <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات</div>
+                </div>
+                
+                <button type="button" id="generate-btn" onclick="generateQR()">
+                    <i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات
+                </button>
+                
+                <div class="qrcode-container">
+                    <div id="qrcode"></div>
+                    <div class="qrcode-title">نظام البيانات الذكية أيدا مابس</div>
+                </div>
 
-            <!-- Ajout du code d'enregistrement -->
-            <div class="registration-code">
-                رقم التسجيل: <span id="uniqueCode"></span>
+                <div class="registration-code">
+                    رقم التسجيل: <span id="uniqueCode"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Page de remerciement -->
+    <div id="thank-you-page">
+        <div class="thank-you-container">
+            <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
+            
+            <div class="thank-you-message">
+                <p>نشكركم على تقديم معلوماتكم وثقتكم بخدماتنا.</p>
+                <p>سيتم استخدام هذه البيانات لتحسين خدماتنا وتقديم تجربة أفضل لكم.</p>
             </div>
-        </form>
+            
+            <button id="download-pdf" onclick="generatePDF()">
+                <i class="fas fa-download"></i> تحميل الوثيقة PDF
+            </button>
+        </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
     <script>
-    // Fonction pour générer le code unique (ajoutée sans modifier le reste)
+    // Variables pour le timer
+    let inactivityTimer;
+    let userInteracted = false;
+
+    // Fonction pour générer le code unique
     function generateUniqueCode() {
         const now = new Date();
         const seconds = String(now.getSeconds()).padStart(2, '0');
@@ -231,9 +301,15 @@
         return seconds + minutes + hours + day + month + year;
     }
 
-    // Afficher le code au chargement (ajouté sans modifier le reste)
+    // Afficher le code au chargement
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('uniqueCode').textContent = generateUniqueCode();
+        
+        // Écouteurs d'événements pour les interactions utilisateur
+        document.addEventListener('mousedown', resetInactivityTimer);
+        document.addEventListener('touchstart', resetInactivityTimer);
+        document.addEventListener('keydown', resetInactivityTimer);
+        document.addEventListener('scroll', resetInactivityTimer);
     });
 
     function validatePhone() {
@@ -290,11 +366,11 @@
         }
         
         const formData = {
-            "رقم التسجيل": document.getElementById('uniqueCode').textContent, // Ajout du code unique
+            "رقم التسجيل": document.getElementById('uniqueCode').textContent,
             "الدوار": document.getElementById('douar').value,
             "أَفُوس": document.getElementById('afous').value,
             "العائلة": document.getElementById('famille').value,
-            "الاسم الكامل": document.getElementById('nom').value,
+            "الاسم واللقب": document.getElementById('nom').value,
             "رقم الهاتف واتساب": document.getElementById('telephone').value
         };
         
@@ -306,20 +382,106 @@
                 text: JSON.stringify(formData),
                 width: 300,
                 height: 300,
-                colorDark: "#ffffff", // QR code blanc
+                colorDark: "#ffffff",
                 colorLight: "#1e1e1e"
             });
             
+            // Animation du QR code
             setTimeout(() => {
                 qrElement.classList.add('blink');
                 
                 setTimeout(() => {
                     qrElement.classList.remove('blink');
+                    // Démarrer le timer après l'animation
+                    startInactivityTimer();
                 }, 3000);
             }, 500);
         } catch (error) {
             qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+            // Démarrer le timer si erreur
+            startInactivityTimer();
         }
+    }
+
+    function startInactivityTimer() {
+        // Réinitialiser le timer s'il existe déjà
+        if (inactivityTimer) {
+            clearTimeout(inactivityTimer);
+        }
+        
+        // Réinitialiser le flag d'interaction
+        userInteracted = false;
+        
+        // Démarrer un nouveau timer de 10 secondes
+        inactivityTimer = setTimeout(function() {
+            if (!userInteracted) {
+                showThankYouPage();
+            }
+        }, 10000); // 10 secondes
+    }
+
+    function resetInactivityTimer() {
+        userInteracted = true;
+        if (inactivityTimer) {
+            clearTimeout(inactivityTimer);
+            startInactivityTimer();
+        }
+    }
+
+    function showThankYouPage() {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('thank-you-page').style.display = 'block';
+    }
+
+    function generatePDF() {
+        // Afficher à nouveau le contenu principal avant la génération du PDF
+        document.getElementById('main-content').style.display = 'block';
+        document.getElementById('thank-you-page').style.display = 'none';
+        
+        // Créer un clone du contenu principal pour l'impression
+        const element = document.getElementById('main-content');
+        const clone = element.cloneNode(true);
+        
+        // Appliquer des styles spécifiques pour l'impression
+        clone.style.width = '100%';
+        clone.style.margin = '0';
+        clone.style.padding = '0';
+        clone.querySelector('.form-container').style.maxWidth = '100%';
+        clone.querySelector('.form-container').style.margin = '0';
+        clone.querySelector('.form-container').style.padding = '20px';
+        clone.querySelector('#qrcode').style.width = '200px';
+        clone.querySelector('#qrcode').style.height = '200px';
+        
+        // Ajouter le clone au corps temporairement
+        document.body.appendChild(clone);
+        
+        const opt = {
+            margin: 5,
+            filename: 'وثيقة_أيدا_مابس.pdf',
+            image: { type: 'jpeg', quality: 0.98 },
+            html2canvas: { 
+                scale: 1,
+                logging: true,
+                useCORS: true,
+                width: clone.offsetWidth,
+                height: clone.offsetHeight
+            },
+            jsPDF: { 
+                unit: 'mm', 
+                format: 'a4', 
+                orientation: 'portrait'
+            }
+        };
+
+        // Générer le PDF
+        html2pdf().set(opt).from(clone).save().then(() => {
+            // Supprimer le clone après la génération du PDF
+            document.body.removeChild(clone);
+            
+            // Re-cacher le contenu principal et réafficher la page de remerciement
+            document.getElementById('main-content').style.display = 'none';
+            document.getElementById('thank-you-page').style.display = 'block';
+        });
     }
     
     document.getElementById('telephone').addEventListener('input', function() {
