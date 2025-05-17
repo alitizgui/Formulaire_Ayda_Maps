@@ -34,7 +34,7 @@
             display: flex;
             align-items: center;
             width: 100%;
-            padding-right: -5%;
+            padding-right: -10%;
         }
         
         .logo-wrapper {
@@ -42,6 +42,10 @@
             align-items: center;
             justify-content: flex-start;
             gap: 20px;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 2rem;
         }
         
         .tech-logo {
@@ -71,7 +75,8 @@
             display: block;
             margin-bottom: 0.8rem;
             color: #e2e8f0;
-            font-size: 1.1rem;
+            font-size: 2.2rem;
+            font-weight: 500;
         }
         
         input {
@@ -82,8 +87,9 @@
             border-radius: 8px;
             color: #f8fafc;
             text-align: right;
-            font-size: 1rem;
+            font-size: 2rem;
             margin-left: auto;
+            font-family: 'Tajawal', sans-serif;
         }
         
         button {
@@ -112,6 +118,10 @@
             flex-direction: column;
             align-items: center;
             margin: 2rem 0;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         #qrcode {
@@ -146,12 +156,24 @@
         .registration-code {
             text-align: center;
             margin-top: 1rem;
-            font-size: 1.1rem;
+            font-size: 2.2rem; /* Taille doublée */
         }
         .registration-code span {
             color: var(--primary);
             font-weight: bold;
         }
+.form-container h1 {
+    font-size: 2.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Alignement à gauche */
+    gap: 15px;
+    margin-bottom: 2rem;
+}
+.form-container h1 i {
+    font-size: 2.4rem;
+    order: 0; /* Réinitialiser l'ordre */
+}
 
         /* Page de remerciement */
         #thank-you-page {
