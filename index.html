@@ -52,6 +52,7 @@
         .tech-logo {
             height: 90px;
             width: auto;
+            display: block;
         }
         
         .surveyor-icon {
@@ -68,7 +69,7 @@
         }
         
         .form-group {
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             text-align: right;
         }
         
@@ -81,8 +82,8 @@
         }
         
         input {
-            width: 90%;
-            padding: 1rem;
+            width: 95%;
+            padding: 1.2rem;
             background: rgba(255, 255, 255, 0.5);
             border: 1px solid rgba(239, 68, 68, 0.3);
             border-radius: 8px;
@@ -91,6 +92,7 @@
             font-size: 2rem;
             margin-left: auto;
             font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
         }
         
         button {
@@ -226,6 +228,73 @@
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
+
+        /* Styles pour la capture */
+        .capture-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            box-sizing: border-box;
+        }
+
+        .capture-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .capture-logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .capture-icon {
+            font-size: 60px;
+            color: white;
+        }
+
+        .capture-form-container {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .capture-input-value {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0 1.5rem;
+            background: white;
+            color: black;
+            font-size: 1.8rem;
+            border-radius: 5px;
+            text-align: right;
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .capture-qrcode {
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            background: white;
+            padding: 10px;
+        }
+
+        .capture-title {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-bottom: 2rem;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -233,7 +302,7 @@
         <header class="tech-header">
             <div class="header-content">
                 <div class="logo-wrapper">
-                    <img src="aydammaps logo.jpg" alt="Logo Ayda Maps" class="tech-logo">
+                    <img src="aydammaps logo.jpg" alt="Logo Ayda Maps" class="tech-logo" crossorigin="anonymous">
                     <i class="fas fa-map-marked-alt surveyor-icon"></i>
                 </div>
             </div>
@@ -285,7 +354,7 @@
                 </div>
 
                 <div class="registration-code">
-                    رقم التسجيل: <span id="uniqueCode"></span>
+                    رقم التسجيل : <span id="uniqueCode"></span>
                 </div>
             </form>
         </div>
@@ -307,10 +376,66 @@
         </div>
     </div>
 
+    <!-- Template pour la capture -->
+    <div id="capture-template" style="display: none; position: fixed; left: 0; top: 0; z-index: 9999;">
+        <div class="capture-container">
+            <div class="capture-header">
+                <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
+                <i class="fas fa-map-marked-alt capture-icon"></i>
+            </div>
+            
+            <div class="capture-form-container">
+                <h1 class="capture-title"><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-location-dot"></i> الدوار
+                    </span>
+                    <span id="capture-douar" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-sitemap"></i> أَفُوس
+                    </span>
+                    <span id="capture-afous" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-users"></i> العائلة
+                    </span>
+                    <span id="capture-famille" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-user"></i> الاسم و اللقب
+                    </span>
+                    <span id="capture-nom" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone"></i> رقم الهاتف (واتساب)
+                    </span>
+                    <span id="capture-telephone" class="capture-input-value"></span>
+                </div>
+                
+                <div id="capture-qrcode" class="capture-qrcode"></div>
+                
+                <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
+                    رقم التسجيل: <span id="capture-uniqueCode" style="color: var(--primary); font-weight: bold;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
     // Variables globales
     let inactivityTimer;
     let userInteracted = false;
+    let qrCodeGenerated = false;
 
     // Initialisation de l'application
     document.addEventListener('DOMContentLoaded', function() {
@@ -320,6 +445,7 @@
     function initApp() {
         // Générer le code unique
         document.getElementById('uniqueCode').textContent = generateUniqueCode();
+        document.getElementById('capture-uniqueCode').textContent = document.getElementById('uniqueCode').textContent;
         
         // Configurer les écouteurs d'événements
         setupEventListeners();
@@ -427,6 +553,19 @@
                 colorLight: "#1e1e1e"
             });
             
+            // Copier le QR code pour la capture
+            const captureQrElement = document.getElementById('capture-qrcode');
+            captureQrElement.innerHTML = '';
+            new QRCode(captureQrElement, {
+                text: JSON.stringify(formData),
+                width: 250,
+                height: 250,
+                colorDark: "#000000",
+                colorLight: "#ffffff"
+            });
+            
+            qrCodeGenerated = true;
+            
             // Animation du QR code
             setTimeout(() => {
                 qrElement.classList.add('blink');
@@ -439,84 +578,58 @@
         } catch (error) {
             console.error("Erreur de génération QR:", error);
             qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+            
+            const captureQrElement = document.getElementById('capture-qrcode');
+            captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
+            
+            qrCodeGenerated = true;
             startInactivityTimer();
         }
     }
 
     async function generateHighResImage() {
-        // Afficher le contenu principal
-        document.getElementById('main-content').style.display = 'block';
-        document.getElementById('thank-you-page').style.display = 'none';
-        
-        // Créer un div pour la capture
-        const captureDiv = document.createElement('div');
-        captureDiv.style.position = 'fixed';
-        captureDiv.style.left = '-9999px';
-        captureDiv.style.width = '800px'; // Largeur fixe pour haute résolution
-        captureDiv.style.background = 'white';
-        captureDiv.style.padding = '20px';
-        captureDiv.style.color = 'black';
-        
-        // Cloner le contenu
-        const element = document.getElementById('main-content');
-        const clone = element.cloneNode(true);
-        
-        // Supprimer l'en-tête
-        const header = clone.querySelector('.tech-header');
-        if (header) header.remove();
-        
-        // Ajuster les styles pour l'image
-        clone.style.width = '100%';
-        clone.style.margin = '0';
-        clone.style.padding = '0';
-        clone.style.background = 'white';
-        clone.style.color = 'black';
-        
-        const formContainer = clone.querySelector('.form-container');
-        if (formContainer) {
-            formContainer.style.maxWidth = '100%';
-            formContainer.style.margin = '0';
-            formContainer.style.padding = '20px';
-            formContainer.style.background = 'white';
-            formContainer.style.boxShadow = 'none';
+        if (!qrCodeGenerated) {
+            alert("الرجاء إنشاء رمز الاستجابة السريعة أولاً");
+            return;
         }
-        
-        // Ajuster le QR code
-        const qrcode = clone.querySelector('#qrcode');
-        if (qrcode) {
-            qrcode.style.width = '200px';
-            qrcode.style.height = '200px';
-            qrcode.style.margin = '15px auto';
-        }
-        
-        // Ajouter au DOM temporairement
-        captureDiv.appendChild(clone);
-        document.body.appendChild(captureDiv);
-        
+
+        // Remplir le template de capture avec les données
+        document.getElementById('capture-douar').textContent = document.getElementById('douar').value;
+        document.getElementById('capture-afous').textContent = document.getElementById('afous').value;
+        document.getElementById('capture-famille').textContent = document.getElementById('famille').value;
+        document.getElementById('capture-nom').textContent = document.getElementById('nom').value;
+        document.getElementById('capture-telephone').textContent = document.getElementById('telephone').value;
+        document.getElementById('capture-uniqueCode').textContent = document.getElementById('uniqueCode').textContent;
+
+        // Afficher le template de capture
+        const captureElement = document.getElementById('capture-template');
+        captureElement.style.display = 'block';
+
         try {
-            // Générer l'image haute résolution
-            const canvas = await html2canvas(clone, {
-                scale: 2, // Double la résolution
-                logging: false,
+            // Attendre un court instant pour que tout soit rendu
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            // Générer l'image avec html2canvas
+            const canvas = await html2canvas(captureElement, {
+                backgroundColor: '#1a1a1a',
                 useCORS: true,
-                backgroundColor: 'white',
-                ignoreElements: (el) => el.classList.contains('error')
+                scale: 2,
+                logging: false,
+                allowTaint: true
             });
-            
-            // Télécharger l'image
+
+            // Créer le lien de téléchargement
             const link = document.createElement('a');
-            link.download = 'وثيقة_أيدا_مابس.png';
+            link.download = 'وثيقة_أيدا_مابس_' + new Date().toISOString().slice(0, 10) + '.png';
             link.href = canvas.toDataURL('image/png');
             link.click();
-            
+
         } catch (error) {
-            console.error("Erreur de génération d'image:", error);
-            alert("Une erreur est survenue lors de la génération de l'image");
+            console.error("Erreur lors de la génération de l'image:", error);
+            alert('حدث خطأ أثناء توليد الصورة. الرجاء المحاولة لاحقًا.');
         } finally {
-            // Nettoyer
-            document.body.removeChild(captureDiv);
-            document.getElementById('main-content').style.display = 'none';
-            document.getElementById('thank-you-page').style.display = 'block';
+            // Masquer à nouveau le template
+            captureElement.style.display = 'none';
         }
     }
 
