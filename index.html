@@ -366,8 +366,8 @@
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>نشكركم على تقديم معلوماتكم و على ثقتكم بخدماتنا.</p>
-                <p>سيتم استخدام هذه البيانات لتحسين خدماتنا وتقديم تجربة أفضل لكم.</p>
+                <p>نشكركم على ثقتكم بخدماتنا </p>
+                <p>يرجى تحميل الوثيقة على هاتفكم لاستخدام الرمز "QR Code"</div></p>
             </div>
             
             <button id="download-image">
@@ -425,7 +425,7 @@
                 <div id="capture-qrcode" class="capture-qrcode"></div>
                 
                 <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
-                    رقم التسجيل: <span id="capture-uniqueCode" style="color: var(--primary); font-weight: bold;"></span>
+                     رقم التسجيل : <span id="capture-uniqueCode" style="color: var(--primary); font-weight: bold;"></span>
                 </div>
             </div>
         </div>
@@ -487,9 +487,9 @@
             now.getSeconds(),
             now.getMinutes(),
             now.getHours(),
-            now.getDate(),
+            now.getFullYear(),
             now.getMonth() + 1,
-            now.getFullYear() % 100
+            now.getDate() ,
         ];
         
         return parts.map(part => String(part).padStart(2, '0')).join('');
@@ -528,7 +528,7 @@
     // Fonction pour générer le QR code
     function generateQR() {
         if (!validateForm()) {
-            alert("الرجاء ملء جميع البيانات المطلوبة بشكل صحيح");
+            alert("يرجى التأكد من إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
             return;
         }
         
