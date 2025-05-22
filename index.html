@@ -217,7 +217,7 @@
             padding: 1rem 2rem;
             font-family: 'Tajawal', sans-serif;
             font-size: 1.1rem;
-            border-radius: 8px;
+            border-Radius: 8px;
             cursor: pointer;
             margin: 1rem auto;
             display: block;
@@ -436,7 +436,7 @@
     let inactivityTimer;
     let userInteracted = false;
     let qrCodeGenerated = false;
-
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec'; // 
     // Initialisation de l'application
     document.addEventListener('DOMContentLoaded', function() {
         initApp();
@@ -525,8 +525,28 @@
         return isValid && validatePhone();
     }
 
+    // Fonction pour envoyer les données à Google Sheets
+    async function sendDataToGoogleSheets(formData) {
+        try {
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            console.log('Données envoyées avec succès!', response);
+            return true;
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi des données:', error);
+            return false;
+        }
+    }
+
     // Fonction pour générer le QR code
-    function generateQR() {
+    async function generateQR() {
         if (!validateForm()) {
             alert("يرجى التأكد من إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
             return;
@@ -538,8 +558,15 @@
             "أَفُوس": document.getElementById('afous').value,
             "العائلة": document.getElementById('famille').value,
             "الاسم واللقب": document.getElementById('nom').value,
-            "رقم الهاتف واتساب": document.getElementById('telephone').value
+            "رقم الهاتف واتساب": document.getElementById('telephone').value,
+            "timestamp": new Date().toISOString()
         };
+        
+        // Envoyer les données à Google Sheets
+        const sendSuccess = await sendDataToGoogleSheets(formData);
+        if (!sendSuccess) {
+            console.warn("Échec de l'envoi des données à Google Sheets, mais continuation du processus...");
+        }
         
         const qrElement = document.getElementById('qrcode');
         qrElement.innerHTML = '';
