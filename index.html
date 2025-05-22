@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : FORMULAIRE 2.0</title>
+    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : Formulaire QR-Code 2.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -366,8 +366,13 @@
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>نشكركم على ثقتكم بخدماتنا </p>
-                <p>يرجى تحميل الوثيقة على هاتفكم لاستخدام الرمز "QR Code"</div></p>
+                <p>يرجى تحميل الوثيقة على هاتفكم لاستعمال الرمز أثناء الأعمال الميدانية.</div></p>
+                <P>مع رمز الاستجابة السريعة "QR Code" لا مجال للخطأ إطلاقاً :</p>
+                    
+                <P>1 - بياناتكم موحّدة ودقيقة على جميع بقعكم الزراعية.
+                <P>2 - لن يتم تسجيل أية بقعة زراعية على أيدا مابس بدون تقديم الرمز الشخصي "QR Code"
+
+                <p>نشكركم على ثقتكم  </p>
             </div>
             
             <button id="download-image">
@@ -552,7 +557,12 @@
             return;
         }
         
-        const formData = {
+        const btn = document.getElementById('generate-btn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ المعالجة...';
+        btn.disabled = true;
+
+
+            const formData = {
             "رقم التسجيل": document.getElementById('uniqueCode').textContent,
             "الدوار": document.getElementById('douar').value,
             "أَفُوس": document.getElementById('afous').value,
@@ -600,7 +610,7 @@
                 setTimeout(() => {
                     qrElement.classList.remove('blink');
                     startInactivityTimer();
-                }, 3000);
+                }, 2000);
             }, 500);
         } catch (error) {
             console.error("Erreur de génération QR:", error);
