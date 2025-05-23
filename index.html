@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : Formulaire QR-Code 2.0</title>
+    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : Formulaire QRCode 2.0</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -11,7 +11,7 @@
     <style>
         :root {
             --primary: #dc2626;
-            --primary-dark: #b91c1c;
+            --primary-dark: hsl(0, 0%, 100%);
             --tech-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
         }
         
@@ -54,17 +54,39 @@
             width: auto;
             display: block;
         }
-        
-        .surveyor-icon {
-            font-size: 70px;
+
+        .ayda-maps-title {
+            font-size: 3.6rem;
+            font-weight: 700;
             color: white;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-left: 15px;
         }
-        
+
+        .ayda-maps-title::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 80%;
+            width: 5px;
+            background: var(--primary);
+            border-radius: 3px;
+        }
+
+        .logo-wrapper {
+            gap: 5;
+            align-items: center;
+        }
+    
         .form-container {
             max-width: 600px;
             margin: 2rem auto;
             padding: 2rem;
-            background: rgba(30, 30, 30, 0.8);
+            background: rgba(255, 255, 255, 0.048);
             border-radius: 15px;
         }
         
@@ -82,10 +104,10 @@
         }
         
         input {
-            width: 95%;
+            width: 100%;
             padding: 1.2rem;
-            background: rgba(255, 255, 255, 0.5);
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: rgb(255, 255, 255);
+            border: 1px solid rgb(252, 252, 252);
             border-radius: 8px;
             color: #000000;
             text-align: right;
@@ -96,24 +118,24 @@
         }
         
         button {
-            background: var(--tech-gradient);
+            background: var(--primary);
             color: white;
             border: none;
             padding: 1.2rem 2.5rem;
             font-family: 'Tajawal', sans-serif;
-            font-size: 1.2rem;
+            font-size: 1.35rem;
             border-radius: 8px;
             cursor: pointer;
             margin: 2rem auto 0;
             display: block;
-            width: 90%;
+            width: 100%;
             max-width: 300px;
             transition: all 0.3s;
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 10px rgb(255, 255, 255);
         }
         
         .qrcode-container {
@@ -130,12 +152,12 @@
         #qrcode {
             width: 300px;
             height: 300px;
-            border: 1px dashed rgba(239, 68, 68, 0.3);
+            border: 2px dashed rgb(255, 251, 251);
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 1rem;
-            background-color: #1e1e1e;
+            background-color: #ffffff;
             transition: background-color 0.5s;
         }
         
@@ -150,7 +172,7 @@
         }
         
         .error {
-            color: #f87171;
+            color: #ff0000;
             font-size: 0.9rem;
             margin-top: 0.5rem;
             display: none;
@@ -159,15 +181,15 @@
         .registration-code {
             text-align: center;
             margin-top: 1rem;
-            font-size: 2.2rem;
+            font-size: 2rem;
         }
         .registration-code span {
-            color: var(--primary);
+            color: #ffffffc2;
             font-weight: bold;
         }
         
         .form-container h1 {
-            font-size: 2.0rem;
+            font-size: 2.1rem;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -176,7 +198,7 @@
         }
         
         .form-container h1 i {
-            font-size: 2.0rem;
+            font-size: 2rem;
             order: 0;
         }
 
@@ -251,11 +273,29 @@
         .capture-logo {
             height: 80px;
             width: auto;
+            display: block;
         }
 
-        .capture-icon {
-            font-size: 60px;
-            color: white;
+        .capture-ayda-maps-title {
+            font-size: 3rem !important; /* Force la taille */
+            font-weight: 700 !important;
+            color: white !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            position: relative !important;
+            padding-left: 15px !important;
+        }
+
+        .capture-ayda-maps-title::before {
+            content: "" !important;
+            position: absolute !important;
+            left: 0 !important;
+            top: 50% !important;
+            transform: translateY(-50%) !important;
+            height: 80% !important;
+            width: 5px !important;
+            background: var(--primary) !important;
+            border-radius: 3px !important;
         }
 
         .capture-form-container {
@@ -303,13 +343,13 @@
             <div class="header-content">
                 <div class="logo-wrapper">
                     <img src="aydammaps logo.jpg" alt="Logo Ayda Maps" class="tech-logo" crossorigin="anonymous">
-                    <i class="fas fa-map-marked-alt surveyor-icon"></i>
+                    <div class="ayda-maps-title">AYDA MAPS 2.0</div>
                 </div>
             </div>
         </header>
         
         <div class="form-container">
-            <h1><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
+            <h1><i class="fas fa-id-card"></i>بطاقة البيانات </h1>
             
             <form id="dataForm">
                 <div class="form-group">
@@ -366,17 +406,14 @@
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>يرجى تحميل الوثيقة على هاتفكم لاستعمال الرمز أثناء الأعمال الميدانية.</div></p>
-                <P>مع رمز الاستجابة السريعة "QR-Code" لا مجال للخطأ إطلاقاً :</p>
-                    
-                <P>1 - بياناتكم موحّدة ودقيقة على جميع بقعكم الزراعية.
-                <P>2 - لن يتم تسجيل أية بقعة زراعية على أيدا مابس بدون تقديم الرمز الشخصي
-                <P>"QR-Code"
+                <p>يرجى تحميل بطاقة البيانات على هاتفكم.</div></p>
+                <P>سيتم اعتماد البطاقة عند تسجيل بقعكم الزراعية على الخريطة خلال الأعمال الميدانية. </p>
+                <p>-------------------------------------------------
                 <p>نشكركم على ثقتكم  </p>
             </div>
             
             <button id="download-image">
-                <i class="fas fa-download"></i> تحميل الوثيقة
+                <i class="fas fa-download"></i> تحميل بطاقة البيانات 
             </button>
         </div>
     </div>
@@ -386,11 +423,11 @@
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <i class="fas fa-map-marked-alt capture-icon"></i>
+                <div class="capture-ayda-maps-title">AYDA MAPS 2.0</div>
             </div>
             
             <div class="capture-form-container">
-                <h1 class="capture-title"><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
+                <h1 class="capture-title"><i class="fas fa-id-card"></i> بطاقة البيانات</h1>
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
@@ -430,7 +467,7 @@
                 <div id="capture-qrcode" class="capture-qrcode"></div>
                 
                 <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
-                     رقم التسجيل : <span id="capture-uniqueCode" style="color: var(--primary); font-weight: bold;"></span>
+                     رقم التسجيل : <span id="capture-uniqueCode" style="color: var(white); font-weight: bold;"></span>
                 </div>
             </div>
         </div>
@@ -553,7 +590,7 @@
     // Fonction pour générer le QR code
     async function generateQR() {
         if (!validateForm()) {
-            alert("يرجى التأكد من إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
+            alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
             return;
         }
         
@@ -650,9 +687,10 @@
             const canvas = await html2canvas(captureElement, {
                 backgroundColor: '#1a1a1a',
                 useCORS: true,
-                scale: 2,
+                scale: 3,
                 logging: false,
                 allowTaint: true
+                
             });
 
             // Créer le lien de téléchargement
