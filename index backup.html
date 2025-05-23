@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : Formulaire QRCode 2.0</title>
+    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -11,7 +11,7 @@
     <style>
         :root {
             --primary: #dc2626;
-            --primary-dark: hsl(0, 0%, 100%);
+            --primary-dark: #b91c1c;
             --tech-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
         }
         
@@ -26,10 +26,9 @@
             background: #1a1a1a;
             padding: 15px 2.5rem;
             display: flex;
-            justify-content: flex-end; /* Aligne le contenu à droite */
-            align-items: center; /* Centre verticalement */
+            justify-content: flex-end;
+            align-items: center;
             border-bottom: 2px solid var(--primary);
-            height: 120px; /* Hauteur fixe pour le header */
         }
         
         .header-content {
@@ -41,13 +40,13 @@
         
         .logo-wrapper {
             display: flex;
-            align-items: center; /* Centre verticalement les éléments */
-            justify-content: flex-end; /* Aligne à droite */
+            align-items: right;
+            justify-content: flex-start;
+            gap: 20px;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 0 2rem;
-            height: 100%; /* Prend toute la hauteur du header */
         }
         
         .tech-logo {
@@ -55,30 +54,17 @@
             width: auto;
             display: block;
         }
-
-        .ayda-maps-title {
-            font-size: 3.7rem;
-            font-weight: 700;
+        
+        .surveyor-icon {
+            font-size: 70px;
             color: white;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-right: auto; /* Pousse le titre à droite */
-            display: flex;
-            align-items: center; /* Centre verticalement */
-            height: 100%; /* Prend toute la hauteur disponible */
-            padding-left: 0px;
         }
-
-        .logo-wrapper {
-            gap: 5;
-            align-items: right;
-        }
-    
+        
         .form-container {
             max-width: 600px;
             margin: 2rem auto;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.048);
+            background: rgba(30, 30, 30, 0.8);
             border-radius: 15px;
         }
         
@@ -91,15 +77,15 @@
             display: block;
             margin-bottom: 0.8rem;
             color: #ffffff;
-            font-size: 1.5rem;
+            font-size: 2.0rem;
             font-weight: 500;
         }
         
         input {
-            width: 100%;
+            width: 95%;
             padding: 1.2rem;
-            background: rgb(255, 255, 255);
-            border: 1px solid rgb(252, 252, 252);
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(239, 68, 68, 0.3);
             border-radius: 8px;
             color: #000000;
             text-align: right;
@@ -110,24 +96,24 @@
         }
         
         button {
-            background: var(--primary);
+            background: var(--tech-gradient);
             color: white;
             border: none;
             padding: 1.2rem 2.5rem;
             font-family: 'Tajawal', sans-serif;
-            font-size: 1.35rem;
+            font-size: 1.2rem;
             border-radius: 8px;
             cursor: pointer;
             margin: 2rem auto 0;
             display: block;
-            width: 100%;
-            max-width: 308px;
+            width: 90%;
+            max-width: 300px;
             transition: all 0.3s;
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 10px rgb(255, 255, 255);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
         
         .qrcode-container {
@@ -144,12 +130,12 @@
         #qrcode {
             width: 300px;
             height: 300px;
-            border: 2px dashed rgb(255, 251, 251);
+            border: 1px dashed rgba(239, 68, 68, 0.3);
             display: flex;
             justify-content: center;
             align-items: center;
             margin-bottom: 1rem;
-            background-color: #ffffff;
+            background-color: #1e1e1e;
             transition: background-color 0.5s;
         }
         
@@ -164,7 +150,7 @@
         }
         
         .error {
-            color: #ff0000;
+            color: #f87171;
             font-size: 0.9rem;
             margin-top: 0.5rem;
             display: none;
@@ -173,15 +159,15 @@
         .registration-code {
             text-align: center;
             margin-top: 1rem;
-            font-size: 2rem;
+            font-size: 2.2rem;
         }
         .registration-code span {
-            color: #ffffffc2;
+            color: var(--primary);
             font-weight: bold;
         }
         
         .form-container h1 {
-            font-size: 2.1rem;
+            font-size: 2.0rem;
             display: flex;
             align-items: center;
             justify-content: flex-start;
@@ -190,7 +176,7 @@
         }
         
         .form-container h1 i {
-            font-size: 2rem;
+            font-size: 2.0rem;
             order: 0;
         }
 
@@ -220,7 +206,7 @@
 
         .thank-you-message {
             margin-bottom: 2rem;
-            font-size: 1.4rem;
+            font-size: 1.2rem;
             line-height: 1.6;
         }
 
@@ -230,8 +216,8 @@
             border: none;
             padding: 1rem 2rem;
             font-family: 'Tajawal', sans-serif;
-            font-size: 1.6rem;
-            border-Radius: 8px;
+            font-size: 1.1rem;
+            border-radius: 8px;
             cursor: pointer;
             margin: 1rem auto;
             display: block;
@@ -255,29 +241,21 @@
 
         .capture-header {
             display: flex;
-            justify-content: flex-end; /* Aligne à droite */
-            align-items: center; /* Centre verticalement */
+            justify-content: space-between;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 2px solid var(--primary);
             margin-bottom: 20px;
-            height: 100px; /* Hauteur fixe */
-        }
-        .capture-logo {
-            height: 60px;
-            width: auto;
-            display: block;
         }
 
-        .capture-ayda-maps-title {
-            font-size: 2rem !important;
-            font-weight: 800 !important;
-            color: white !important;
-            text-transform: uppercase !important;
-            letter-spacing: 1px !important;
-            margin-right: auto !important; /* Pousse à droite */
-            display: flex !important;
-            align-items: center !important; /* Centre verticalement */
-            height: 100% !important;
+        .capture-logo {
+            height: 80px;
+            width: auto;
+        }
+
+        .capture-icon {
+            font-size: 60px;
+            color: white;
         }
 
         .capture-form-container {
@@ -324,14 +302,14 @@
         <header class="tech-header">
             <div class="header-content">
                 <div class="logo-wrapper">
-                    <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
-                    <div class="ayda-maps-title"> AYDA MAPS 2.0</div>
+                    <img src="aydammaps logo.jpg" alt="Logo Ayda Maps" class="tech-logo" crossorigin="anonymous">
+                    <i class="fas fa-map-marked-alt surveyor-icon"></i>
                 </div>
             </div>
         </header>
         
         <div class="form-container">
-            <h1><i class="fas fa-id-card"></i>بطاقة البيانات </h1>
+            <h1><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
             
             <form id="dataForm">
                 <div class="form-group">
@@ -376,7 +354,7 @@
                 </div>
 
                 <div class="registration-code">
-                    رقم التسجيل : <span id="uniqueCode"></span>
+                    رقم التسجيل: <span id="uniqueCode"></span>
                 </div>
             </form>
         </div>
@@ -388,14 +366,12 @@
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>يرجى تحميل بطاقة البيانات على هاتفكم.</div></p>
-                <P>سيتم اعتماد البطاقة عند تسجيل بقعكم الزراعية على الخريطة خلال الأعمال الميدانية. </p>
-                <p>-------------------------------------------------
-                <p>نشكركم على ثقتكم  </p>
+                <p>نشكركم على تقديم معلوماتكم و على ثقتكم بخدماتنا.</p>
+                <p>سيتم استخدام هذه البيانات لتحسين خدماتنا وتقديم تجربة أفضل لكم.</p>
             </div>
             
             <button id="download-image">
-                <i class="fas fa-download"></i> تحميل بطاقة البيانات 
+                <i class="fas fa-download"></i> تحميل الوثيقة
             </button>
         </div>
     </div>
@@ -405,11 +381,11 @@
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <div class="capture-ayda-maps-title">AYDA MAPS 2.0</div>
+                <i class="fas fa-map-marked-alt capture-icon"></i>
             </div>
             
             <div class="capture-form-container">
-                <h1 class="capture-title"><i class="fas fa-id-card"></i> بطاقة البيانات</h1>
+                <h1 class="capture-title"><i class="fas fa-id-card"></i> تسجيل البيانات</h1>
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
@@ -449,7 +425,7 @@
                 <div id="capture-qrcode" class="capture-qrcode"></div>
                 
                 <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
-                     رقم التسجيل : <span id="capture-uniqueCode" style="color: var(white); font-weight: bold;"></span>
+                    رقم التسجيل: <span id="capture-uniqueCode" style="color: var(--primary); font-weight: bold;"></span>
                 </div>
             </div>
         </div>
@@ -460,7 +436,7 @@
     let inactivityTimer;
     let userInteracted = false;
     let qrCodeGenerated = false;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec'; // 
+
     // Initialisation de l'application
     document.addEventListener('DOMContentLoaded', function() {
         initApp();
@@ -511,9 +487,9 @@
             now.getSeconds(),
             now.getMinutes(),
             now.getHours(),
-            now.getFullYear(),
+            now.getDate(),
             now.getMonth() + 1,
-            now.getDate() ,
+            now.getFullYear() % 100
         ];
         
         return parts.map(part => String(part).padStart(2, '0')).join('');
@@ -549,53 +525,21 @@
         return isValid && validatePhone();
     }
 
-    // Fonction pour envoyer les données à Google Sheets
-    async function sendDataToGoogleSheets(formData) {
-        try {
-            const response = await fetch(scriptURL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(formData)
-            });
-            
-            console.log('Données envoyées avec succès!', response);
-            return true;
-        } catch (error) {
-            console.error('Erreur lors de l\'envoi des données:', error);
-            return false;
-        }
-    }
-
     // Fonction pour générer le QR code
-    async function generateQR() {
+    function generateQR() {
         if (!validateForm()) {
-            alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
+            alert("الرجاء ملء جميع البيانات المطلوبة بشكل صحيح");
             return;
         }
         
-        const btn = document.getElementById('generate-btn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
-        btn.disabled = true;
-
-
-            const formData = {
+        const formData = {
             "رقم التسجيل": document.getElementById('uniqueCode').textContent,
             "الدوار": document.getElementById('douar').value,
             "أَفُوس": document.getElementById('afous').value,
             "العائلة": document.getElementById('famille').value,
             "الاسم واللقب": document.getElementById('nom').value,
-            "رقم الهاتف واتساب": document.getElementById('telephone').value,
-            "timestamp": new Date().toISOString()
+            "رقم الهاتف واتساب": document.getElementById('telephone').value
         };
-        
-        // Envoyer les données à Google Sheets
-        const sendSuccess = await sendDataToGoogleSheets(formData);
-        if (!sendSuccess) {
-            console.warn("Échec de l'envoi des données à Google Sheets, mais continuation du processus...");
-        }
         
         const qrElement = document.getElementById('qrcode');
         qrElement.innerHTML = '';
@@ -629,7 +573,7 @@
                 setTimeout(() => {
                     qrElement.classList.remove('blink');
                     startInactivityTimer();
-                }, 2000);
+                }, 3000);
             }, 500);
         } catch (error) {
             console.error("Erreur de génération QR:", error);
@@ -669,10 +613,9 @@
             const canvas = await html2canvas(captureElement, {
                 backgroundColor: '#1a1a1a',
                 useCORS: true,
-                scale: 3,
+                scale: 2,
                 logging: false,
                 allowTaint: true
-                
             });
 
             // Créer le lien de téléchargement
@@ -697,7 +640,7 @@
         
         inactivityTimer = setTimeout(function() {
             if (!userInteracted) showThankYouPage();
-        }, 3000);
+        }, 5000);
     }
 
     function resetInactivityTimer() {
