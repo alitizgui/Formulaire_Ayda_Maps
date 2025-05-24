@@ -24,19 +24,18 @@
         
         .tech-header {
             background: #1a1a1a;
-            padding: 15px 2.5rem;
+            padding: 15px 0;
             display: flex;
-            justify-content: flex-end; /* Aligne le contenu à droite */
+            justify-content: center; /* Aligne le contenu à droite */
             align-items: center; /* Centre verticalement */
             border-bottom: 2px solid var(--primary);
             height: 120px; /* Hauteur fixe pour le header */
         }
         
         .header-content {
-            display: flex;
-            align-items: flex-end;
             width: 100%;
-            padding: 0 2rem;
+            max-width: 600px; /* Même largeur que le formulaire */
+            margin: 0 auto;
         }
         
         .logo-wrapper {
@@ -50,6 +49,37 @@
             height: 100%; /* Prend toute la hauteur du header */
         }
         
+        .header-frame {
+            border: 2px solid white; /* Cadre blanc de 2px */
+            border-radius: 8px; /* Coins arrondis */
+            padding: 10px 20px; /* Espace intérieur */
+            width: 100%;
+            box-sizing: border-box; /* Inclut le padding dans la largeur */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Ajustements pour le contenu à l'intérieur du cadre */
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ayda-maps-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            padding: 0 10px;
+        }
+
         .tech-logo {
             height: 90px;
             width: auto;
@@ -267,10 +297,12 @@
             height: 80px;
             width: auto;
             display: block;
+            justify-content: flex-end; /* Aligne à droite */
+
         }
 
         .capture-ayda-maps-title {
-            font-size: 2rem !important;
+            font-size: 2.5rem !important;
             font-weight: 800 !important;
             color: white !important;
             text-transform: uppercase !important;
@@ -324,9 +356,10 @@
     <div id="main-content">
         <header class="tech-header">
             <div class="header-content">
-                <div class="logo-wrapper">
-                    <div class="ayda-maps-title"> Ayda Maps Webtech Service 2.0</div>
-                    <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
+                <div class="header-frame"> 
+                    <div class="logo-wrapper">
+                        <div class="ayda-maps-title"> Ayda Maps Webtech Service 2.0</div>
+                        <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
                 </div>
             </div>
         </header>
