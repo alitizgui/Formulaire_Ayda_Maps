@@ -34,7 +34,7 @@
         
         .header-content {
             width: 100%;
-            max-width: 600px; /* Même largeur que le formulaire */
+            max-width: 650px; /* Même largeur que le formulaire */
             margin: 0 auto;
         }
         
@@ -45,7 +45,7 @@
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 0.2rem;
             height: 100%; /* Prend toute la hauteur du header */
         }
         
@@ -77,27 +77,13 @@
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 0;
-            padding: 0 10px;
+            padding: 0 2px;
         }
 
         .tech-logo {
             height: 90px;
             width: auto;
             display: block;
-        }
-
-        .ayda-maps-title {
-            font-size: 1rem;
-            font-weight: 700;
-            color: white;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-right: 0; /* Pousse le titre à droite */
-            margin-left: 0; /* Pousse le titre à gauche*/
-            display: flex;
-            align-items: center; /* Centre verticalement */
-            height: 100%; /* Prend toute la hauteur disponible */
-            padding-left: 20px;
         }
 
         .logo-wrapper {
@@ -550,16 +536,17 @@
     // Fonction pour générer le code unique
     function generateUniqueCode() {
         const now = new Date();
-        const parts = [
-            now.getSeconds(),
-            now.getMinutes(),
-            now.getHours(),
-            now.getFullYear(),
-            now.getMonth() + 1,
-            now.getDate() ,
-        ];
         
-        return parts.map(part => String(part).padStart(2, '0')).join('');
+        // Formatage des composants
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = String(now.getFullYear()).slice(-2); // 2 derniers chiffres
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        // Assemblage avec le préfixe AM
+        return `AM${day}${month}${year}${hours}${minutes}${seconds}`;
     }
 
     // Fonction de validation du téléphone
