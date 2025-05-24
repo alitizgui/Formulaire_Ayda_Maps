@@ -567,6 +567,61 @@
         return `AM${day}${month}${year}${hours}${minutes}${seconds}`;
     }
 
+    async function sendWhatsAppAuto() {
+  const phone = cleanPhoneNumber(document.getElementById('telephone').value);
+  const uniqueCode = document.getElementById('uniqueCode').textContent;
+  
+  // Générer l'image
+  const canvas = await html2canvas(document.getElementById('capture-template'), {
+    backgroundColor: '#1a1a1a',
+    scale: 2
+  });
+
+  // Stratégie d'envoi multi-plateforme
+  if (canShareFile()) {
+    await shareViaNativeAPI(canvas, uniqueCode); // Android/iOS modernes
+  } else {
+    shareViaWhatsAppLink(phone, uniqueCode); // Fallback pour anciens devices
+  }
+}
+
+// 2. Détection des capacités du device
+function canShareFile() {
+  return (
+    navigator.share && 
+    navigator.canShare && 
+    navigator.canShare({ files: [] })
+  );
+}
+
+// 3. Envoi natif (Android Chrome 89+/iOS 15+)    
+async function shareViaNativeAPI(canvas, uniqueCode) {
+    canvas.toBlob(async (blob) => {
+        const file = new File([blob], `ayda-${uniqueCode}.png`, { type: 'image/png' });
+        try {
+        await navigator.share({
+            title: 'بطاقة Ayda Maps',
+            text: `رقم التسجيل: ${uniqueCode}`,
+            files: [file]
+        });
+        } catch (error) {
+        console.error("Échec du partage natif:", error);
+        return false;
+        }
+    }, 'image/png');
+    }
+
+    // 4. Fallback pour anciens devices
+    function shareViaWhatsAppLink(phone, uniqueCode) {
+    const message = `*بطاقة Ayda Maps*\nرقم التسجيل: ${uniqueCode}`;
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
+    }
+
+    // 5. Nettoyage numéro (format international)
+    function cleanPhoneNumber(phone) {
+    return phone.replace(/^0/, '212'); // Transforme 06... en 2126...
+    }
+
     // Fonction de validation du téléphone
     function validatePhone() {
         const phone = document.getElementById('telephone').value;
