@@ -266,12 +266,13 @@
             position: fixed;
             left: 0;
             top: 0;
-            z-index: 9999;
             width: 100%;
-            max-width: 600px;
+            max-width: 600px; /* Largeur maximale cohérente avec votre design */
             margin: 0 auto;
             padding: 20px;
             box-sizing: border-box;
+            transform: translateX(0); /* S'assurer qu'il n'y a pas de décalage */
+            overflow: visible; /* Permettre à tout le contenu d'être visible */
         }
 
         .capture-container {
@@ -280,6 +281,8 @@
             padding: 20px;
             border-radius: 15px;
             border: 2px solid var(--primary);
+            box-sizing: border-box; /* Inclure padding dans la largeur */
+            margin: 0 auto; /* Centrer horizontalement */
         }
         
         .capture-header {
@@ -699,14 +702,7 @@
             prepareCaptureTemplate(currentFormData);
             
             // Animation effects
-            setTimeout(() => {
-                qrElement.classList.add('blink');
-                setTimeout(() => {
-                    qrElement.classList.remove('blink');
-                    startInactivityTimer();
-                }, 2000);
-            }, 500);
-            
+
             qrCodeGenerated = true;
             
         } catch (error) {
@@ -784,9 +780,10 @@
             const canvas = await html2canvas(captureElement, {
                 backgroundColor: '#1a1a1a',
                 useCORS: true,
-                scale: 3,
+                scale: 2,
                 logging: false,
                 allowTaint: true
+
             });
 
             // Create download link
