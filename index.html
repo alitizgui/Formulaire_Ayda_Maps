@@ -26,47 +26,38 @@
             background: #1a1a1a;
             padding: 15px 0;
             display: flex;
-            justify-content: center; /* Aligne le contenu à droite */
-            align-items: center; /* Centre verticalement */
+            justify-content: center;
+            align-items: center;
             border-bottom: 2px solid var(--primary);
-            height: 120px; /* Hauteur fixe pour le header */
+            height: 120px;
         }
         
         .header-content {
             width: 100%;
-            max-width: 650px; /* Même largeur que le formulaire */
+            max-width: 650px;
             margin: 0 auto;
         }
         
         .logo-wrapper {
             display: flex;
-            align-items: center; /* Centre verticalement les éléments */
-            justify-content: space-between; /* Aligne à droite */
+            align-items: center;
+            justify-content: space-between;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 0 0.2rem;
-            height: 100%; /* Prend toute la hauteur du header */
+            height: 100%;
         }
         
         .header-frame {
-            border: 2px solid rgba(255, 255, 255, 0.89); /* Cadre blanc de 2px */
-            border-radius: 8px; /* Coins arrondis */
-            padding: 12px 20px; /* Espace intérieur */
+            border: 2px solid rgba(255, 255, 255, 0.89);
+            border-radius: 8px;
+            padding: 12px 20px;
             width: 100%;
-            box-sizing: border-box; /* Inclut le padding dans la largeur */
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 100%;
-        }
-
-        /* Ajustements pour le contenu à l'intérieur du cadre */
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
             height: 100%;
         }
 
@@ -171,12 +162,12 @@
         }
         
         .qrcode-title {
-            font-family: 'Tajawal', sans-serif; /* Police */
-            font-size: 1.2rem;                 /* Taille */
-            font-weight: 500;                  /* Épaisseur */
-            color: white;                      /* Couleur */
-            margin-top: 10px;                  /* Marge */
-            text-align: center;                /* Alignement */
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: white;
+            margin-top: 10px;
+            text-align: center;
         }
         
         .blink {
@@ -220,7 +211,7 @@
             order: 0;
         }
 
-        /* Page de remerciement */
+        /* Thank you page */
         #thank-you-page {
             display: none;
             position: fixed;
@@ -269,31 +260,41 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Styles pour la capture */
-        .capture-container {
+        /* Capture template */
+        #capture-template {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 9999;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 20px;
-            background: #1a1a1a;
             box-sizing: border-box;
         }
 
+        .capture-container {
+            width: 100%;
+            background: #1a1a1a;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--primary);
+        }
+        
         .capture-header {
             display: flex;
-            justify-content: flex-end; /* Aligne à droite */
-            align-items: center; /* Centre verticalement */
+            justify-content: flex-end;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 2px solid var(--primary);
             margin-bottom: 20px;
-            height: 100px; /* Hauteur fixe */
+            height: 100px;
         }
         .capture-logo {
             height: 80px;
             width: auto;
             display: block;
-            justify-content: flex-end; /* Aligne à droite */
-
         }
 
         .capture-ayda-maps-title {
@@ -302,9 +303,9 @@
             color: white !important;
             text-transform: uppercase !important;
             letter-spacing: 1px !important;
-            margin-right: auto !important; /* Pousse à droite */
+            margin-right: auto !important;
             display: flex !important;
-            align-items: center !important; /* Centre verticalement */
+            align-items: center !important;
             height: 100% !important;
         }
 
@@ -345,6 +346,40 @@
             margin-bottom: 2rem;
             color: white;
         }
+
+        /* WhatsApp button */
+        .whatsapp-button {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.6rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-button:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        /* Loading spinner */
+        .spinner {
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -355,6 +390,7 @@
                     <div class="logo-wrapper">
                         <div class="ayda-maps-title"> Ayda Maps Webtech Service 2.0</div>
                         <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
+                    </div>
                 </div>
             </div>
         </header>
@@ -411,26 +447,30 @@
         </div>
     </div>
 
-    <!-- Page de remerciement -->
+    <!-- Thank you page -->
     <div id="thank-you-page">
         <div class="thank-you-container">
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>يرجى تحميل بطاقة البيانات على هاتفكم.</div></p>
-                <P>سيتم اعتماد البطاقة عند تسجيل بقعكم الزراعية على الخريطة خلال الأعمال الميدانية. </p>
-                <p>-------------------------------------------------
-                <p>نشكركم على ثقتكم  </p>
+                <p>يرجى تحميل بطاقة البيانات على هاتفكم.</p>
+                <p>سيتم اعتماد البطاقة عند تسجيل بقعكم الزراعية على الخريطة خلال الأعمال الميدانية.</p>
+                <p>-------------------------------------------------</p>
+                <p>نشكركم على ثقتكم</p>
             </div>
             
             <button id="download-image">
                 <i class="fas fa-download"></i> تحميل بطاقة البيانات 
             </button>
+            
+            <button id="whatsapp-share" class="whatsapp-button">
+                <i class="fab fa-whatsapp"></i> مشاركة عبر واتساب
+            </button>
         </div>
     </div>
 
-    <!-- Template pour la capture -->
-    <div id="capture-template" style="display: none; position: fixed; left: 0; top: 0; z-index: 9999;">
+    <!-- Capture template -->
+    <div id="capture-template">
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
@@ -478,62 +518,47 @@
                 <div id="capture-qrcode" class="capture-qrcode"></div>
                 
                 <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
-                     رقم التسجيل : <span id="capture-uniqueCode" style="color: var(white); font-weight: bold;"></span>
+                     رقم التسجيل : <span id="capture-uniqueCode" style="color: white; font-weight: bold;"></span>
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-    // Variables globales
+    // Global variables
     let inactivityTimer;
     let userInteracted = false;
     let qrCodeGenerated = false;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec'; //
-    function cleanInput(value) {
-        if (typeof value === 'string') {
-        let cleaned = value.trim();
-        cleaned = cleaned.replace(/\.+$/, '');
-        cleaned = cleaned.replace(/\s+/g, ' ');
-        return cleaned;
-      }
-      return value;
-    }
+    let currentFormData = null;
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec';
 
-    function cleanPhoneNumber(phone) {
-      let cleaned = phone.trim().replace(/[^\d+]/g, '');
-      if (/^0\d{9}$/.test(cleaned)) {
-        return cleaned.replace(/^0/, '+212');
-      }
-      return cleaned;
-    }
-
-    // Initialisation de l'application
+    // Initialize the app when DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
         initApp();
     });
 
     function initApp() {
-        // Générer le code unique
+        // Generate unique code
         document.getElementById('uniqueCode').textContent = generateUniqueCode();
         document.getElementById('capture-uniqueCode').textContent = document.getElementById('uniqueCode').textContent;
         
-        // Configurer les écouteurs d'événements
+        // Setup event listeners
         setupEventListeners();
     }
 
     function setupEventListeners() {
-        // Écouteurs pour le timer d'inactivité
+        // Inactivity timer listeners
         ['mousedown', 'touchstart', 'keydown', 'scroll'].forEach(event => {
             document.addEventListener(event, resetInactivityTimer);
         });
 
-        // Validation en temps réel
+        // Real-time validation for phone
         document.getElementById('telephone').addEventListener('input', function() {
             this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
             document.getElementById('phoneError').style.display = 'none';
         });
 
+        // Real-time validation for Arabic fields
         document.querySelectorAll('input[pattern="[\\u0600-\\u06FF\\s]+"]').forEach(input => {
             input.addEventListener('input', function() {
                 const errorElement = document.getElementById(`${this.id}Error`);
@@ -544,97 +569,46 @@
             });
         });
 
-        // Bouton de génération QR
+        // Generate QR button
         document.getElementById('generate-btn').addEventListener('click', generateQR);
         
-        // Bouton de téléchargement image
+        // Download image button
         document.getElementById('download-image').addEventListener('click', generateHighResImage);
-    }
-
-    // Fonction pour générer le code unique
-    function generateUniqueCode() {
-        const now = new Date();
         
-        // Formatage des composants
-        const day = String(now.getDate()).padStart(2, '0');
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const year = String(now.getFullYear()).slice(-2); // 2 derniers chiffres
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const seconds = String(now.getSeconds()).padStart(2, '0');
-
-        // Assemblage avec le préfixe AM
-        return `AM${day}${month}${year}${hours}${minutes}${seconds}`;
+        // WhatsApp share button
+        document.getElementById('whatsapp-share').addEventListener('click', shareViaWhatsApp);
     }
 
-    async function sendWhatsAppAuto() {
-  const phone = cleanPhoneNumber(document.getElementById('telephone').value);
-  const uniqueCode = document.getElementById('uniqueCode').textContent;
-  
-  // Générer l'image
-  const canvas = await html2canvas(document.getElementById('capture-template'), {
-    backgroundColor: '#1a1a1a',
-    scale: 2
-  });
-
-  // Stratégie d'envoi multi-plateforme
-  if (canShareFile()) {
-    await shareViaNativeAPI(canvas, uniqueCode); // Android/iOS modernes
-  } else {
-    shareViaWhatsAppLink(phone, uniqueCode); // Fallback pour anciens devices
-  }
-}
-
-// 2. Détection des capacités du device
-function canShareFile() {
-  return (
-    navigator.share && 
-    navigator.canShare && 
-    navigator.canShare({ files: [] })
-  );
-}
-
-// 3. Envoi natif (Android Chrome 89+/iOS 15+)    
-async function shareViaNativeAPI(canvas, uniqueCode) {
-    canvas.toBlob(async (blob) => {
-        const file = new File([blob], `ayda-${uniqueCode}.png`, { type: 'image/png' });
-        try {
-        await navigator.share({
-            title: 'بطاقة Ayda Maps',
-            text: `رقم التسجيل: ${uniqueCode}`,
-            files: [file]
-        });
-        } catch (error) {
-        console.error("Échec du partage natif:", error);
-        return false;
+    // Input cleaning functions
+    function cleanInput(value) {
+        if (typeof value === 'string') {
+            let cleaned = value.trim();
+            cleaned = cleaned.replace(/\.+$/, '');
+            cleaned = cleaned.replace(/\s+/g, ' ');
+            return cleaned;
         }
-    }, 'image/png');
+        return value;
     }
 
-    // 4. Fallback pour anciens devices
-    function shareViaWhatsAppLink(phone, uniqueCode) {
-    const message = `*بطاقة Ayda Maps*\nرقم التسجيل: ${uniqueCode}`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
-    // 5. Nettoyage numéro (format international)
     function cleanPhoneNumber(phone) {
-    return phone.replace(/^0/, '212'); // Transforme 06... en 2126...
+        let cleaned = phone.trim().replace(/[^\d+]/g, '');
+        
+        // Convert local numbers to international format
+        if (/^0\d{9}$/.test(cleaned)) {
+            return cleaned.replace(/^0/, '+212');
+        }
+        
+        // Ensure international format
+        if (!cleaned.startsWith('+') && !cleaned.startsWith('00')) {
+            cleaned = '+212' + cleaned.replace(/^0/, '');
+        } else if (cleaned.startsWith('00')) {
+            cleaned = '+' + cleaned.substring(2);
+        }
+        
+        return cleaned;
     }
 
-    // Fonction de validation du téléphone
-    function validatePhone() {
-        const phone = document.getElementById('telephone').value;
-        const errorElement = document.getElementById('phoneError');
-        
-        const isValid = phone.startsWith('+') || phone.startsWith('00') || 
-                      (phone.startsWith('0') && /^0[0-9]{9}$/.test(phone));
-        
-        errorElement.style.display = isValid ? 'none' : 'block';
-        return isValid;
-    }
-
-    // Fonction de validation du formulaire
+    // Form validation
     function validateForm() {
         let isValid = true;
         const inputs = document.querySelectorAll('input[required]');
@@ -652,8 +626,128 @@ async function shareViaNativeAPI(canvas, uniqueCode) {
         return isValid && validatePhone();
     }
 
-        // Fonction pour envoyer les données à Google Sheets
-        async function sendDataToGoogleSheets(formData) {
+    function validatePhone() {
+        const phoneInput = document.getElementById('telephone');
+        const phoneValue = phoneInput.value.trim();
+        const phonePattern = /(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})/;
+        
+        if (!phonePattern.test(phoneValue)) {
+            phoneInput.style.borderColor = '#f87171';
+            document.getElementById('phoneError').style.display = 'block';
+            return false;
+        }
+        
+        return true;
+    }
+
+    // Unique code generation
+    function generateUniqueCode() {
+        const now = new Date();
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = String(now.getFullYear()).slice(-2);
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        return `AM${day}${month}${year}${hours}${minutes}${seconds}`;
+    }
+
+    // QR Code generation
+    async function generateQR() {
+        if (!validateForm()) {
+            alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح");
+            return;
+        }
+        
+        const btn = document.getElementById('generate-btn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
+        btn.disabled = true;
+
+        // Prepare form data
+        currentFormData = {
+            "رقم التسجيل": document.getElementById('uniqueCode').textContent,
+            "الدوار": cleanInput(document.getElementById('douar').value),
+            "أَفُوس": cleanInput(document.getElementById('afous').value),
+            "العائلة": cleanInput(document.getElementById('famille').value),
+            "الاسم واللقب": cleanInput(document.getElementById('nom').value),
+            "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
+            "timestamp": new Date().toISOString()
+        };
+
+        // Send to Google Sheets
+        try {
+            await sendDataToGoogleSheets(currentFormData);
+        } catch (error) {
+            console.warn("Failed to send data to Google Sheets:", error);
+        }
+        
+        // Generate QR Code
+        const qrElement = document.getElementById('qrcode');
+        qrElement.innerHTML = '';
+        
+        try {
+            new QRCode(qrElement, {
+                text: JSON.stringify(currentFormData),
+                width: 300,
+                height: 300,
+                colorDark: "#000000",
+                colorLight: "#ffffff"
+            });
+            
+            // Prepare capture template
+            prepareCaptureTemplate(currentFormData);
+            
+            // Animation effects
+            setTimeout(() => {
+                qrElement.classList.add('blink');
+                setTimeout(() => {
+                    qrElement.classList.remove('blink');
+                    startInactivityTimer();
+                }, 2000);
+            }, 500);
+            
+            qrCodeGenerated = true;
+            
+        } catch (error) {
+            console.error("QR generation error:", error);
+            // Fallback if QR generation fails
+            qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(currentFormData))}&size=300x300&color=000000&bgcolor=ffffff" alt="QR Code">`;
+            prepareCaptureTemplate(currentFormData);
+            qrCodeGenerated = true;
+            startInactivityTimer();
+        } finally {
+            btn.innerHTML = '<i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات';
+            btn.disabled = false;
+        }
+    }
+
+    // Prepare capture template
+    function prepareCaptureTemplate(formData) {
+        document.getElementById('capture-douar').textContent = formData["الدوار"];
+        document.getElementById('capture-afous').textContent = formData["أَفُوس"];
+        document.getElementById('capture-famille').textContent = formData["العائلة"];
+        document.getElementById('capture-nom').textContent = formData["الاسم واللقب"];
+        document.getElementById('capture-telephone').textContent = document.getElementById('telephone').value;
+        document.getElementById('capture-uniqueCode').textContent = formData["رقم التسجيل"];
+        
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = '';
+        try {
+            new QRCode(captureQrElement, {
+                text: JSON.stringify(formData),
+                width: 250,
+                height: 250,
+                colorDark: "#000000",
+                colorLight: "#ffffff"
+            });
+        } catch (e) {
+            captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
+        }
+    }
+
+    // Send data to Google Sheets
+    async function sendDataToGoogleSheets(formData) {
         try {
             const response = await fetch(scriptURL, {
                 method: 'POST',
@@ -664,221 +758,150 @@ async function shareViaNativeAPI(canvas, uniqueCode) {
                 body: JSON.stringify(formData)
             });
             
-            console.log('Données envoyées avec succès!', response);
+            console.log('Data sent successfully!', response);
             return true;
         } catch (error) {
-            console.error('Erreur lors de l\'envoi des données:', error);
+            console.error('Error sending data:', error);
             return false;
         }
     }
 
-    async function generateQR() {
-    if (!validateForm()) {
-        alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح");
-        return;
-    }
-    
-    const btn = document.getElementById('generate-btn');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
-    btn.disabled = true;
-
-    // 1. Préparer les données
-    const formData = {
-        "رقم التسجيل": document.getElementById('uniqueCode').textContent,
-        "الدوار": cleanInput(document.getElementById('douar').value),
-        "أَفُوس": cleanInput(document.getElementById('afous').value),
-        "العائلة": cleanInput(document.getElementById('famille').value),
-        "الاسم واللقب": cleanInput(document.getElementById('nom').value),
-        "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
-        "timestamp": new Date().toISOString()
-    };
-
-    // 2. Envoyer à Google Sheets
-    const sendSuccess = await sendDataToGoogleSheets(formData);
-    if (!sendSuccess) {
-        console.warn("Échec de l'envoi des données à Google Sheets");
-    }
-    
-    // 3. Générer le QR Code principal
-    const qrElement = document.getElementById('qrcode');
-    qrElement.innerHTML = '';
-    try {
-        new QRCode(qrElement, {
-            text: JSON.stringify(formData),
-            width: 300,
-            height: 300,
-            colorDark: "#ffffff",
-            colorLight: "#1e1e1e"
-        });
-        
-        // 4. Préparer le template pour capture
-        prepareCaptureTemplate(formData);
-        
-        // 5. Animation du QR code
-        setTimeout(() => {
-            qrElement.classList.add('blink');
-            setTimeout(() => {
-                qrElement.classList.remove('blink');
-                
-                // 6. Envoyer via WhatsApp (automatique sur mobile)
-                setTimeout(sendWhatsAppAuto, 500);
-                
-                startInactivityTimer();
-            }, 2000);
-        }, 500);
-        
-        qrCodeGenerated = true;
-        
-    } catch (error) {
-        console.error("Erreur de génération QR:", error);
-        // Fallback si la génération QR échoue
-        qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
-        prepareCaptureTemplate(formData);
-        setTimeout(sendWhatsAppAuto, 1000);
-        qrCodeGenerated = true;
-        startInactivityTimer();
-    }
-}
-
-// Nouvelle fonction pour préparer le template de capture
-function prepareCaptureTemplate(formData) {
-    document.getElementById('capture-douar').textContent = formData["الدوار"];
-    document.getElementById('capture-afous').textContent = formData["أَفُوس"];
-    document.getElementById('capture-famille').textContent = formData["العائلة"];
-    document.getElementById('capture-nom').textContent = formData["الاسم واللقب"];
-    document.getElementById('capture-telephone').textContent = document.getElementById('telephone').value;
-    document.getElementById('capture-uniqueCode').textContent = formData["رقم التسجيل"];
-    
-    const captureQrElement = document.getElementById('capture-qrcode');
-    captureQrElement.innerHTML = '';
-    try {
-        new QRCode(captureQrElement, {
-            text: JSON.stringify(formData),
-            width: 250,
-            height: 250,
-            colorDark: "#000000",
-            colorLight: "#ffffff"
-        });
-    } catch (e) {
-        captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
-    }
-}
-
-// Fonction pour vérifier la compatibilité du partage
-function canShareFile() {
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    return isMobile && navigator.share && navigator.canShare && navigator.canShare({ files: [] });
-}
-
-// Envoi natif (Android/iOS modernes)
-async function shareViaNativeAPI(canvas, uniqueCode) {
-    return new Promise((resolve) => {
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], `ayda-${uniqueCode}.png`, { type: 'image/png' });
-            try {
-                await navigator.share({
-                    title: 'بطاقة Ayda Maps',
-                    text: `رقم التسجيل: ${uniqueCode}`,
-                    files: [file]
-                });
-                resolve(true);
-            } catch (error) {
-                console.error("Échec du partage natif:", error);
-                resolve(false);
-            }
-        }, 'image/png');
-    });
-}
-
-// Fallback pour anciens devices
-function shareViaWhatsAppLink(phone, uniqueCode) {
-    const message = `*بطاقة Ayda Maps*\nرقم التسجيل: ${uniqueCode}`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-}
-
-// Fonction principale d'envoi WhatsApp
-async function sendWhatsAppAuto() {
-    const phone = cleanPhoneNumber(document.getElementById('telephone').value);
-    const uniqueCode = document.getElementById('uniqueCode').textContent;
-    
-    // Afficher brièvement le template pour la capture
-    const captureElement = document.getElementById('capture-template');
-    captureElement.style.display = 'block';
-    
-    try {
-        // Attendre le rendu complet
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
-        const canvas = await html2canvas(captureElement, {
-            backgroundColor: '#1a1a1a',
-            scale: 2,
-            logging: false,
-            useCORS: true
-        });
-
-        if (canShareFile()) {
-            const success = await shareViaNativeAPI(canvas, uniqueCode);
-            if (!success) {
-                shareViaWhatsAppLink(phone, uniqueCode);
-            }
-        } else {
-            shareViaWhatsAppLink(phone, uniqueCode);
-        }
-    } catch (error) {
-        console.error("Erreur lors de l'envoi WhatsApp:", error);
-        shareViaWhatsAppLink(phone, uniqueCode);
-    } finally {
-        captureElement.style.display = 'none';
-    }
-}
-
+    // Generate high resolution image for download
     async function generateHighResImage() {
         if (!qrCodeGenerated) {
             alert("الرجاء إنشاء رمز الاستجابة السريعة أولاً");
             return;
         }
 
-        // Remplir le template de capture avec les données
-        document.getElementById('capture-douar').textContent = cleanInput(document.getElementById('douar').value);
-        document.getElementById('capture-afous').textContent = cleanInput(document.getElementById('afous').value);
-        document.getElementById('capture-famille').textContent = cleanInput(document.getElementById('famille').value);
-        document.getElementById('capture-nom').textContent = cleanInput(document.getElementById('nom').value);
-        document.getElementById('capture-telephone').textContent = cleanInput(document.getElementById('telephone').value);
-
-        // Afficher le template de capture
         const captureElement = document.getElementById('capture-template');
         captureElement.style.display = 'block';
 
         try {
-            // Attendre un court instant pour que tout soit rendu
+            // Wait for rendering to complete
             await new Promise(resolve => setTimeout(resolve, 300));
 
-            // Générer l'image avec html2canvas
+            // Generate image with html2canvas
             const canvas = await html2canvas(captureElement, {
                 backgroundColor: '#1a1a1a',
                 useCORS: true,
                 scale: 3,
                 logging: false,
                 allowTaint: true
-                
             });
 
-            // Créer le lien de téléchargement
+            // Create download link
             const link = document.createElement('a');
-            link.download = 'وثيقة_أيدا_مابس_' + new Date().toISOString().slice(0, 10) + '.png';
+            link.download = `بطاقة_أيدا_مابس_${currentFormData["رقم التسجيل"]}.png`;
             link.href = canvas.toDataURL('image/png');
             link.click();
 
         } catch (error) {
-            console.error("Erreur lors de la génération de l'image:", error);
+            console.error("Image generation error:", error);
             alert('حدث خطأ أثناء توليد الصورة. الرجاء المحاولة لاحقًا.');
         } finally {
-            // Masquer à nouveau le template
             captureElement.style.display = 'none';
         }
     }
 
-    // Gestion du timer d'inactivité
+    // WhatsApp sharing functionality
+    async function shareViaWhatsApp() {
+        if (!qrCodeGenerated) {
+            alert("الرجاء إنشاء رمز الاستجابة السريعة أولاً");
+            return;
+        }
+
+        const whatsappBtn = document.getElementById('whatsapp-share');
+        const originalContent = whatsappBtn.innerHTML;
+        whatsappBtn.innerHTML = '<i class="fas fa-spinner spinner"></i> جاري الإرسال...';
+        whatsappBtn.disabled = true;
+
+        const captureElement = document.getElementById('capture-template');
+        captureElement.style.display = 'block';
+
+        try {
+            // Wait for rendering to complete
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            // Generate image
+            const canvas = await html2canvas(captureElement, {
+                backgroundColor: '#1a1a1a',
+                scale: 2,
+                logging: false,
+                useCORS: true
+            });
+
+            // Convert canvas to blob
+            const blob = await new Promise(resolve => canvas.toBlob(resolve, 'image/png'));
+            
+            // Format WhatsApp message
+            const message = formatWhatsAppMessage(currentFormData);
+            const phone = cleanPhoneNumber(currentFormData["رقم الهاتف واتساب"]);
+            
+            // Try native share first (mobile devices)
+            if (navigator.share && navigator.canShare) {
+                const file = new File([blob], `ayda-card-${currentFormData["رقم التسجيل"]}.png`, { type: 'image/png' });
+                
+                try {
+                    if (navigator.canShare({ files: [file] })) {
+                        await navigator.share({
+                            title: 'بطاقة البيانات - Ayda Maps',
+                            text: message,
+                            files: [file]
+                        });
+                        return;
+                    }
+                } catch (error) {
+                    console.warn("Native share failed, falling back to WhatsApp:", error);
+                }
+            }
+            
+            // Fallback to WhatsApp web
+            const imageUrl = canvas.toDataURL('image/png');
+            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+            
+            // For mobile, we can try to share directly
+            if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+                window.open(whatsappUrl, '_blank');
+            } else {
+                // For desktop, we need to download the image first
+                const link = document.createElement('a');
+                link.href = imageUrl;
+                link.download = `ayda-card-${currentFormData["رقم التسجيل"]}.png`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // Then open WhatsApp web
+                setTimeout(() => {
+                    window.open(whatsappUrl, '_blank');
+                }, 1000);
+            }
+            
+        } catch (error) {
+            console.error("WhatsApp sharing error:", error);
+            alert('حدث خطأ أثناء المشاركة عبر واتساب. الرجاء المحاولة لاحقًا.');
+        } finally {
+            captureElement.style.display = 'none';
+            whatsappBtn.innerHTML = originalContent;
+            whatsappBtn.disabled = false;
+        }
+    }
+
+    // Format WhatsApp message
+    function formatWhatsAppMessage(formData) {
+        return `*بطاقة البيانات Ayda Maps 2.0*
+
+*رقم التسجيل:* ${formData["رقم التسجيل"]}
+*الدوار:* ${formData["الدوار"]}
+*أفوس:* ${formData["أَفُوس"]}
+*العائلة:* ${formData["العائلة"]}
+*الاسم واللقب:* ${formData["الاسم واللقب"]}
+*رقم الهاتف:* ${formData["رقم الهاتف واتساب"]}
+
+_نشكركم على استخدام خدمتنا_`;
+    }
+
+    // Inactivity timer functions
     function startInactivityTimer() {
         if (inactivityTimer) clearTimeout(inactivityTimer);
         userInteracted = false;
