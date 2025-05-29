@@ -1,52 +1,52 @@
 <?php
 header('Content-Type: application/json');
 
-// Configurations
-$uploadDir = __DIR__ . '/temp/';
-$maxFileAge = 86400; // 24h en secondes
+// Configuration
+$storagePath = __DIR__.'/../storage/';
+$maxHours = 24;
 
-// Créer le dossier temp s'il n'existe pas
-if (!file_exists($uploadDir)) {
-    mkdir($uploadDir, 0755, true);
+// Créer le dossier storage si inexistant
+if (!file_exists($storagePath)) {
+    mkdir($storagePath, 0755, true);
 }
 
-// Nettoyer les vieux fichiers
-foreach (glob($uploadDir . "*") as $file) {
-    if (time() - filemtime($file) > $maxFileAge) {
+// Nettoyer les anciens fichiers (>24h)
+foreach (glob($storagePath."*.png") as $file) {
+    if (time() - filemtime($file) > ($maxHours * 3600)) {
         unlink($file);
     }
 }
 
-// Action Upload
-if ($_GET['action'] === 'upload') {
-    try {
-        $code = $_POST['code'];
-        $tempFile = $_FILES['image']['tmp_name'];
-        $targetFile = $uploadDir . $code . '.png';
-
-        move_uploaded_file($tempFile, $targetFile);
-        
-        echo json_encode(['success' => true]);
-    } catch (Exception $e) {
-        echo json_encode(['error' => $e->getMessage()]);
+// Gestion des requêtes
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Upload
+    $uniqueCode = preg_replace('/[^a-zA-Z0-9]/', '', $_POST['code']);
+    $tempFile = $_FILES['image']['tmp_name'];
+    $targetFile = $storagePath.$uniqueCode.'.png';
+    
+    if (move_uploaded_file($tempFile, $targetFile)) {
+        echo json_encode([
+            'success' => true,
+            'download_url' => "api/download.php?code=".$uniqueCode
+        ]);
+    } else {
+        http_response_code(500);
+        echo json_encode(['error' => 'Upload failed']);
     }
     exit;
 }
 
-// Action Download
+// Téléchargement
 if (isset($_GET['code'])) {
-    $file = $uploadDir . $_GET['code'] . '.png';
+    $file = $storagePath.preg_replace('/[^a-zA-Z0-9]/', '', $_GET['code']).'.png';
     
     if (file_exists($file)) {
         header('Content-Type: image/png');
-        header('Content-Disposition: inline; filename="AydaMaps_Card.png"');
         readfile($file);
     } else {
-        header('HTTP/1.0 404 Not Found');
-        echo "Fichier introuvable ou expiré";
+        http_response_code(404);
+        echo "Fichier expiré ou introuvable";
     }
     exit;
 }
-
-echo json_encode(['error' => 'Action non valide']);
 ?>

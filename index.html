@@ -567,61 +567,6 @@
         return `AM${day}${month}${year}${hours}${minutes}${seconds}`;
     }
 
-    async function sendWhatsAppAuto() {
-  const phone = cleanPhoneNumber(document.getElementById('telephone').value);
-  const uniqueCode = document.getElementById('uniqueCode').textContent;
-  
-  // Générer l'image
-  const canvas = await html2canvas(document.getElementById('capture-template'), {
-    backgroundColor: '#1a1a1a',
-    scale: 2
-  });
-
-  // Stratégie d'envoi multi-plateforme
-  if (canShareFile()) {
-    await shareViaNativeAPI(canvas, uniqueCode); // Android/iOS modernes
-  } else {
-    shareViaWhatsAppLink(phone, uniqueCode); // Fallback pour anciens devices
-  }
-}
-
-// 2. Détection des capacités du device
-function canShareFile() {
-  return (
-    navigator.share && 
-    navigator.canShare && 
-    navigator.canShare({ files: [] })
-  );
-}
-
-// 3. Envoi natif (Android Chrome 89+/iOS 15+)    
-async function shareViaNativeAPI(canvas, uniqueCode) {
-    canvas.toBlob(async (blob) => {
-        const file = new File([blob], `ayda-${uniqueCode}.png`, { type: 'image/png' });
-        try {
-        await navigator.share({
-            title: 'بطاقة Ayda Maps',
-            text: `رقم التسجيل: ${uniqueCode}`,
-            files: [file]
-        });
-        } catch (error) {
-        console.error("Échec du partage natif:", error);
-        return false;
-        }
-    }, 'image/png');
-    }
-
-    // 4. Fallback pour anciens devices
-    function shareViaWhatsAppLink(phone, uniqueCode) {
-    const message = `*بطاقة Ayda Maps*\nرقم التسجيل: ${uniqueCode}`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-    }
-
-    // 5. Nettoyage numéro (format international)
-    function cleanPhoneNumber(phone) {
-    return phone.replace(/^0/, '212'); // Transforme 06... en 2126...
-    }
-
     // Fonction de validation du téléphone
     function validatePhone() {
         const phone = document.getElementById('telephone').value;
@@ -672,165 +617,78 @@ async function shareViaNativeAPI(canvas, uniqueCode) {
         }
     }
 
-    async function generateQR() {
-    if (!validateForm()) {
-        alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح");
-        return;
-    }
-    
-    const btn = document.getElementById('generate-btn');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
-    btn.disabled = true;
-
-    // 1. Préparer les données
-    const formData = {
-        "رقم التسجيل": document.getElementById('uniqueCode').textContent,
-        "الدوار": cleanInput(document.getElementById('douar').value),
-        "أَفُوس": cleanInput(document.getElementById('afous').value),
-        "العائلة": cleanInput(document.getElementById('famille').value),
-        "الاسم واللقب": cleanInput(document.getElementById('nom').value),
-        "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
-        "timestamp": new Date().toISOString()
-    };
-
-    // 2. Envoyer à Google Sheets
-    const sendSuccess = await sendDataToGoogleSheets(formData);
-    if (!sendSuccess) {
-        console.warn("Échec de l'envoi des données à Google Sheets");
-    }
-    
-    // 3. Générer le QR Code principal
-    const qrElement = document.getElementById('qrcode');
-    qrElement.innerHTML = '';
-    try {
-        new QRCode(qrElement, {
-            text: JSON.stringify(formData),
-            width: 300,
-            height: 300,
-            colorDark: "#ffffff",
-            colorLight: "#1e1e1e"
-        });
-        
-        // 4. Préparer le template pour capture
-        prepareCaptureTemplate(formData);
-        
-        // 5. Animation du QR code
-        setTimeout(() => {
-            qrElement.classList.add('blink');
-            setTimeout(() => {
-                qrElement.classList.remove('blink');
-                
-                // 6. Envoyer via WhatsApp (automatique sur mobile)
-                setTimeout(sendWhatsAppAuto, 500);
-                
-                startInactivityTimer();
-            }, 2000);
-        }, 500);
-        
-        qrCodeGenerated = true;
-        
-    } catch (error) {
-        console.error("Erreur de génération QR:", error);
-        // Fallback si la génération QR échoue
-        qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
-        prepareCaptureTemplate(formData);
-        setTimeout(sendWhatsAppAuto, 1000);
-        qrCodeGenerated = true;
-        startInactivityTimer();
-    }
-}
-
-// Nouvelle fonction pour préparer le template de capture
-function prepareCaptureTemplate(formData) {
-    document.getElementById('capture-douar').textContent = formData["الدوار"];
-    document.getElementById('capture-afous').textContent = formData["أَفُوس"];
-    document.getElementById('capture-famille').textContent = formData["العائلة"];
-    document.getElementById('capture-nom').textContent = formData["الاسم واللقب"];
-    document.getElementById('capture-telephone').textContent = document.getElementById('telephone').value;
-    document.getElementById('capture-uniqueCode').textContent = formData["رقم التسجيل"];
-    
-    const captureQrElement = document.getElementById('capture-qrcode');
-    captureQrElement.innerHTML = '';
-    try {
-        new QRCode(captureQrElement, {
-            text: JSON.stringify(formData),
-            width: 250,
-            height: 250,
-            colorDark: "#000000",
-            colorLight: "#ffffff"
-        });
-    } catch (e) {
-        captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
-    }
-}
-
-// Fonction pour vérifier la compatibilité du partage
-function canShareFile() {
-    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-    return isMobile && navigator.share && navigator.canShare && navigator.canShare({ files: [] });
-}
-
-// Envoi natif (Android/iOS modernes)
-async function shareViaNativeAPI(canvas, uniqueCode) {
-    return new Promise((resolve) => {
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], `ayda-${uniqueCode}.png`, { type: 'image/png' });
-            try {
-                await navigator.share({
-                    title: 'بطاقة Ayda Maps',
-                    text: `رقم التسجيل: ${uniqueCode}`,
-                    files: [file]
-                });
-                resolve(true);
-            } catch (error) {
-                console.error("Échec du partage natif:", error);
-                resolve(false);
-            }
-        }, 'image/png');
-    });
-}
-
-// Fallback pour anciens devices
-function shareViaWhatsAppLink(phone, uniqueCode) {
-    const message = `*بطاقة Ayda Maps*\nرقم التسجيل: ${uniqueCode}`;
-    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`, '_blank');
-}
-
-// Fonction principale d'envoi WhatsApp
-async function sendWhatsAppAuto() {
-    const phone = cleanPhoneNumber(document.getElementById('telephone').value);
-    const uniqueCode = document.getElementById('uniqueCode').textContent;
-    
-    // Afficher brièvement le template pour la capture
-    const captureElement = document.getElementById('capture-template');
-    captureElement.style.display = 'block';
-    
-    try {
-        // Attendre le rendu complet
-        await new Promise(resolve => setTimeout(resolve, 300));
-        
-        const canvas = await html2canvas(captureElement, {
-            backgroundColor: '#1a1a1a',
-            scale: 2,
-            logging: false,
-            useCORS: true
-        });
-
-        if (canShareFile()) {
-            const success = await shareViaNativeAPI(canvas, uniqueCode);
-            if (!success) {
-                shareViaWhatsAppLink(phone, uniqueCode);
-            }
-        } else {
-            shareViaWhatsAppLink(phone, uniqueCode);
+        // Fonction pour générer le QR code
+        async function generateQR() {
+        if (!validateForm()) {
+            alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
+            return;
         }
-    } catch (error) {
-        console.error("Erreur lors de l'envoi WhatsApp:", error);
-        shareViaWhatsAppLink(phone, uniqueCode);
-    } finally {
-        captureElement.style.display = 'none';
+        
+        const btn = document.getElementById('generate-btn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
+        btn.disabled = true;
+
+        const formData = {
+            "رقم التسجيل": document.getElementById('uniqueCode').textContent,
+            "الدوار": cleanInput(document.getElementById('douar').value),
+            "أَفُوس": cleanInput(document.getElementById('afous').value),
+            "العائلة": cleanInput(document.getElementById('famille').value),
+            "الاسم واللقب": cleanInput(document.getElementById('nom').value),
+            "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
+            "timestamp": new Date().toISOString()
+        };
+        
+        // Envoyer les données à Google Sheets
+        const sendSuccess = await sendDataToGoogleSheets(formData);
+        if (!sendSuccess) {
+            console.warn("Échec de l'envoi des données à Google Sheets, mais continuation du processus...");
+        }
+        
+        const qrElement = document.getElementById('qrcode');
+        qrElement.innerHTML = '';
+        
+        try {
+            new QRCode(qrElement, {
+                text: JSON.stringify(formData),
+                width: 300,
+                height: 300,
+                colorDark: "#ffffff",
+                colorLight: "#1e1e1e"
+            });
+            
+        // Copier le QR code pour la capture
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = '';
+            new QRCode(captureQrElement, {
+                text: JSON.stringify(formData),
+                width: 250,
+                height: 250,
+                colorDark: "#000000",
+                colorLight: "#ffffff"
+            });
+            
+            qrCodeGenerated = true;
+            
+            // Animation du QR code
+            setTimeout(() => {
+                qrElement.classList.add('blink');
+                
+                setTimeout(() => {
+                    qrElement.classList.remove('blink');
+                    startInactivityTimer();
+                }, 2000);
+            }, 500);
+        } catch (error) {
+        console.error("Erreur de génération QR:", error);
+        qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+            
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
+            
+            qrCodeGenerated = true;
+            startInactivityTimer();
+        }
     }
-}
 
     async function generateHighResImage() {
         if (!qrCodeGenerated) {
