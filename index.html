@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : Formulaire QRCode 2.0</title>
+    <title>نظام البيانات الذكية أيدا مابس - Ayda Maps Service Web : Formulaire QRCode</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
@@ -26,47 +26,38 @@
             background: #1a1a1a;
             padding: 15px 0;
             display: flex;
-            justify-content: center; /* Aligne le contenu à droite */
-            align-items: center; /* Centre verticalement */
+            justify-content: center;
+            align-items: center;
             border-bottom: 2px solid var(--primary);
-            height: 120px; /* Hauteur fixe pour le header */
+            height: 120px;
         }
         
         .header-content {
             width: 100%;
-            max-width: 650px; /* Même largeur que le formulaire */
+            max-width: 650px;
             margin: 0 auto;
         }
         
         .logo-wrapper {
             display: flex;
-            align-items: center; /* Centre verticalement les éléments */
-            justify-content: space-between; /* Aligne à droite */
+            align-items: center;
+            justify-content: space-between;
             width: 100%;
             max-width: 600px;
             margin: 0 auto;
             padding: 0 0.2rem;
-            height: 100%; /* Prend toute la hauteur du header */
+            height: 100%;
         }
         
         .header-frame {
-            border: 2px solid rgba(255, 255, 255, 0.89); /* Cadre blanc de 2px */
-            border-radius: 8px; /* Coins arrondis */
-            padding: 12px 20px; /* Espace intérieur */
+            border: 2px solid rgba(255, 255, 255, 0.89);
+            border-radius: 8px;
+            padding: 12px 20px;
             width: 100%;
-            box-sizing: border-box; /* Inclut le padding dans la largeur */
+            box-sizing: border-box;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            height: 100%;
-        }
-
-        /* Ajustements pour le contenu à l'intérieur du cadre */
-        .logo-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            width: 100%;
             height: 100%;
         }
 
@@ -112,7 +103,7 @@
             font-weight: 500;
         }
         
-        input {
+        input, .form-select {
             width: 100%;
             padding: 1.2rem;
             background: rgb(255, 255, 255);
@@ -124,6 +115,16 @@
             margin-left: auto;
             font-family: 'Tajawal', sans-serif;
             box-sizing: border-box;
+        }
+        
+        .form-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 1rem center;
+            background-size: 1.5rem;
         }
         
         button {
@@ -171,12 +172,12 @@
         }
         
         .qrcode-title {
-            font-family: 'Tajawal', sans-serif; /* Police */
-            font-size: 1.2rem;                 /* Taille */
-            font-weight: 500;                  /* Épaisseur */
-            color: white;                      /* Couleur */
-            margin-top: 10px;                  /* Marge */
-            text-align: center;                /* Alignement */
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: white;
+            margin-top: 10px;
+            text-align: center;
         }
         
         .blink {
@@ -220,7 +221,6 @@
             order: 0;
         }
 
-        /* Page de remerciement */
         #thank-you-page {
             display: none;
             position: fixed;
@@ -269,7 +269,6 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
         }
 
-        /* Styles pour la capture */
         .capture-container {
             width: 100%;
             max-width: 600px;
@@ -281,19 +280,18 @@
 
         .capture-header {
             display: flex;
-            justify-content: flex-end; /* Aligne à droite */
-            align-items: center; /* Centre verticalement */
+            justify-content: flex-end;
+            align-items: center;
             padding: 10px 0;
             border-bottom: 2px solid var(--primary);
             margin-bottom: 20px;
-            height: 100px; /* Hauteur fixe */
+            height: 100px;
         }
         .capture-logo {
             height: 80px;
             width: auto;
             display: block;
-            justify-content: flex-end; /* Aligne à droite */
-
+            justify-content: flex-end;
         }
 
         .capture-ayda-maps-title {
@@ -302,9 +300,9 @@
             color: white !important;
             text-transform: uppercase !important;
             letter-spacing: 1px !important;
-            margin-right: auto !important; /* Pousse à droite */
+            margin-right: auto !important;
             display: flex !important;
-            align-items: center !important; /* Centre verticalement */
+            align-items: center !important;
             height: 100% !important;
         }
 
@@ -353,8 +351,9 @@
             <div class="header-content">
                 <div class="header-frame"> 
                     <div class="logo-wrapper">
-                        <div class="ayda-maps-title"> Ayda Maps Webtech Service 2.0</div>
+                        <div class="ayda-maps-title"> Ayda Maps Webtech Service</div>
                         <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
+                    </div>
                 </div>
             </div>
         </header>
@@ -395,6 +394,16 @@
                     <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات</div>
                 </div>
                 
+                <div class="form-group">
+                    <p style="font-size: 1.6em; text-align: right;"> 🔗 <strong>جماعي</strong> 🔒 <strong>خاص</strong></p>
+                    <select id="system-type" required class="form-select">
+                        <option value="" selected disabled>مشروع جماعي أم خاص ؟</option>
+                        <option value="جماعي">جماعي</option>
+                        <option value="خاص">خاص</option>
+                    </select>
+                    <div class="error" id="systemTypeError">الرجاء اختيار نوع النظام</div>
+                </div>
+                
                 <button type="button" id="generate-btn">
                     <i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات
                 </button>
@@ -411,7 +420,6 @@
         </div>
     </div>
 
-    <!-- Page de remerciement -->
     <div id="thank-you-page">
         <div class="thank-you-container">
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
@@ -429,12 +437,11 @@
         </div>
     </div>
 
-    <!-- Template pour la capture -->
     <div id="capture-template" style="display: none; position: fixed; left: 0; top: 0; z-index: 9999;">
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <div class="capture-ayda-maps-title">AYDA MAPS 2.0</div>
+                <div class="capture-ayda-maps-title">Ayda Maps Code</div>
             </div>
             
             <div class="capture-form-container">
@@ -475,6 +482,13 @@
                     <span id="capture-telephone" class="capture-input-value"></span>
                 </div>
                 
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fi fi-ss-people-poll"></i> ⚙️ نوع النظام
+                    </span>
+                    <span id="capture-system-type" class="capture-input-value"></span>
+                </div>
+                
                 <div id="capture-qrcode" class="capture-qrcode"></div>
                 
                 <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
@@ -489,23 +503,24 @@
     let inactivityTimer;
     let userInteracted = false;
     let qrCodeGenerated = false;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec'; //
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec';
+
     function cleanInput(value) {
         if (typeof value === 'string') {
-        let cleaned = value.trim();
-        cleaned = cleaned.replace(/\.+$/, '');
-        cleaned = cleaned.replace(/\s+/g, ' ');
-        return cleaned;
-      }
-      return value;
+            let cleaned = value.trim();
+            cleaned = cleaned.replace(/\.+$/, '');
+            cleaned = cleaned.replace(/\s+/g, ' ');
+            return cleaned;
+        }
+        return value;
     }
 
     function cleanPhoneNumber(phone) {
-      let cleaned = phone.trim().replace(/[^\d+]/g, '');
-      if (/^0\d{9}$/.test(cleaned)) {
-        return cleaned.replace(/^0/, '+212');
-      }
-      return cleaned;
+        let cleaned = phone.trim().replace(/[^\d+]/g, '');
+        if (/^0\d{9}$/.test(cleaned)) {
+            return cleaned.replace(/^0/, '+212');
+        }
+        return cleaned;
     }
 
     // Initialisation de l'application
@@ -542,6 +557,15 @@
                     errorElement.style.display = 'none';
                 }
             });
+        });
+
+        // Validation pour le select
+        document.getElementById('system-type').addEventListener('change', function() {
+            const errorElement = document.getElementById('systemTypeError');
+            if (this.value) {
+                this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                errorElement.style.display = 'none';
+            }
         });
 
         // Bouton de génération QR
@@ -582,11 +606,11 @@
     // Fonction de validation du formulaire
     function validateForm() {
         let isValid = true;
-        const inputs = document.querySelectorAll('input[required]');
+        const inputs = document.querySelectorAll('input[required], select[required]');
         
         inputs.forEach(input => {
             const errorElement = document.getElementById(`${input.id}Error`);
-            const fieldValid = input.value.trim() && input.validity.valid;
+            const fieldValid = input.value && input.value.trim();
             
             input.style.borderColor = fieldValid ? 'rgba(239, 68, 68, 0.3)' : '#f87171';
             if (errorElement) errorElement.style.display = fieldValid ? 'none' : 'block';
@@ -597,8 +621,8 @@
         return isValid && validatePhone();
     }
 
-        // Fonction pour envoyer les données à Google Sheets
-        async function sendDataToGoogleSheets(formData) {
+    // Fonction pour envoyer les données à Google Sheets
+    async function sendDataToGoogleSheets(formData) {
         try {
             const response = await fetch(scriptURL, {
                 method: 'POST',
@@ -617,8 +641,8 @@
         }
     }
 
-        // Fonction pour générer le QR code
-        async function generateQR() {
+    // Fonction pour générer le QR code
+    async function generateQR() {
         if (!validateForm()) {
             alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
             return;
@@ -634,7 +658,8 @@
             "أَفُوس": cleanInput(document.getElementById('afous').value),
             "العائلة": cleanInput(document.getElementById('famille').value),
             "الاسم واللقب": cleanInput(document.getElementById('nom').value),
-            "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value)
+            "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
+            "نوع النظام": document.getElementById('system-type').value
         };
         
         // Envoyer les données à Google Sheets
@@ -655,9 +680,9 @@
                 colorLight: "#1e1e1e"
             });
             
-        // Copier le QR code pour la capture
-        const captureQrElement = document.getElementById('capture-qrcode');
-        captureQrElement.innerHTML = '';
+            // Copier le QR code pour la capture
+            const captureQrElement = document.getElementById('capture-qrcode');
+            captureQrElement.innerHTML = '';
             new QRCode(captureQrElement, {
                 text: JSON.stringify(formData),
                 width: 250,
@@ -678,11 +703,11 @@
                 }, 2000);
             }, 500);
         } catch (error) {
-        console.error("Erreur de génération QR:", error);
-        qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+            console.error("Erreur de génération QR:", error);
+            qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
             
-        const captureQrElement = document.getElementById('capture-qrcode');
-        captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
+            const captureQrElement = document.getElementById('capture-qrcode');
+            captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
             
             qrCodeGenerated = true;
             startInactivityTimer();
@@ -701,6 +726,7 @@
         document.getElementById('capture-famille').textContent = cleanInput(document.getElementById('famille').value);
         document.getElementById('capture-nom').textContent = cleanInput(document.getElementById('nom').value);
         document.getElementById('capture-telephone').textContent = cleanInput(document.getElementById('telephone').value);
+        document.getElementById('capture-system-type').textContent = document.getElementById('system-type').value;
 
         // Afficher le template de capture
         const captureElement = document.getElementById('capture-template');
@@ -717,7 +743,6 @@
                 scale: 3,
                 logging: false,
                 allowTaint: true
-                
             });
 
             // Créer le lien de téléchargement
