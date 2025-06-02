@@ -343,6 +343,118 @@
             margin-bottom: 2rem;
             color: white;
         }
+
+        /* Styles pour les conditions d'utilisation */
+        .conditions-group {
+            margin: 1.5rem 0;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .conditions-label {
+            display: inline;
+            margin-right: 10px;
+            font-size: 1.2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .conditions-checkbox {
+            width: auto;
+            margin-left: 10px;
+            transform: scale(1.5);
+        }
+
+        .conditions-link {
+            color: var(--primary);
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #conditionsError {
+            color: #ff0000;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: right;
+        }
+
+        /* Modal pour les conditions */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #1a1a1a;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: white;
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: white;
+        }
+
+        .modal-body {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #ddd;
+            text-align: right;
+        }
+
+        .back-to-form {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-to-form:hover {
+            background: #d42c2c;
+        }
     </style>
 </head>
 <body>
@@ -359,7 +471,7 @@
         </header>
         
         <div class="form-container">
-            <h1><i class="fas fa-id-card"></i>بطاقة البيانات </h1>
+            <h1><i class="fas fa-id-card"></i>بطاقة بيانات المُنخرِط</h1>
             
             <form id="dataForm">
                 <div class="form-group">
@@ -403,6 +515,16 @@
                     </select>
                     <div class="error" id="systemTypeError">الرجاء اختيار نوع النظام</div>
                 </div>
+
+                <!-- Ajout des conditions d'utilisation -->
+                <div class="conditions-group">
+                    <input type="checkbox" id="conditions" class="conditions-checkbox" required>
+                    <label for="conditions" class="conditions-label">
+                        أوافق على 
+                        <span class="conditions-link" id="showConditions">الشروط العامة للاستخدام</span>
+                    </label>
+                    <div class="error" id="conditionsError">يجب الموافقة على الشروط العامة للاستخدام</div>
+                </div>
                 
                 <button type="button" id="generate-btn">
                     <i class="fas fa-qrcode"></i> اضغط لرقمنة البيانات
@@ -417,6 +539,76 @@
                     رقم التسجيل : <span id="uniqueCode"></span>
                 </div>
             </form>
+        </div>
+    </div>
+
+    <!-- Modal pour les conditions d'utilisation -->
+    <div id="conditionsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">الشروط العامة للاستخدام</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <h3>🗺️📱 رقمنة المعارف الفلاحية</h3>
+                
+                <p>شهدت العديد من الأراضي الفلاحية خلال العقود الماضية إهمالًا كبيرًا نتيجة الهجرة نحو المدن ووفاة عدد من كبار السن الذين كانوا يحملون في ذاكرتهم تفاصيل المواقع والحدود والمعالم المرتبطة بهذه الأراضي.</p>
+                <p>اليوم، لم يتبقَّ سوى عدد قليل من الأشخاص الذين ما زالوا يتذكرون هذه المعطيات، ما يجعل خطر ضياعها كليًا قريبًا.</p>
+
+                <p>في هذا السياق، تتيح الرقمنة وسيلة بسيطة، فعّالة وعملية لتدوين هذه المعلومات وتسجيلها، عبر إنشاء خرائط رقمية دقيقة تُستخدم في التسيير المحلي، تحديد المواقع، وتثمين التراث الفلاحي والمعرفي للمنطقة.</p>
+                <p>تهدف هذه الخدمة إلى المساعدة في حفظ الذاكرة الجماعية وتنظيم الموارد محليًا، دون أن تكون بديلًا عن الوثائق القانونية أو الأعمال المساحية الرسمية.</p>
+                <p>إنها مساهمة مجتمعية في تثبيت ما تبقّى من المعارف الميدانية، وتيسير التسيير الزراعي في الحاضر، مع نقل هذه الذاكرة للأجيال القادمة.</p>
+
+                <h3>📱 تراثك الفلاحي على هاتفك</h3>
+
+                <p>الغاية من هذه الخدمة هي أن يتمكّن المستعمل، أينما وُجد، من الاحتفاظ بتراثه الفلاحي بين يديه، على شكل خريطة رقمية دقيقة محفوظة على هاتفه.</p>
+                <p>تُمكّنه هذه الخريطة من الوصول بسهولة إلى كل معلومة متعلّقة بأملاكه، دون الاعتماد على الذاكرة أو الأشخاص.</p>
+
+                <p>لكل بقعة أرضية أو شجرة يتمّ تسجيل معطياتها، يمكن ربط بطاقة معلومات مخصصة تتضمن التفاصيل المعروفة عنها (الموقع، الاستعمال، المعالم، الملاحظات، إلخ)، مما يُسهم في تنظيم المعطيات واتخاذ قرارات مدروسة بشأن التسيير المستقبلي.</p>
+
+                <p>وبفضل الدقة العالية للخرائط، وإمكانية استعمال أدوات تحديد المواقع (GPS) المدمجة في الهاتف، يمكن للمستخدم أن يصل إلى كل موقع ونقطة على الخريطة بدقة قد تصل إلى 50 سم، دون الحاجة إلى مرافق أو دليل ميداني، فقط عبر نظام الملاحة البسيط في هاتفه.</p>
+
+                <p>هكذا، تُصبح الأرض حاضرة ومُتاحة رقميًا في أي وقت، ما يُعيد ربط الإنسان بأرضه، ويُمهّد الطريق لإعادة استثمارها فرديًا أو جماعيًا.</p>
+
+                <h3>📍 نطاق الاستخدام</h3>
+
+                <p>يقدّم مزوّد هذه الخدمة خرائط رقمية دقيقة تعتمد على معطيات جغرافية متاحة وأدوات تحديد المواقع الجغرافية الدقيقة، وذلك بهدف تسهيل الملاحة للمستعمل وتحديد المواقع، تدبير الممتلكات الفلاحية، وتثمين المعارف المحلية.</p>
+                <p>تُستعمل هذه الخرائط لأغراض شخصية، تنظيمية داخل المجتمعات المحلية، أو لأهداف الملاحة الزراعية، ولا تُعد وثائق رسمية أو معتمدة لإثبات الملكية أو ترسيم الحدود القانونية.</p>
+                <p>يُمنع استخدام هذه الخرائط في النزاعات العقارية أو كمرجع قانوني أمام المحاكم أو الإدارات العمومية.</p>
+
+                <h3>⚠️ تنبيه قانوني</h3>
+
+                <p>لا يتحمّل مزوّد الخدمة أي مسؤولية قانونية ناتجة عن استخدام الخرائط خارج الإطار المشار إليه أعلاه.</p>
+                <p>الخرائط لا تحمل أي طابع رسمي أو ختم إداري، ولا تُعد توثيقًا قانونيًا للوضعية العقارية.</p>
+                <p>تندرج هذه الخدمة في إطار رقمنة المعطيات لأغراض غير رسمية، ولا يمكن اعتبارها جزءًا من مسطرة التحفيظ أو التمليك.</p>
+                <p>يتحمّل المستخدم كامل المسؤولية في حالة الاستعمال خارج النطاق المحدد.</p>
+                <p>يُنصح بالرجوع إلى الجهات المختصة في حال الرغبة في التقييد أو التوثيق الرسمي للملكيات.</p>
+
+                <h3>⚠️ إخلاء المسؤولية</h3>
+
+                <p>رغم أن المعطيات المقدمة تتميز بدقة عالية جدًا، فإن استعمالها مخصص فقط لـ:</p>
+                <ul>
+                    <li>تحديد الموقع بدقة في إطار الاستغلال الفلاحي الشخصي أو الجماعي غير الرسمي؛</li>
+                    <li>التوجيه وإدارة الموارد في إطار الفلاحة الدقيقة.</li>
+                </ul>
+
+                <p>يُستعمل في هذه الخرائط نظام الإحداثيات الجغرافية UTM المثالي للملاحة وتحديد المواقع بدقة عالية.</p>
+                <p>يختلف هذا النظام عن النظام الرسمي المُعتمد في التوثيق العقاري الدقيق (لامبير Lambert).</p>
+                <p>هذه المعطيات لا تمثل وثيقة رسمية أو مسحًا طبوغرافيًا معتمدًا، ولا يمكن استخدامها لأي غرض قانوني أو إداري.</p>
+                <p>للاستعمالات الرسمية، يُرجى الاستعانة بمهني معتمد (مهندس مسّاح أو خبير طوبوغرافي).</p>
+
+                <h3>✅ إقرار المستخدم</h3>
+
+                <p>باستخدام هذه الخرائط أو المعطيات، يُقرّ المستعمل بأنه اطّلع على هذه الشروط ووافق على جميع حدود الاستعمال والمسؤولية المذكورة أعلاه.</p>
+
+                <p><strong>رقم التعريف في السجل الوطني :</strong> 00369176500000021</p>
+                <p><strong>التخصص المرخّص :</strong> أنشطة علمية وتقنية – Activités scientifiques et techniques</p>
+          
+
+                <br><br>
+
+                <a href="#" class="back-to-form" id="backToForm">العودة إلى النموذج</a>
+            </div>
         </div>
     </div>
 
@@ -445,7 +637,7 @@
             </div>
             
             <div class="capture-form-container">
-                <h1 class="capture-title"><i class="fas fa-id-card"></i> بطاقة البيانات</h1>
+                <h1 class="capture-title"><i class="fas fa-id-card"></i> بطاقة بيانات المُنخرِط</h1>
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
@@ -573,6 +765,31 @@
         
         // Bouton de téléchargement image
         document.getElementById('download-image').addEventListener('click', generateHighResImage);
+
+        // Gestion des conditions d'utilisation
+        document.getElementById('showConditions').addEventListener('click', showConditionsModal);
+        document.getElementById('backToForm').addEventListener('click', hideConditionsModal);
+        document.querySelector('.close').addEventListener('click', hideConditionsModal);
+        document.getElementById('conditions').addEventListener('change', function() {
+            document.getElementById('conditionsError').style.display = 'none';
+        });
+
+        // Fermer la modal si on clique en dehors
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('conditionsModal')) {
+                hideConditionsModal();
+            }
+        });
+    }
+
+    // Fonctions pour gérer la modal des conditions
+    function showConditionsModal() {
+        document.getElementById('conditionsModal').style.display = 'block';
+    }
+
+    function hideConditionsModal() {
+        document.getElementById('conditionsModal').style.display = 'none';
+        return false;
     }
 
     // Fonction pour générer le code unique
@@ -618,6 +835,13 @@
             if (!fieldValid) isValid = false;
         });
         
+        // Validation des conditions
+        const conditionsChecked = document.getElementById('conditions').checked;
+        if (!conditionsChecked) {
+            document.getElementById('conditionsError').style.display = 'block';
+            isValid = false;
+        }
+        
         return isValid && validatePhone();
     }
 
@@ -641,7 +865,7 @@
         }
     }
 
-    // Fonction pour générer le QR code
+     // Fonction pour générer le QR code
     async function generateQR() {
         if (!validateForm()) {
             alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
