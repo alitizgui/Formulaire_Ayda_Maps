@@ -66,7 +66,9 @@ function generateQR() {
         "أَفُوس": document.getElementById('afous').value,
         "العائلة": document.getElementById('famille').value,
         "الاسم واللقب": document.getElementById('nom').value,
-        "رقم الهاتف واتساب": document.getElementById('telephone').value
+        "رقم الهاتف واتساب": document.getElementById('telephone').value,
+        "نوع النظام": document.getElementById('system-type').value,
+        "موافقة الشروط": document.getElementById('conditions').checked ? "نعم" : "لا"
     };
     
     const qrElement = document.getElementById('qrcode');
