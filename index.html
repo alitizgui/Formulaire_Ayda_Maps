@@ -510,8 +510,8 @@
                     <p style="font-size: 1.6em; text-align: right;"> الخريطة : عامة أم خاصة ؟</p>
                     <select id="system-type" required class="form-select">
                         <option value="" selected disabled>نوع الخريطة</option>
-                        <option value="جماعي">خريطة عامة - عمل جماعي</option>
-                        <option value="خاص">خريطة خاصة - عمل انفرادي</option>
+                        <option value="جماعية">خريطة عامة - عمل جماعي</option>
+                        <option value="خاصة">خريطة خاصة - عمل انفرادي</option>
                     </select>
                     <div class="error" id="systemTypeError">الرجاء تحديد نوع الخريطة</div>
                 </div>
@@ -681,7 +681,7 @@
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fi fi-ss-people-poll"></i> ⚙️ نوع النظام
+                        <i class="fi fi-ss-people-poll"></i>  نوع الخريطة
                     </span>
                     <span id="capture-system-type" class="capture-input-value"></span>
                 </div>
@@ -888,7 +888,7 @@
             "العائلة": cleanInput(document.getElementById('famille').value),
             "الاسم واللقب": cleanInput(document.getElementById('nom').value),
             "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
-            "نوع النظام": document.getElementById('system-type').value
+            "نوع الخريطة": document.getElementById('system-type').value
         };
         
         // Envoyer les données à Google Sheets
