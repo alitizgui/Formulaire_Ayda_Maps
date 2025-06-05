@@ -13,9 +13,9 @@
             --light: #f5f7fa;
             --dark: #333;
             --text: #444;
-            --group-color: #f5d692; /* Bleu clair pour groupe */
+            --group-color: #b0ddf7; /* Bleu clair pour groupe */
             --unified-color: #abf1b1; /* Vert clair pour unifié */
-            --individual-color: #ffbebe; /* Rose clair pour individuel */
+            --individual-color: #fcf7af; /* Rose clair pour individuel */
         }
         
         body {
@@ -212,6 +212,16 @@
             .pricing-table {
                 display: block;
                 overflow-x: auto;
+                @media (max-width: 768px) {
+            .pricing-table {
+                font-size: 0.8rem; /* Plus petit sur mobile */
+            }
+            
+            .pricing-table th, 
+            .pricing-table td {
+                padding: 0.5rem; /* Espacement réduit */
+            }
+        }
             }
             
             .stats {
@@ -307,7 +317,7 @@
                         <th>نوع الانخراط</th>
                         <th>المساحة (م²)</th>
                         <th>السعر لكل م² (درهم)</th>
-                        <th>أتعاب ثابتة لكل بقعة (درهم)</th>
+                        <th>لكل بقعة (درهم)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -371,7 +381,7 @@
         <div class="cta-box">
             <h2 style="color: white; border-right: none;">✅ للانخراط يرجى الضغط على الزر أدناه</h2>
             <p style="font-size: 1.2rem;">اضغط على الزر للانتقال مباشرة إلى استمارة المنخرط</p>
-            <a href="index.html" class="cta-button pulse-animation">
+            <a href="formulaire.html" class="cta-button pulse-animation">
                 <i class="fas fa-file-signature"></i> 📋 اضغط هنا لتعبئة الاستمارة
             </a>
         </div>
