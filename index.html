@@ -17,13 +17,13 @@
         
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #28282c;
+            background-color: #28292e;
             color: #f8fafc;
             margin: 0;
         }
         
         .tech-header {
-            background: #272933;
+            background: #28292e;
             padding: 15px 0;
             display: flex;
             justify-content: center;
@@ -62,9 +62,9 @@
         }
 
         .ayda-maps-title {
-            font-size: 2.3rem;
+            font-size: 2.5rem;
             font-weight: 700;
-            color: rgb(255, 251, 0);
+            color: rgb(255, 255, 255);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 0;
@@ -86,7 +86,7 @@
             max-width: 600px;
             margin: 2rem auto;
             padding: 2rem;
-            background: rgba(255, 238, 0, 0.048);
+            background: rgba(255, 255, 255, 0.048);
             border-radius: 15px;
         }
         
@@ -105,7 +105,7 @@
         
         input, .form-select {
             width: 100%;
-            padding: 1rem;
+            padding: 0.5rem;
             background: rgb(255, 255, 255);
             border: 1px solid rgb(252, 252, 252);
             border-radius: 2px;
@@ -507,16 +507,16 @@
                 </div>
                 
                 <div class="form-group">
-                    <p style="font-size: 1.5rem; text-align: right;">
-                        <i class="fas fa-handshake"></i> خيارات فئات الانخراط
+                    <p style="font-size: 1.8rem; text-align: right; margin-bottom: 0.3rem; line-height: 1.3;">
+                        <i class="fas fa-handshake"></i> فئة الانخراط
                     </p>
                     <select id="system-type" required class="form-select">
-                        <option value="" selected disabled>إلى أية فئة تنتمون ؟</option>
-                        <option value="جماعي"> انخراط جماعي (تحت إشراف جمعة الدوار)</option>
-                        <option value="موحد"> انخراط موحد (مجموعة من خمس عائلات)</option>
-                        <option value="فردي"> انخراط فردي (عائلة واحدة فقط)</option>
+                        <option value="" selected disabled>إلى أية فئة الانخراط تنتمون ؟</option>
+                        <option value="جماعي">انخراط جماعي (تحت إشراف جمعية الدوار)</option>
+                        <option value="موحد">انخراط موحد (خمس عائلات فقط من نفس الدوار)</option>
+                        <option value="فردي">انخراط فردي (انخراط عائلة واحدة فقط)</option>
                     </select>
-                    <div class="error" id="systemTypeError">الرجاء تحديد نوعية الانخراط</div>
+                    <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
                 </div>
 
                 <!-- Ajout des conditions d'utilisation -->
