@@ -67,7 +67,7 @@ function generateQR() {
         "العائلة": document.getElementById('famille').value,
         "الاسم واللقب": document.getElementById('nom').value,
         "رقم الهاتف واتساب": document.getElementById('telephone').value,
-        "نوع الخريطة": document.getElementById('system-type').value,
+        "نوع النظام": document.getElementById('system-type').value,
         "موافقة الشروط": document.getElementById('conditions').checked ? "نعم" : "لا"
     };
     

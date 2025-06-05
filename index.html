@@ -17,13 +17,13 @@
         
         body {
             font-family: 'Tajawal', sans-serif;
-            background-color: #1a1a1a;
+            background-color: #28292e;
             color: #f8fafc;
             margin: 0;
         }
         
         .tech-header {
-            background: #1a1a1a;
+            background: #24252c;
             padding: 15px 0;
             display: flex;
             justify-content: center;
@@ -62,9 +62,9 @@
         }
 
         .ayda-maps-title {
-            font-size: 1.5rem;
+            font-size: 2.3rem;
             font-weight: 700;
-            color: white;
+            color: rgb(169, 184, 252);
             text-transform: uppercase;
             letter-spacing: 2px;
             margin: 0;
@@ -97,7 +97,7 @@
         
         label {
             display: block;
-            margin-bottom: 0.8rem;
+            margin-bottom: 0.5rem;
             color: #ffffff;
             font-size: 1.5rem;
             font-weight: 500;
@@ -105,13 +105,13 @@
         
         input, .form-select {
             width: 100%;
-            padding: 1.2rem;
+            padding: 1rem;
             background: rgb(255, 255, 255);
             border: 1px solid rgb(252, 252, 252);
-            border-radius: 8px;
+            border-radius: 2px;
             color: #000000;
             text-align: right;
-            font-size: 2rem;
+            font-size: 1.5rem;
             margin-left: auto;
             font-family: 'Tajawal', sans-serif;
             box-sizing: border-box;
@@ -364,12 +364,12 @@
 
         .conditions-checkbox {
             width: auto;
-            margin-left: 10px;
+            margin-left: 15px;
             transform: scale(1.5);
         }
 
         .conditions-link {
-            color: var(--primary);
+            color: #82acdf;
             text-decoration: underline;
             cursor: pointer;
             font-weight: bold;
@@ -463,7 +463,7 @@
             <div class="header-content">
                 <div class="header-frame"> 
                     <div class="logo-wrapper">
-                        <div class="ayda-maps-title"> Ayda Maps Webtech Service</div>
+                        <div class="ayda-maps-title"> بطاقة المنخرط</div>
                         <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
                     </div>
                 </div>
@@ -471,7 +471,7 @@
         </header>
         
         <div class="form-container">
-            <h1><i class="fas fa-id-card"></i>بطاقة البيانات </h1>
+            <h1><i class="fas fa-id-card"></i>البيانات</h1>
             
             <form id="dataForm">
                 <div class="form-group">
@@ -507,13 +507,16 @@
                 </div>
                 
                 <div class="form-group">
-                    <p style="font-size: 1.6em; text-align: right;"> الخريطة : عامة أم خاصة ؟</p>
+                    <p style="font-size: 2em; text-align: right;">
+                        <i class="fas fa-handshake"></i> خيارات فئات الانخراط
+                    </p>
                     <select id="system-type" required class="form-select">
-                        <option value="" selected disabled>نوع الخريطة</option>
-                        <option value="جماعي">خريطة عامة - عمل جماعي</option>
-                        <option value="خاص">خريطة خاصة - عمل انفرادي</option>
+                        <option value="" selected disabled>إلى أية فئة تنتمون ؟</option>
+                        <option value="جماعي"> انخراط جماعي (تحت إشراف جمعة الدوار)</option>
+                        <option value="موحد"> انخراط موحد (مجموعة من خمس عائلات)</option>
+                        <option value="فردي"> انخراط فردي (عائلة واحدة فقط)</option>
                     </select>
-                    <div class="error" id="systemTypeError">الرجاء تحديد نوع الخريطة</div>
+                    <div class="error" id="systemTypeError">الرجاء تحديد نوعية الانخراط</div>
                 </div>
 
                 <!-- Ajout des conditions d'utilisation -->
@@ -597,8 +600,7 @@
                     </ul>
 
                     <p>يُستعمل في هذه الخرائط نظام الإحداثيات الجغرافية UTM العالمي المثالي للملاحة وتحديد المواقع بدقة عالية.</p>
-                    <p>يختلف هذا النظام عن النظام الرسمي  الوطني المُعتمد في التوثيق العقاري الدقيق (لامبير Lambert) "غير معتمد في برامج الملاحة الخاصة بالهواتف الذكية."
-.</p>
+                    <p>يختلف هذا النظام عن النظام الرسمي  الوطني المُعتمد في التوثيق العقاري الدقيق (لامبير Lambert) "غير معتمد في برامج الملاحة الخاصة بالهواتف الذكية.".</p>
                    
                     <h3>✅ إقرار المستخدم</h3>
 
@@ -618,15 +620,13 @@
             <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
             
             <div class="thank-you-message">
-                <p>يرجى تحميل بطاقة البيانات على هاتفكم.</div></p>
-                <P>سيتم اعتماد البطاقة عند تسجيل بقعكم الزراعية على الخريطة خلال الأعمال الميدانية. </p>
-                <p>-------------------------------------------------
-                <p>نشكركم على ثقتكم  </p>
+                <p>تم تنزيل بطاقة البيانات بنجاح على هاتفكم.</p>
+                <p>المرجو الاحتفاظ بالبطاقة بعناية .سوف يتم استعمالها عند تسجيل بقعكم الزراعية على الخريطة الرقمية خلال الأعمال الميدانية.</p>
+                <p>-------------------------------------------------</p>
+                <p>نشكركم على ثقتكم</p>
             </div>
             
-            <button id="download-image">
-                <i class="fas fa-download"></i> تحميل بطاقة البيانات 
-            </button>
+            
         </div>
     </div>
 
@@ -634,7 +634,7 @@
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <div class="capture-ayda-maps-title">Ayda Maps Code</div>
+                <div class="capture-ayda-maps-title">QR DATA</div>
             </div>
             
             <div class="capture-form-container">
@@ -764,9 +764,6 @@
         // Bouton de génération QR
         document.getElementById('generate-btn').addEventListener('click', generateQR);
         
-        // Bouton de téléchargement image
-        document.getElementById('download-image').addEventListener('click', generateHighResImage);
-
         // Gestion des conditions d'utilisation
         document.getElementById('showConditions').addEventListener('click', showConditionsModal);
         document.getElementById('backToForm').addEventListener('click', hideConditionsModal);
@@ -866,78 +863,86 @@
         }
     }
 
-     // Fonction pour générer le QR code
-    async function generateQR() {
-        if (!validateForm()) {
-            alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
-            return;
-        }
-        
-        const btn = document.getElementById('generate-btn');
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
-        btn.disabled = true;
 
-        const formData = {
-            "رقم التسجيل": document.getElementById('uniqueCode').textContent,
-            "الدوار": cleanInput(document.getElementById('douar').value),
-            "أَفُوس": cleanInput(document.getElementById('afous').value),
-            "العائلة": cleanInput(document.getElementById('famille').value),
-            "الاسم واللقب": cleanInput(document.getElementById('nom').value),
-            "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
-            "نوع النظام": document.getElementById('system-type').value
-        };
-        
-        // Envoyer les données à Google Sheets
-        const sendSuccess = await sendDataToGoogleSheets(formData);
-        if (!sendSuccess) {
-            console.warn("Échec de l'envoi des données à Google Sheets, mais continuation du processus...");
-        }
-        
-        const qrElement = document.getElementById('qrcode');
-        qrElement.innerHTML = '';
-        
-        try {
-            new QRCode(qrElement, {
-                text: JSON.stringify(formData),
-                width: 300,
-                height: 300,
-                colorDark: "#ffffff",
-                colorLight: "#1e1e1e"
-            });
-            
-            // Copier le QR code pour la capture
-            const captureQrElement = document.getElementById('capture-qrcode');
-            captureQrElement.innerHTML = '';
-            new QRCode(captureQrElement, {
-                text: JSON.stringify(formData),
-                width: 250,
-                height: 250,
-                colorDark: "#000000",
-                colorLight: "#ffffff"
-            });
-            
-            qrCodeGenerated = true;
-            
-            // Animation du QR code
-            setTimeout(() => {
-                qrElement.classList.add('blink');
-                
-                setTimeout(() => {
-                    qrElement.classList.remove('blink');
-                    startInactivityTimer();
-                }, 2000);
-            }, 500);
-        } catch (error) {
-            console.error("Erreur de génération QR:", error);
-            qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
-            
-            const captureQrElement = document.getElementById('capture-qrcode');
-            captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
-            
-            qrCodeGenerated = true;
-            startInactivityTimer();
-        }
+async function generateQR() {
+    if (!validateForm()) {
+        alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
+        return;
     }
+    
+    const btn = document.getElementById('generate-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
+    btn.disabled = true;
+
+    const formData = {
+        "رقم التسجيل": document.getElementById('uniqueCode').textContent,
+        "الدوار": cleanInput(document.getElementById('douar').value),
+        "أَفُوس": cleanInput(document.getElementById('afous').value),
+        "العائلة": cleanInput(document.getElementById('famille').value),
+        "الاسم واللقب": cleanInput(document.getElementById('nom').value),
+        "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
+        "نوع النظام": document.getElementById('system-type').value
+    };
+    
+    // Envoyer les données à Google Sheets
+    const sendSuccess = await sendDataToGoogleSheets(formData);
+    if (!sendSuccess) {
+        console.warn("Échec de l'envoi des données à Google Sheets, mais continuation du processus...");
+    }
+    
+    const qrElement = document.getElementById('qrcode');
+    qrElement.innerHTML = '';
+    
+    try {
+        new QRCode(qrElement, {
+            text: JSON.stringify(formData),
+            width: 300,
+            height: 300,
+            colorDark: "#ffffff",
+            colorLight: "#1e1e1e"
+        });
+        
+        // Copier le QR code pour la capture
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = '';
+        new QRCode(captureQrElement, {
+            text: JSON.stringify(formData),
+            width: 250,
+            height: 250,
+            colorDark: "#000000",
+            colorLight: "#ffffff"
+        });
+        
+        qrCodeGenerated = true;
+        
+        // Animation du QR code
+        setTimeout(() => {
+            qrElement.classList.add('blink');
+            
+            setTimeout(() => {
+                qrElement.classList.remove('blink');
+                // Générer et télécharger automatiquement l'image
+                generateHighResImage().then(() => {
+                    // Afficher la page de remerciement après le téléchargement
+                    showThankYouPage();
+                });
+            }, 2000);
+        }, 500);
+    } catch (error) {
+        console.error("Erreur de génération QR:", error);
+        qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+        
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
+        
+        qrCodeGenerated = true;
+        // Générer et télécharger automatiquement l'image
+        generateHighResImage().then(() => {
+            // Afficher la page de remerciement après le téléchargement
+            showThankYouPage();
+        });
+    }
+}
 
     async function generateHighResImage() {
         if (!qrCodeGenerated) {
