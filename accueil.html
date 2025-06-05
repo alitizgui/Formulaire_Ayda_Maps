@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أيدا مابس - الذاكرة الرقمية للفلاحة</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2a7f62;
+            --secondary: #f8b400;
+            --light: #f5f7fa;
+            --dark: #333;
+            --text: #444;
+            --group-color: #e3f2fd; /* Bleu clair pour groupe */
+            --unified-color: #e8f5e9; /* Vert clair pour unifié */
+            --individual-color: #fce4ec; /* Rose clair pour individuel */
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, rgba(42,127,98,0.1) 0%, rgba(248,180,0,0.05) 100%);
+            padding: 2rem 0;
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+        
+        .logo-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .logo-img {
+            height: 100px;
+            width: auto;
+            border-radius: 50%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .title-box {
+            text-align: center;
+            padding: 1.5rem;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        h1 {
+            color: var(--primary);
+            font-size: 2.5rem;
+            margin: 0;
+            font-weight: 900;
+        }
+        
+        h2 {
+            color: var(--primary);
+            font-size: 1.8rem;
+            border-right: 4px solid var(--secondary);
+            padding-right: 1rem;
+            margin-top: 3rem;
+        }
+        
+        .highlight-box {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 3px solid var(--secondary);
+        }
+        
+        .feature-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-left: 0.5rem;
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-bottom: 3px solid var(--primary);
+        }
+        
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin: 0.5rem 0;
+        }
+        
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        
+        .pricing-table th {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .pricing-table td {
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Styles spécifiques pour chaque type d'adhésion */
+        .group-adhesion { background-color: var(--group-color) !important; }
+        .unified-adhesion { background-color: var(--unified-color) !important; }
+        .individual-adhesion { background-color: var(--individual-color) !important; }
+        
+        .pricing-table tr.group-adhesion:hover { background-color: #bbdefb !important; }
+        .pricing-table tr.unified-adhesion:hover { background-color: #c8e6c9 !important; }
+        .pricing-table tr.individual-adhesion:hover { background-color: #f8bbd0 !important; }
+        
+        .cta-box {
+            text-align: center;
+            padding: 3rem;
+            margin: 3rem 0;
+            background: linear-gradient(135deg, var(--primary) 0%, #1e5f4b 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 1.5rem;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            background-color: #ffc107;
+        }
+        
+        .warning-box {
+            background-color: #fff8e1;
+            border-right: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 5px;
+        }
+        
+        /* Animation pour le bouton */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @media (max-width: 768px) {
+            .logo-header {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+            }
+            
+            .pricing-table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            .stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-box {
+                padding: 2rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo-header">
+                <img src="aydammaps logo.jpg" alt="شعار أيدا مابس" class="logo-img">
+                <div class="title-box">
+                    <h1>أيدا مابس تفتح آفاقًا جديدة لموروثنا الفلاحي الثمين</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <section>
+            <h2><i class="fas fa-map-marked-alt feature-icon"></i> نحو ذاكرة رقمية للأراضي الفلاحية</h2>
+            <div class="highlight-box">
+                <p>شهدت الأراضي الفلاحية، خصوصًا بمناطق سوس جنوب المغرب، خلال العقود الأخيرة، ضياعًا تدريجيًا للمعطيات المرتبطة بها، نتيجة الهجرة إلى المدن ووفاة كبار السن الحاملين لهذه المعارف الميدانية.</p>
+                
+                <p>اليوم، تبقى هذه المعرفة محصورة لدى عدد محدود من الأشخاص، مما يجعل خطر اندثارها كبيرًا. وهنا تبرز أهمية خدمة أيدا مابس كوسيلة فعالة، بسيطة ومباشرة لحفظ وتثمين هذه المعطيات، عبر رقمنتها الدقيقة وربطها بمواقعها الأصلية، للمساهمة في إحياء الذاكرة الزراعية الجماعية.</p>
+                
+                <div class="warning-box">
+                    <strong>❗ تنبيه:</strong> الخدمة لا تمثل بديلًا عن الوثائق القانونية، لكنها تساهم بشكل كبير في توثيق المعرفة الميدانية ونقلها للأجيال القادمة، وحمايتها من النسيان.
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-mobile-alt feature-icon"></i> الخدمة: خريطة ذكية في متناولك</h2>
+            <div class="highlight-box">
+                <p>توفر أيدا مابس لكل منخرط إمكانية رقمنة كل معلومة تخص أرضًا، شجرة، أو موقعًا فلاحيًا، من خلال بطاقات بيانات فردية دقيقة مرتبطة بنقطة جغرافية على الخريطة.</p>
+                
+                <p>من خلال هاتفك فقط، يمكنك تصفح المعطيات، التنقل مباشرة نحو المواقع المرقمنة، والوصول إليها بدقة تصل إلى 50 سنتيمترًا، بدون الحاجة إلى دليل أو ذاكرة شخصية.</p>
+                
+                <p>الخدمة تجعل المعرفة الزراعية حاضرة في كل وقت، ومؤرشفة بشكل يمكن الرجوع إليه بسهولة، مما يفتح آفاقًا جديدة في تنظيم واستثمار الممتلكات على المستوى الفردي والجماعي.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-chart-line feature-icon"></i> ما الذي تحقق إلى حدود اليوم؟</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <i class="fas fa-users" style="font-size: 2rem; color: var(--primary);"></i>
+                    <div class="stat-number">+100</div>
+                    <p>عائلة منخرطة موزعة على 8 دواوير مختلفة</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-map-marked" style="font-size: 2rem; color: var(--primary);"></i>
+                    <div class="stat-number">5,000+</div>
+                    <p>ملك فلاحي موثق بدقة</p>
+                </div>
+                
+                <div class="stat-card">
+                    <i class="fas fa-database" style="font-size: 2rem; color: var(--primary);"></i>
+                    <div class="stat-number">3 سنوات</div>
+                    <p>من العمل الميداني المكثف</p>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <p>بتوفيقٍ من الله، وبفضل ثقة منخرطي "أيدا مابس" الذين يتمتعون بوضوح الرؤية، ووعيًا كاملًا بالدور الذي يمكن أن تلعبه الرقمنة الدقيقة لأملاكهم الفلاحية، استطعنا خلال ثلاث سنوات فقط من العمل الميداني في منطقة سوس تحقيق هذه النتائج المتميزة.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-star feature-icon"></i> والآن، دورك أنت!</h2>
+            <div class="highlight-box">
+                <p>لقد تمكن هؤلاء المنخرطين من تحقيق راحة ذهنية عبر توثيق معرفي دقيق لممتلكاتهم، ما يفتح أمامهم المجال لإحياء أراضيهم واستثمارها، وربط أبنائهم وأحفادهم بجذورهم وأصولهم العائلية.</p>
+                
+                <p><strong>لا تنتظر حتى تضيع المعلومة... بادر اليوم بحفظها.</strong></p>
+                
+                <p>انخراطك في خدمة أيدا مابس هو خطوة ذكية نحو حماية إرثك، واستعادة السيطرة على ذاكرتك الفلاحية.</p>
+            </div>
+        </section>
+        
+        <section>
+            <h2><i class="fas fa-tags feature-icon"></i> لائحة الأثمنة حسب فئات الانخراط</h2>
+            <table class="pricing-table">
+                <thead>
+                    <tr>
+                        <th>نوع الانخراط</th>
+                        <th>المساحة (م²)</th>
+                        <th>السعر لكل م² (درهم)</th>
+                        <th>أتعاب ثابتة لكل بقعة (درهم)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- انخراط جماعي -->
+                    <tr class="group-adhesion">
+                        <td rowspan="3">انخراط جماعي تحت إشراف جمعية الدوار</td>
+                        <td>من 0 إلى 1000 م²</td>
+                        <td>0.15 درهم</td>
+                        <td>50 درهم</td>
+                    </tr>
+                    <tr class="group-adhesion">
+                        <td>من 1000 إلى 5000 م²</td>
+                        <td>0.10 درهم</td>
+                        <td>100 درهم</td>
+                    </tr>
+                    <tr class="group-adhesion">
+                        <td>أكثر من 5000 م²</td>
+                        <td>0.08 درهم</td>
+                        <td>150 درهم</td>
+                    </tr>
+                    
+                    <!-- انخراط موحد -->
+                    <tr class="unified-adhesion">
+                        <td rowspan="3">انخراط موحد لمجموعة من خمسة عائلات</td>
+                        <td>من 0 إلى 1000 م²</td>
+                        <td>0.30 درهم</td>
+                        <td>50 درهم</td>
+                    </tr>
+                    <tr class="unified-adhesion">
+                        <td>من 1000 إلى 5000 م²</td>
+                        <td>0.25 درهم</td>
+                        <td>100 درهم</td>
+                    </tr>
+                    <tr class="unified-adhesion">
+                        <td>أكثر من 5000 م²</td>
+                        <td>0.24 درهم</td>
+                        <td>150 درهم</td>
+                    </tr>
+                    
+                    <!-- انخراط فردي -->
+                    <tr class="individual-adhesion">
+                        <td rowspan="3">انخراط فردي لعائلة واحدة</td>
+                        <td>من 0 إلى 1000 م²</td>
+                        <td>0.40 درهم</td>
+                        <td>50 درهم</td>
+                    </tr>
+                    <tr class="individual-adhesion">
+                        <td>من 1000 إلى 5000 م²</td>
+                        <td>0.35 درهم</td>
+                        <td>100 درهم</td>
+                    </tr>
+                    <tr class="individual-adhesion">
+                        <td>أكثر من 5000 م²</td>
+                        <td>0.39 درهم</td>
+                        <td>150 درهم</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        
+        <div class="cta-box">
+            <h2 style="color: white; border-right: none;">✅ للانخراط يرجى الضغط على الزر أدناه</h2>
+            <p style="font-size: 1.2rem;">اضغط على الزر للانتقال مباشرة إلى استمارة المنخرط</p>
+            <a href="index.html" class="cta-button pulse-animation">
+                <i class="fas fa-file-signature"></i> 📋 اضغط هنا لتعبئة الاستمارة
+            </a>
+        </div>
+    </main>
+</body>
+</html>
