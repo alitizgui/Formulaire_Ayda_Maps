@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام البيانات الذكية أيدا مابس - استمارة الانخراط - Ayda Maps Service Web : Formulaire d'adhésion (QRCode)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <style>
+        :root {
+            --primary: #b81c1c;
+            --primary-dark: hsl(0, 0%, 100%);
+            --tech-gradient: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: #28292e;
+            color: #f8fafc;
+            margin: 0;
+        }
+        
+        .tech-header {
+            background: #28292e;
+            padding: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px solid var(--primary);
+            height: 120px;
+        }
+        
+        .header-content {
+            width: 100%;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+        
+        .logo-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 0 0.2rem;
+            height: 100%;
+        }
+        
+        .header-frame {
+            border: 2px solid rgba(255, 255, 255, 0.89);
+            border-radius: 8px;
+            padding: 12px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .ayda-maps-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: rgb(255, 255, 255);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin: 0;
+            padding: 0 2px;
+        }
+
+        .tech-logo {
+            height: 90px;
+            width: auto;
+            display: block;
+        }
+
+        .logo-wrapper {
+            gap: 5;
+            align-items: right;
+        }
+    
+        .form-container {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.048);
+            border-radius: 15px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: right;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+        
+        input, .form-select {
+            width: 100%;
+            padding: 0.5rem;
+            background: rgb(255, 255, 255);
+            border: 1px solid rgb(252, 252, 252);
+            border-radius: 2px;
+            color: #000000;
+            text-align: right;
+            font-size: 1.5rem;
+            margin-left: auto;
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+        }
+        
+        .form-select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 1rem center;
+            background-size: 1.5rem;
+        }
+        
+        button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.2rem 2.5rem;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.4rem;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 2rem auto 0;
+            display: block;
+            width: 100%;
+            max-width: 308px;
+            transition: all 0.3s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 10px rgb(255, 255, 255);
+        }
+        
+        .qrcode-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 2rem 0;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        #qrcode {
+            width: 300px;
+            height: 300px;
+            border: 2px dashed rgb(255, 251, 251);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1rem;
+            background-color: #ffffff;
+            transition: background-color 0.5s;
+        }
+        
+        .qrcode-title {
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            font-weight: 500;
+            color: white;
+            margin-top: 10px;
+            text-align: center;
+        }
+        
+        .blink {
+            animation: blink-animation 0.5s steps(2, start) infinite;
+        }
+        
+        @keyframes blink-animation {
+            to {
+                background-color: var(--primary-dark);
+            }
+        }
+        
+        .error {
+            color: #ff0000;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            display: none;
+        }
+
+        .registration-code {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 1.5rem;
+        }
+        .registration-code span {
+            color: #ffffffc2;
+            font-weight: bold;
+        }
+        
+        .form-container h1 {
+            font-size: 2.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-bottom: 2rem;
+        }
+        
+        .form-container h1 i {
+            font-size: 2rem;
+            order: 0;
+        }
+
+        #thank-you-page {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a1a;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .thank-you-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 15px;
+            border: 1px solid var(--primary);
+        }
+
+        .thank-you-message {
+            margin-bottom: 2rem;
+            font-size: 1.4rem;
+            line-height: 1.6;
+        }
+
+        #download-image {
+            background: var(--tech-gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.6rem;
+            border-Radius: 8px;
+            cursor: pointer;
+            margin: 1rem auto;
+            display: block;
+            transition: all 0.3s;
+        }
+
+        #download-image:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .capture-container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #1a1a1a;
+            box-sizing: border-box;
+        }
+
+        .capture-header {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 2px solid var(--primary);
+            margin-bottom: 20px;
+            height: 100px;
+        }
+        .capture-logo {
+            height: 80px;
+            width: auto;
+            display: block;
+            justify-content: flex-end;
+        }
+
+        .capture-ayda-maps-title {
+            font-size: 2rem !important;
+            font-weight: 800 !important;
+            color: white !important;
+            text-transform: uppercase !important;
+            letter-spacing: 1px !important;
+            margin-right: auto !important;
+            display: flex !important;
+            align-items: center !important;
+            height: 100% !important;
+        }
+
+        .capture-form-container {
+            background: rgba(30, 30, 30, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .capture-input-value {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            margin: 0.5rem 0 1.5rem;
+            background: white;
+            color: black;
+            font-size: 1.8rem;
+            border-radius: 5px;
+            text-align: right;
+            font-family: 'Tajawal', sans-serif;
+            box-sizing: border-box;
+        }
+
+        .capture-qrcode {
+            width: 250px;
+            height: 250px;
+            margin: 20px auto;
+            background: white;
+            padding: 10px;
+        }
+
+        .capture-title {
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 15px;
+            margin-bottom: 2rem;
+            color: white;
+        }
+
+        /* Styles pour les conditions d'utilisation */
+        .conditions-group {
+            margin: 1.5rem 0;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-direction: row-reverse;
+        }
+
+        .conditions-label {
+            display: inline;
+            margin-right: 10px;
+            font-size: 1rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .conditions-checkbox {
+            width: auto;
+            margin-right: 15px;
+            transform: scale(2);
+        }
+
+        .conditions-link {
+            color: #fffc4b;
+            text-decoration: underline;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        #conditionsError {
+            color: #ff0000;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            display: none;
+            text-align: right;
+        }
+
+        /* Modal pour les conditions */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            margin: 5% auto;
+            padding: 20px;
+            border: 1px solid var(--primary);
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        .modal-title {
+            font-size: 1.8rem;
+            color: rgb(0, 0, 0);
+            margin: 0;
+        }
+
+        .close {
+            color: #aaa;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: rgb(0, 0, 0);
+        }
+
+        .modal-body {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #000000;
+            text-align: right;
+        }
+
+        .back-to-form {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-to-form:hover {
+            background: #d42c2c;
+        }
+    </style>
+</head>
+<body>
+    <div id="main-content">
+        <header class="tech-header">
+            <div class="header-content">
+                <div class="header-frame"> 
+                    <div class="logo-wrapper">
+                        <div class="ayda-maps-title">استمارة الانخراط</div>
+                        <img src="aydammaps logo.jpg" alt="" class="tech-logo" crossorigin="anonymous">
+                    </div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="form-container">
+            <h1><i class="fas fa-id-card"></i>بيانات المنخرط</h1>
+            
+            <form id="dataForm">
+                <div class="form-group">
+                    <label for="douar"><i class="fas fa-location-dot"></i> الدوار</label>
+                    <input type="text" id="douar" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="douarError">يسمح فقط بالأحرف العربية</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="afous"><i class="fas fa-sitemap"></i> أَفُوس</label>
+                    <input type="text" id="afous" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="afousError">يسمح فقط بالأحرف العربية</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="famille"><i class="fas fa-users"></i> العائلة</label>
+                    <input type="text" id="famille" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="familleError">يسمح فقط بالأحرف العربية</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="nom"><i class="fas fa-user"></i> الاسم و اللقب</label>
+                    <input type="text" id="nom" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
+                    <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
+                </div>
+            
+                <div class="form-group">
+                    <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
+                    <input type="tel" id="telephone" required style="direction: ltr; text-align: right;"
+                           pattern="(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})"
+                           title="يجب أن يحتوي الرقم على 10 خانات">
+                    <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات</div>
+                </div>
+                
+                <div class="form-group">
+                    <p style="font-size: 1.8rem; text-align: right; margin-bottom: 0.3rem; line-height: 1.3;">
+                        <i class="fas fa-handshake"></i> فئة الانخراط
+                    </p>
+                    <select id="system-type" required class="form-select">
+                        <option value="" selected disabled>إلى أية فئة تنتمون ؟</option>
+                        <option value="جماعي">جماعي (انخراط تحت إشراف جمعية الدوار)</option>
+                        <option value="موحد">موحد (انخراط خمس عائلات فقط من نفس الدوار)</option>
+                        <option value="فردي">فردي (انخراط عائلة واحدة فقط)</option>
+                    </select>
+                    <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
+                </div>
+
+                <!-- Ajout des conditions d'utilisation -->
+                <div class="conditions-group">
+                    <input type="checkbox" id="conditions" class="conditions-checkbox" required>
+                    <label for="conditions" class="conditions-label">
+                        أوافق على 
+                        <span class="conditions-link" id="showConditions">الشروط العامة للاستخدام</span>
+                    </label>
+                    <div class="error" id="conditionsError">يجب الموافقة على الشروط العامة للاستخدام</div>
+                </div>
+                
+                <button type="button" id="generate-btn">
+                    <i class="fas fa-qrcode"></i> اضغط هنا للانخراط 
+                </button>
+                
+                <div class="qrcode-container">
+                    <div id="qrcode"></div>
+                    <div class="qrcode-title">نظام البيانات الذكية أيدا مابس</div>
+                </div>
+
+                <div class="registration-code">
+                    رقم التسجيل : <span id="uniqueCode"></span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal pour les conditions d'utilisation -->
+    <div id="conditionsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">الشروط العامة للاستخدام</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                    <h3>📍 نطاق الاستخدام</h3>
+
+                    <p>توفر الخدمة خرائط دقيقة اعتمادًا على أدوات تموضع جغرافي موجهة للاستعمال التقني الميداني ، خصوصًا في المجالات التالية:</p>
+
+                    <ul>
+                        <li>رقمنة الممتلكات الفلاحية على الخرائط الذكية الخاصة</li>
+                        <li>التسيير الفلاحي الدقيق</li>
+                        <li>تنظيم الموارد الزراعية برقمنة متقدمة</li>
+                        <li>الفلاحة الدقيقة و تسيير المزارع عن بُعد</li>                        
+
+                    </ul>
+
+                    <p>مع التنبيه الصريح أن هذه الخرائط ليست وثائق رسمية، ولا يمكن استخدامها في المساطر القانونية، أو النزاعات العقارية، أو إثبات الملكية أمام المحاكم أو الإدارات.</p>
+
+                    <h3>⚠️ المسؤولية القانونية</h3>
+
+                    <p>الخدمة موجهة حصريًا للاستعمال التنظيمي أو المعرفي غير الرسمي. ولا يتحمّل المزوّد "المقاول" أيّة مسؤولية قانونية في حالة استخدام الخرائط خارج الإطار المحدد.</p>
+
+                    <p>هذه الخرائط لا تمثل توثيقًا قانونيًا أو إحداثيات معتمدة في التحفيظ أو التمليك.</p>
+
+                    <p>في حالة الرغبة في الاستخدام الرسمي، ينصح باللجوء إلى مهنيين معتمدين كالمهندسين المسّاحين أو الخبراء الطبوغرافيين.</p>
+
+                    <h3>⚠️ المعطيات التقنية</h3>
+
+                    <p>رغم أن المعطيات والإحداثيات الجغرافية المقدمة تتميز بجودة عالية ، فإن استعمالها مخصص فقط لـ:</p>
+                    <ul>
+                        <li>تحديد الموقع بدقة في إطار الاستغلال الفلاحي الشخصي أو الجماعي غير الرسمي؛</li>
+                        <li>التوجيه وإدارة الموارد في إطار الفلاحة الدقيقة.</li>
+                    </ul>
+
+                    <p>يُستعمل في هذه الخرائط نظام الإحداثيات الجغرافية UTM العالمي المثالي للملاحة وتحديد المواقع بدقة عالية.</p>
+                    <p>يختلف هذا النظام عن النظام الرسمي  الوطني المُعتمد في التوثيق العقاري الدقيق (لامبير Lambert) "غير معتمد في برامج الملاحة الخاصة بالهواتف الذكية.".</p>
+                   
+                    <h3>✅ إقرار المستخدم</h3>
+
+                    <p>باستخدام هذه الخدمة، يقرّ المستعمل بأنه اطّلع على شروط الاستخدام، ووافق على القيود القانونية، ويدرك أن الخرائط المقدمة ذات طابع غير رسمي، موجهة فقط لتنظيم المعلومات الفلاحية، ولا يمكن اعتبارها مرجعًا قانونيًا.</p>
+
+                    <p><strong>رقم التعريف في السجل الوطني :</strong> 00369176500000021</p>
+                    <p><strong>التخصص المُرَخَّص له : </strong>أنشطة علمية وتقنية أخرى</p>
+                    <p>الأنشطة : رقمنة فلاحية، ملاحة دقيقة، خرائط رقمية زراعية دقيقة</p>
+
+                <a href="#" class="back-to-form" id="backToForm">الرجوع</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="thank-you-page">
+        <div class="thank-you-container">
+            <h1><i class="fas fa-check-circle" style="color: var(--primary);"></i> شكراً لكم</h1>
+            
+            <div class="thank-you-message">
+                <p>تم تنزيل بطاقة الانخراط بنجاح على هاتفكم.</p>
+                <p>المرجو الاحتفاظ بالبطاقة بعناية .سوف يتم استعمالها عند تسجيل بقعكم الزراعية على الخريطة الرقمية خلال الأعمال الميدانية.</p>
+                <p>-------------------------------------------------</p>
+                <p>نشكركم على ثقتكم</p>
+            </div>
+            
+            
+        </div>
+    </div>
+
+    <div id="capture-template" style="display: none; position: fixed; left: 0; top: 0; z-index: 9999;">
+        <div class="capture-container">
+            <div class="capture-header">
+                <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
+                <div class="capture-ayda-maps-title">QR DATA</div>
+            </div>
+            
+            <div class="capture-form-container">
+                <h1 class="capture-title"><i class="fas fa-id-card"></i> بطاقة المُنخرِط</h1>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-location-dot"></i> الدوار
+                    </span>
+                    <span id="capture-douar" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-sitemap"></i> أَفُوس
+                    </span>
+                    <span id="capture-afous" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-users"></i> العائلة
+                    </span>
+                    <span id="capture-famille" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-user"></i> الاسم و اللقب
+                    </span>
+                    <span id="capture-nom" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fas fa-phone"></i> رقم الهاتف (واتساب)
+                    </span>
+                    <span id="capture-telephone" class="capture-input-value"></span>
+                </div>
+                
+                <div class="capture-form-group">
+                    <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
+                        <i class="fi fi-ss-people-poll"></i> ⚙️ نوع النظام
+                    </span>
+                    <span id="capture-system-type" class="capture-input-value"></span>
+                </div>
+                
+                <div id="capture-qrcode" class="capture-qrcode"></div>
+                
+                <div style="text-align: center; margin-top: 1.5rem; font-size: 1.8rem; color: white;">
+                     رقم التسجيل : <span id="capture-uniqueCode" style="color: var(white); font-weight: bold;"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    // Variables globales
+    let inactivityTimer;
+    let userInteracted = false;
+    let qrCodeGenerated = false;
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec';
+
+    function cleanInput(value) {
+        if (typeof value === 'string') {
+            let cleaned = value.trim();
+            cleaned = cleaned.replace(/\.+$/, '');
+            cleaned = cleaned.replace(/\s+/g, ' ');
+            return cleaned;
+        }
+        return value;
+    }
+
+    function cleanPhoneNumber(phone) {
+        let cleaned = phone.trim().replace(/[^\d+]/g, '');
+        if (/^0\d{9}$/.test(cleaned)) {
+            return cleaned.replace(/^0/, '+212');
+        }
+        return cleaned;
+    }
+
+    // Initialisation de l'application
+    document.addEventListener('DOMContentLoaded', function() {
+        initApp();
+    });
+
+    function initApp() {
+        // Générer le code unique
+        document.getElementById('uniqueCode').textContent = generateUniqueCode();
+        document.getElementById('capture-uniqueCode').textContent = document.getElementById('uniqueCode').textContent;
+        
+        // Configurer les écouteurs d'événements
+        setupEventListeners();
+    }
+
+    function setupEventListeners() {
+        // Écouteurs pour le timer d'inactivité
+        ['mousedown', 'touchstart', 'keydown', 'scroll'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer);
+        });
+
+        // Validation en temps réel
+        document.getElementById('telephone').addEventListener('input', function() {
+            this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+            document.getElementById('phoneError').style.display = 'none';
+        });
+
+        document.querySelectorAll('input[pattern="[\\u0600-\\u06FF\\s]+"]').forEach(input => {
+            input.addEventListener('input', function() {
+                const errorElement = document.getElementById(`${this.id}Error`);
+                if (this.validity.valid) {
+                    this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                    errorElement.style.display = 'none';
+                }
+            });
+        });
+
+        // Validation pour le select
+        document.getElementById('system-type').addEventListener('change', function() {
+            const errorElement = document.getElementById('systemTypeError');
+            if (this.value) {
+                this.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+                errorElement.style.display = 'none';
+            }
+        });
+
+        // Bouton de génération QR
+        document.getElementById('generate-btn').addEventListener('click', generateQR);
+        
+        // Gestion des conditions d'utilisation
+        document.getElementById('showConditions').addEventListener('click', showConditionsModal);
+        document.getElementById('backToForm').addEventListener('click', hideConditionsModal);
+        document.querySelector('.close').addEventListener('click', hideConditionsModal);
+        document.getElementById('conditions').addEventListener('change', function() {
+            document.getElementById('conditionsError').style.display = 'none';
+        });
+
+        // Fermer la modal si on clique en dehors
+        window.addEventListener('click', function(event) {
+            if (event.target === document.getElementById('conditionsModal')) {
+                hideConditionsModal();
+            }
+        });
+    }
+
+    // Fonctions pour gérer la modal des conditions
+    function showConditionsModal() {
+        document.getElementById('conditionsModal').style.display = 'block';
+    }
+
+    function hideConditionsModal() {
+        document.getElementById('conditionsModal').style.display = 'none';
+        return false;
+    }
+
+    // Fonction pour générer le code unique
+    function generateUniqueCode() {
+        const now = new Date();
+        
+        // Formatage des composants
+        const day = String(now.getDate()).padStart(2, '0');
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const year = String(now.getFullYear()).slice(-2); // 2 derniers chiffres
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+
+        // Assemblage avec le préfixe AM
+        return `AM${day}${month}${year}${hours}${minutes}${seconds}`;
+    }
+
+    // Fonction de validation du téléphone
+    function validatePhone() {
+        const phone = document.getElementById('telephone').value;
+        const errorElement = document.getElementById('phoneError');
+        
+        const isValid = phone.startsWith('+') || phone.startsWith('00') || 
+                      (phone.startsWith('0') && /^0[0-9]{9}$/.test(phone));
+        
+        errorElement.style.display = isValid ? 'none' : 'block';
+        return isValid;
+    }
+
+    // Fonction de validation du formulaire
+    function validateForm() {
+        let isValid = true;
+        const inputs = document.querySelectorAll('input[required], select[required]');
+        
+        inputs.forEach(input => {
+            const errorElement = document.getElementById(`${input.id}Error`);
+            const fieldValid = input.value && input.value.trim();
+            
+            input.style.borderColor = fieldValid ? 'rgba(239, 68, 68, 0.3)' : '#f87171';
+            if (errorElement) errorElement.style.display = fieldValid ? 'none' : 'block';
+            
+            if (!fieldValid) isValid = false;
+        });
+        
+        // Validation des conditions
+        const conditionsChecked = document.getElementById('conditions').checked;
+        if (!conditionsChecked) {
+            document.getElementById('conditionsError').style.display = 'block';
+            isValid = false;
+        }
+        
+        return isValid && validatePhone();
+    }
+
+    // Fonction pour envoyer les données à Google Sheets
+    async function sendDataToGoogleSheets(formData) {
+        try {
+            const response = await fetch(scriptURL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            console.log('Données envoyées avec succès!', response);
+            return true;
+        } catch (error) {
+            console.error('Erreur lors de l\'envoi des données:', error);
+            return false;
+        }
+    }
+
+
+async function generateQR() {
+    if (!validateForm()) {
+        alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
+        return;
+    }
+    
+    const btn = document.getElementById('generate-btn');
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
+    btn.disabled = true;
+
+    const formData = {
+        "رقم التسجيل": document.getElementById('uniqueCode').textContent,
+        "الدوار": cleanInput(document.getElementById('douar').value),
+        "أَفُوس": cleanInput(document.getElementById('afous').value),
+        "العائلة": cleanInput(document.getElementById('famille').value),
+        "الاسم واللقب": cleanInput(document.getElementById('nom').value),
+        "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
+        "نوع النظام": document.getElementById('system-type').value
+    };
+    
+    // Envoyer les données à Google Sheets
+    const sendSuccess = await sendDataToGoogleSheets(formData);
+    if (!sendSuccess) {
+        console.warn("Échec de l'envoi des données à Google Sheets, mais continuation du processus...");
+    }
+    
+    const qrElement = document.getElementById('qrcode');
+    qrElement.innerHTML = '';
+    
+    try {
+        new QRCode(qrElement, {
+            text: JSON.stringify(formData),
+            width: 300,
+            height: 300,
+            colorDark: "#ffffff",
+            colorLight: "#1e1e1e"
+        });
+        
+        // Copier le QR code pour la capture
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = '';
+        new QRCode(captureQrElement, {
+            text: JSON.stringify(formData),
+            width: 250,
+            height: 250,
+            colorDark: "#000000",
+            colorLight: "#ffffff"
+        });
+        
+        qrCodeGenerated = true;
+        
+        // Animation du QR code
+        setTimeout(() => {
+            qrElement.classList.add('blink');
+            
+            setTimeout(() => {
+                qrElement.classList.remove('blink');
+                // Générer et télécharger automatiquement l'image
+                generateHighResImage().then(() => {
+                    // Afficher la page de remerciement après le téléchargement
+                    showThankYouPage();
+                });
+            }, 2000);
+        }, 500);
+    } catch (error) {
+        console.error("Erreur de génération QR:", error);
+        qrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=300x300&color=ffffff&bgcolor=1e1e1e" alt="QR Code">`;
+        
+        const captureQrElement = document.getElementById('capture-qrcode');
+        captureQrElement.innerHTML = `<img src="https://api.qrserver.com/v1/create-qr-code/?data=${encodeURIComponent(JSON.stringify(formData))}&size=250x250&color=000000&bgcolor=ffffff" alt="QR Code">`;
+        
+        qrCodeGenerated = true;
+        // Générer et télécharger automatiquement l'image
+        generateHighResImage().then(() => {
+            // Afficher la page de remerciement après le téléchargement
+            showThankYouPage();
+        });
+    }
+}
+
+    async function generateHighResImage() {
+        if (!qrCodeGenerated) {
+            alert("الرجاء إنشاء رمز الاستجابة السريعة أولاً");
+            return;
+        }
+
+        // Remplir le template de capture avec les données
+        document.getElementById('capture-douar').textContent = cleanInput(document.getElementById('douar').value);
+        document.getElementById('capture-afous').textContent = cleanInput(document.getElementById('afous').value);
+        document.getElementById('capture-famille').textContent = cleanInput(document.getElementById('famille').value);
+        document.getElementById('capture-nom').textContent = cleanInput(document.getElementById('nom').value);
+        document.getElementById('capture-telephone').textContent = cleanInput(document.getElementById('telephone').value);
+        document.getElementById('capture-system-type').textContent = document.getElementById('system-type').value;
+
+        // Afficher le template de capture
+        const captureElement = document.getElementById('capture-template');
+        captureElement.style.display = 'block';
+
+        try {
+            // Attendre un court instant pour que tout soit rendu
+            await new Promise(resolve => setTimeout(resolve, 300));
+
+            // Générer l'image avec html2canvas
+            const canvas = await html2canvas(captureElement, {
+                backgroundColor: '#1a1a1a',
+                useCORS: true,
+                scale: 3,
+                logging: false,
+                allowTaint: true
+            });
+
+            // Créer le lien de téléchargement
+            const link = document.createElement('a');
+            link.download = 'وثيقة_أيدا_مابس_' + new Date().toISOString().slice(0, 10) + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+
+        } catch (error) {
+            console.error("Erreur lors de la génération de l'image:", error);
+            alert('حدث خطأ أثناء توليد الصورة. الرجاء المحاولة لاحقًا.');
+        } finally {
+            // Masquer à nouveau le template
+            captureElement.style.display = 'none';
+        }
+    }
+
+    // Gestion du timer d'inactivité
+    function startInactivityTimer() {
+        if (inactivityTimer) clearTimeout(inactivityTimer);
+        userInteracted = false;
+        
+        inactivityTimer = setTimeout(function() {
+            if (!userInteracted) showThankYouPage();
+        }, 3000);
+    }
+
+    function resetInactivityTimer() {
+        userInteracted = true;
+        if (inactivityTimer) {
+            clearTimeout(inactivityTimer);
+            startInactivityTimer();
+        }
+    }
+
+    function showThankYouPage() {
+        document.getElementById('main-content').style.display = 'none';
+        document.getElementById('thank-you-page').style.display = 'block';
+    }
+    </script>
+</body>
+</html>
