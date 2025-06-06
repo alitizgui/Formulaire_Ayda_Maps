@@ -51,12 +51,12 @@
             height: 100px;
             width: auto;
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 8px rgba(3, 18, 100, 0.1);
         }
         
         .title-box {
             text-align: center;
-            padding: 1.5rem;
+            padding: 1.8rem;
             border-radius: 10px;
             background-color: white;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
@@ -125,17 +125,18 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
         
-        .pricing-table th {
-            background-color: var(--primary);
-            color: white;
-            padding: 1rem;
-            text-align: center;
+       
+.pricing-table th, 
+.pricing-table td {
+    padding: 1rem;
+    text-align: center;
+    border: 1px solid #0f0f0f; /* Bordures internes */
         }
         
-        .pricing-table td {
-            padding: 1rem;
-            text-align: center;
-            border-bottom: 1px solid #eee;
+        .pricing-table th {
+    background-color: var(--primary);
+    color: white;
+    border-bottom: 2px solid #181717; /* Bordure plus épaisse */
         }
         
         /* Styles spécifiques pour chaque type d'adhésion */
@@ -315,7 +316,7 @@
                 <thead>
                     <tr>
                         <th>نوع الانخراط</th>
-                        <th>المساحة (م²)</th>
+                        <th>المساحة بقعة (م²)</th>
                         <th>السعر لكل م² (درهم)</th>
                         <th>لكل بقعة (درهم)</th>
                     </tr>
