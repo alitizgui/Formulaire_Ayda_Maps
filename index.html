@@ -13,9 +13,9 @@
             --light: #f5f7fa;
             --dark: #333;
             --text: #444;
-            --group-color: #d6ffd9; /* Bleu clair pour groupe */
-            --unified-color: #d3ebff; /* Vert clair pour unifié */
-            --individual-color: #fcf7af; /* Rose clair pour individuel */
+            --group-color: #d6ffd9;
+            --unified-color: #d3ebff;
+            --individual-color: #fcf7af;
         }
         
         body {
@@ -41,6 +41,7 @@
         
         .logo-header {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
@@ -56,12 +57,42 @@
         
         .title-box {
             text-align: center;
-            padding: 3.5rem;
+            padding: 1.5rem;
             border-radius: 1px;
             background-color: rgba(255, 255, 255, 0);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0);
+            width: 100%;
         }
         
+        h1 {
+            color: rgb(16, 47, 219);
+            font-size: 1.2rem;
+            margin: 0;
+            font-weight: 1500;
+            opacity: 0;
+            animation: 
+                fadeIn 2s forwards,
+                explodeOut 1s 7s forwards,
+                fadeInAgain 2s 9s forwards;
+        }
+        
+        /* Animation d'apparition */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Animation d'éclatement pour la disparition */
+        @keyframes explodeOut {
+            0% { opacity: 1; transform: scale(1); }
+            100% { opacity: 0; transform: scale(1.5); }
+        }
+        
+        /* Animation de réapparition */
+        @keyframes fadeInAgain {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
         
         h2 {
             color: var(--primary);
@@ -120,21 +151,19 @@
             font-size: clamp(0.75rem, 1.5vw, 1rem); 
         }
         
-       
         .pricing-table th, 
         .pricing-table td {
             padding: 1rem;
             text-align: center;
-            border: 1px solid #0f0f0f; /* Bordures internes */
+            border: 1px solid #0f0f0f;
         }
         
         .pricing-table th {
             background-color: var(--primary);
             color: white;
-            border-bottom: 2px solid #181717; /* Bordure plus épaisse */
+            border-bottom: 2px solid #181717;
         }
         
-        /* Styles spécifiques pour chaque type d'adhésion */
         .group-adhesion { background-color: var(--group-color) !important; }
         .unified-adhesion { background-color: var(--unified-color) !important; }
         .individual-adhesion { background-color: var(--individual-color) !important; }
@@ -176,7 +205,6 @@
             border-radius: 5px;
         }
         
-        /* Animation pour le bouton */
         @keyframes pulse {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -204,16 +232,6 @@
             .pricing-table {
                 display: block;
                 overflow-x: auto;
-                @media (max-width: 768px) {
-            .pricing-table {
-                font-size: 0.8rem; /* Plus petit sur mobile */
-            }
-            
-            .pricing-table th, 
-            .pricing-table td {
-                padding: 0.5rem; /* Espacement réduit */
-            }
-        }
             }
             
             .stats {
@@ -224,6 +242,17 @@
                 padding: 2rem 1rem;
             }
         }
+        
+        @media (max-width: 768px) {
+            .pricing-table {
+                font-size: 0.8rem;
+            }
+            
+            .pricing-table th, 
+            .pricing-table td {
+                padding: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -231,7 +260,8 @@
         <div class="container">
             <div class="logo-header">
                 <img src="aydamapsprojets.png" alt="شعار أيدا مابس" class="logo-img">
-
+                <div class="title-box">
+                    <h1>أيدا مابس تفتح آفاقًا جديدة لموروثنا الفلاحي الثمين</h1>
                 </div>
             </div>
         </div>
@@ -242,36 +272,37 @@
             <h2><i class="fas fa-map-marked-alt feature-icon"></i>نحو ذاكرة رقمية تحفظ موروث سوس الفلاحي</h2>
             <div class="highlight-box">       
                 <p> تشهد الأراضي الزراعية في منطقة سوس، جنوب المغرب، ضياعًا تدريجيًا لإرث معرفي ثمين متعلق بحدود الأراضي ومعالمها التقليدية. ويَعود هذا الضياع إلى جملة من الأسباب، من بينها :</p>
-    <section>
-      <li>هجرة السكان الأصليين نحو المدن</li>
-      <li>ضعف وتَراجُع استغلال الأراضي</li>
-      <li>الإتلاف المتواصل لمعالم الأراضي نتيجة تحرّكات الحيوانات البرّية</li>
-      <li>وفاة كبار السن الحاملين لهذه المعارف الميدانية الأصيلة</li>
-    <section>
+                <section>
+                    <li>هجرة السكان الأصليين نحو المدن</li>
+                    <li>ضعف وتَراجُع استغلال الأراضي</li>
+                    <li>الإتلاف المتواصل لمعالم الأراضي نتيجة تحرّكات الحيوانات البرّية</li>
+                    <li>وفاة كبار السن الحاملين لهذه المعارف الميدانية الأصيلة</li>
+                </section>
 
-    <p>هذه الحدود الأرضية ومعالمها لم تعد محفوظة إلا في صدور قلة من الشيوخ، ما يجعلها عرضة للضياع والاندثار في أي لحظة. وإن لم يتداركها المعنيون بسرعة، فلن يبقى منها أثر للأجيال القادمة.</p>
+                <p>هذه الحدود الأرضية ومعالمها لم تعد محفوظة إلا في صدور قلة من الشيوخ، ما يجعلها عرضة للضياع والاندثار في أي لحظة. وإن لم يتداركها المعنيون بسرعة، فلن يبقى منها أثر للأجيال القادمة.</p>
 
-    <p><strong>في ظل هذه التحديات، ولحماية هذا الإرث المعرفي الثمين، ظهرت " أيدا مابس " كحل فعّال وبسيط. بحيث تمكّن كل مستخدميها من :</strong></p>
+                <p><strong>في ظل هذه التحديات، ولحماية هذا الإرث المعرفي الثمين، ظهرت " أيدا مابس " كحل فعّال وبسيط. بحيث تمكّن كل مستخدميها من :</strong></p>
 
-    <section>
-    <li>تحديد مواقع وحدود البقع الفلاحية بدقة عالية، وتثبيتها على خرائط رقمية</li>
-    <li>حفظ منظم وآمن للبيانات الخاصة بكل ملكية</li>
-    <section>
+                <section>
+                    <li>تحديد مواقع وحدود البقع الفلاحية بدقة عالية، وتثبيتها على خرائط رقمية</li>
+                    <li>حفظ منظم وآمن للبيانات الخاصة بكل ملكية</li>
+                </section>
 
-    <p>كل ذلك عبر واجهة بسيطة على هاتفك الذكي، لتوثّق ذاكرتك الفلاحية وتحميها... قبل أن يفوت الأوان.</p>
+                <p>كل ذلك عبر واجهة بسيطة على هاتفك الذكي، لتوثّق ذاكرتك الفلاحية وتحميها... قبل أن يفوت الأوان.</p>
 
-    <p class="note" style="margin-top: 20px; font-weight: bold; color: #a00;">
-            </ul> <div class="warning-box"> <strong>❗ تنبيه مهم:</strong><br> "أيدا مابس" لا تُعدّ بديلاً عن الوثائق القانونية، لكنها تشكّل خطوة محورية في توثيق المعرفة المحلية، وحمايتها من النسيان. </div>
+                <p class="note" style="margin-top: 20px; font-weight: bold; color: #a00;">
+                </ul> <div class="warning-box"> <strong>❗ تنبيه مهم:</strong><br> "أيدا مابس" لا تُعدّ بديلاً عن الوثائق القانونية، لكنها تشكّل خطوة محورية في توثيق المعرفة المحلية، وحمايتها من النسيان. </div>
             </div>
         </section>
         
         <section>
             <h2><i class="fas fa-mobile-alt feature-icon"></i> أيدا مابس : خريطة ذكية بين يديك</h2>
             <div class="highlight-box">
-            <p2>تمكّن "أيدا مابس" كل منخرط من رقمنة المعطيات الميدانية المرتبطة بممتلكاته الفلاحية (كالأراضي، الأشجار، المرافق...) وربطها بمواقعها وحدودها الدقيقة على خريطة ذكية سهلة الاستعمال، وآمنة.</p2> 
-        <section>
-            <p>من خلال هاتفك فقط، يمكن لك تصفّح هذه البيانات والتنقّل نحو ممتلكاتك الفلاحية بدقة تصل إلى 50 سنتيمترًا، دون حاجة إلى مرشد أو ذاكرة شخصية.</p>  
-            <p>وبذلك، يتحوّل الإرث المعرفي المتعلق بالأرض إلى رصيد رقمي محفوظ، جاهز للاستعمال في أي وقت، وسهل الاسترجاع.</p>            
+                <p2>تمكّن "أيدا مابس" كل منخرط من رقمنة المعطيات الميدانية المرتبطة بممتلكاته الفلاحية (كالأراضي، الأشجار، المرافق...) وربطها بمواقعها وحدودها الدقيقة على خريطة ذكية سهلة الاستعمال، وآمنة.</p2> 
+                <section>
+                    <p>من خلال هاتفك فقط، يمكن لك تصفّح هذه البيانات والتنقّل نحو ممتلكاتك الفلاحية بدقة تصل إلى 50 سنتيمترًا، دون حاجة إلى مرشد أو ذاكرة شخصية.</p>  
+                    <p>وبذلك، يتحوّل الإرث المعرفي المتعلق بالأرض إلى رصيد رقمي محفوظ، جاهز للاستعمال في أي وقت، وسهل الاسترجاع.</p>            
+                </section>
             </div>
         </section>
 
@@ -323,8 +354,8 @@
             <table class="pricing-table">
                 <thead> 
                     <section>
-            <p>نقدّم ثلاث فئات مختلفة من الانخراط، لتناسب كل الحالات (الفردية إلى الجماعية) :</p>
-            <section>
+                        <p>نقدّم ثلاث فئات مختلفة من الانخراط، لتناسب كل الحالات (الفردية إلى الجماعية) :</p>
+                    </section>
                     <tr>
                         <th>فئة الانخراط</th>
                         <th>مساحة البقعة (م²)</th>
