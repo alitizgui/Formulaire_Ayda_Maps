@@ -618,7 +618,7 @@
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <div class="capture-ayda-maps-title">QR DATA</div>
+                <div class="capture-ayda-maps-title">QR DATA AYDA</div>
             </div>
             
             <div class="capture-form-container">
@@ -661,7 +661,7 @@
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fi fi-ss-people-poll"></i> ⚙️ نوع النظام
+                        <i class="fi fi-ss-people-poll"></i> ⚙️ فئة الانخراط
                     </span>
                     <span id="capture-system-type" class="capture-input-value"></span>
                 </div>
@@ -681,7 +681,22 @@
     let userInteracted = false;
     let qrCodeGenerated = false;
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec';
-
+    async function sendDataToGoogleSheets(formData) {
+    try {
+        const response = await fetch(scriptURL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+        });
+        
+        const result = await response.json();
+        console.log('Succès:', result);
+        return true;
+    } catch (error) {
+        console.error('Erreur:', error);
+        return false;
+    }
+    }
     function cleanInput(value) {
         if (typeof value === 'string') {
             let cleaned = value.trim();
@@ -865,7 +880,7 @@ async function generateQR() {
         "العائلة": cleanInput(document.getElementById('famille').value),
         "الاسم واللقب": cleanInput(document.getElementById('nom').value),
         "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
-        "نوع النظام": document.getElementById('system-type').value
+        "فئة الانخراط": document.getElementById('system-type').value
     };
     
     // Envoyer les données à Google Sheets
