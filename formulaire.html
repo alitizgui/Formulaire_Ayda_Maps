@@ -481,33 +481,41 @@
             
             <form id="dataForm">
 
-        <div class="form-group">
-            <label for="douar"><i class="fas fa-location-dot"></i>اسم الدوار</label>
-            <input type="text" id="douar" required pattern="^[\u0600-\u06FF\s]+$" 
-                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
-            <div class="error" id="douarError">يسمح فقط بالأحرف العربية</div>
-        </div>
+            <div class="form-group">
+                <label for="douar"><i class="fas fa-location-dot"></i>اسم الدوار</label>
+                <input type="text" id="douar" required 
+                    pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u06A8\u06AC\s]+$"
+                    title="يجب إدخال أحرف عربية فقط (بما في ذلك ڨ، ݣ)"
+                    oninput="validateArabic(this)">
+                <div class="error" id="douarError">يسمح فقط بالأحرف العربية بما فيها ڨ و ݣ</div>
+            </div>
 
-        <div class="form-group">
-            <label for="afous"><i class="fas fa-sitemap"></i> اسم أَفُوس</label>
-            <input type="text" id="afous" required pattern="^[\u0600-\u06FF\s]+$" 
-                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
-            <div class="error" id="afousError">يسمح فقط بالأحرف العربية</div>
-        </div>
+            <div class="form-group">
+                <label for="afous"><i class="fas fa-sitemap"></i> اسم أَفُوس</label>
+                <input type="text" id="afous" required 
+                    pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u06A8\u06AC\s]+$"
+                    title="يجب إدخال أحرف عربية فقط (بما في ذلك ڨ، ݣ)"
+                    oninput="validateArabic(this)">
+                <div class="error" id="afousError">يسمح فقط بالأحرف العربية بما فيها ڨ و ݣ</div>
+            </div>
 
-        <div class="form-group">
-            <label for="famille"><i class="fas fa-users"></i> اسم العائلة</label>
-            <input type="text" id="famille" required pattern="^[\u0600-\u06FF\s]+$" 
-                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
-            <div class="error" id="familleError">يسمح فقط بالأحرف العربية</div>
-        </div>
+            <div class="form-group">
+                <label for="famille"><i class="fas fa-users"></i> اسم العائلة المالكة</label>
+                <input type="text" id="famille" required 
+                    pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u06A8\u06AC\s]+$"
+                    title="يجب إدخال أحرف عربية فقط (بما في ذلك ڨ، ݣ)"
+                    oninput="validateArabic(this)">
+                <div class="error" id="familleError">يسمح فقط بالأحرف العربية بما فيها ڨ و ݣ</div>
+            </div>
 
-        <div class="form-group">
-            <label for="nom"><i class="fas fa-user"></i> الاسم و اللقب</label>
-            <input type="text" id="nom" required pattern="^[\u0600-\u06FF\s]+$" 
-                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
-            <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
-        </div>
+            <div class="form-group">
+                <label for="nom"><i class="fas fa-user"></i> اسم و لقب النائب</label>
+                <input type="text" id="nom" required 
+                    pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u06A8\u06AC\s]+$"
+                    title="يجب إدخال أحرف عربية فقط (بما في ذلك ڨ، ݣ)"
+                    oninput="validateArabic(this)">
+                <div class="error" id="nomError">يسمح فقط بالأحرف العربية بما فيها ڨ و ݣ</div>
+            </div>
             
             <div class="form-group">
                 <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
@@ -641,7 +649,6 @@
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <div class="capture-ayda-maps-title">ticket qrdata</div>
             </div>
             
             <div class="capture-form-container">
@@ -649,28 +656,28 @@
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fas fa-location-dot"></i> الدوار
+                        <i class="fas fa-location-dot"></i> اسم الدوار
                     </span>
                     <span id="capture-douar" class="capture-input-value"></span>
                 </div>
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fas fa-sitemap"></i> أَفُوس
+                        <i class="fas fa-sitemap"></i> اسم أَفُوس
                     </span>
                     <span id="capture-afous" class="capture-input-value"></span>
                 </div>
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fas fa-users"></i> العائلة
+                        <i class="fas fa-users"></i>اسم العائلة المالكة
                     </span>
                     <span id="capture-famille" class="capture-input-value"></span>
                 </div>
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fas fa-user"></i> الاسم و اللقب
+                        <i class="fas fa-user"></i>اسم ولقب النائب 
                     </span>
                     <span id="capture-nom" class="capture-input-value"></span>
                 </div>
@@ -684,7 +691,7 @@
                 
                 <div class="capture-form-group">
                     <span style="display: block; font-size: 1.8rem; color: white; margin-bottom: 0.5rem;">
-                        <i class="fi fi-ss-people-poll"></i> ⚙️ فئة الانخراط
+                        <i class="fi fi-ss-people-poll"></i> فئة الانخراط
                     </span>
                     <span id="capture-system-type" class="capture-input-value"></span>
                 </div>
@@ -731,19 +738,19 @@
     } 
 
     function validateArabic(input) {
-        const arabicRegex = /^[\u0600-\u06FF\s]+$/;
-        const errorElement = document.getElementById(`${input.id}Error`);
-        
-        if (!arabicRegex.test(input.value)) {
-            input.style.borderColor = '#f87171';
-            errorElement.style.display = 'block';
-            return false;
-        } else {
-            input.style.borderColor = 'rgba(239, 68, 68, 0.3)';
-            errorElement.style.display = 'none';
-            return true;
-        }
+    const arabicRegex = /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\u06A8\u06AC\s]+$/;
+    const errorElement = document.getElementById(`${input.id}Error`);
+    
+    if (!arabicRegex.test(input.value)) {
+        input.style.borderColor = '#f87171';
+        errorElement.style.display = 'block';
+        return false;
+    } else {
+        input.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+        errorElement.style.display = 'none';
+        return true;
     }
+}
 
     function cleanPhoneNumber(phone) {
         let cleaned = phone.trim().replace(/[^\d+]/g, '');
