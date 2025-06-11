@@ -81,7 +81,52 @@
             gap: 5;
             align-items: right;
         }
-    
+                .sophisticated-banner {
+            background: linear-gradient(135deg, rgba(52, 115, 187, 0.61) 0%, rgba(10, 110, 224, 0.349) 100%);
+            border: 1px solid rgba(25, 128, 212, 0.068);
+            border-radius: 8px;
+            padding: 0.5px 20px;
+            margin: 0 auto 25px;
+            text-align: center;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 2px 5px rgb(107, 176, 216);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .sophisticated-banner::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #4ba7f36e, #3085f35b);
+        }
+
+        .banner-message {
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 800;
+            color: #ffffff;
+            text-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+            letter-spacing: 0.3px;
+            background: linear-gradient(to right, #ffffff, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Animation de clignotement doux */
+        @keyframes gentlePulse {
+            20% { opacity: 0; transform: scale(1.2); }
+            100% { opacity: 0.1; transform: scale(1); }
+        }
+
+        /* Animation de disparition */
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 1; transform: translateY(-10px); }
+        }
         .form-container {
             max-width: 600px;
             margin: 2rem auto;
@@ -106,7 +151,7 @@
         
         input, .form-select {
             width: 100%;
-            padding: 0.5rem;
+            padding: 0.8rem;
             background: rgb(255, 255, 255);
             border: 1px solid rgb(252, 252, 252);
             border-radius: 2px;
@@ -477,6 +522,11 @@
         </header>
         
         <div class="form-container">
+                <!-- Bannière animée -->
+            <div id="fill-blanks-banner" class="sophisticated-banner">
+            <span class="banner-message">المرجو ملء الفراغات</span>
+            </div>
+
             <h1><i class="fas fa-id-card"></i>بيانات المنخرط</h1>
             
             <form id="dataForm">
@@ -525,18 +575,18 @@
                 <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات وما فوق</div>
             </div>
                 
-<div class="form-group">
-    <p style="font-size: 1.6rem; text-align: right; margin-bottom: 0.8rem; line-height: 1.5;">
-        <i class="fas fa-handshake"></i>فئة الانخراط
-    </p>
-    <select id="system-type" required class="form-select" onchange="updateSelectLabel(this)">
-        <option value="" selected disabled>المرجو اختيار فئة الانخراط</option>
-        <option value="انخراط جماعي" data-full="أنخرطُ تحت إشراف جمعية الدوار (جماعي)">أنخرطُ تحت إشراف جمعية الدوار (انخراط جماعي)</option>
-        <option value="انخراط موحد" data-full="أنخرطُ مع أربعة منخرطين ضمن مجموعة موحدة (موحد)">أنخرطُ مع أربعة منخرطين ضمن مجموعة موحدة (انخراط موحد)</option>
-        <option value="انخراط فردي" data-full="أنخرطُ لوحدي (فردي)">أنخرطُ لوحدي (انخراط فردي)</option>
-    </select>
-    <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
-</div> 
+            <div class="form-group">
+                <p style="font-size: 1.6rem; text-align: right; margin-bottom: 1.2rem; line-height: 1.2;display: flex; gap: 10px">
+                <i class="fas fa-handshake"></i> فئة الانخراط
+                </p>
+                <select id="system-type" required class="form-select" onchange="updateSelectLabel(this)">
+                    <option value="" selected disabled>المرجو اختيار فئة الانخراط</option>
+                    <option value="انخراط جماعي" data-full="أنخرطُ تحت إشراف جمعية الدوار (جماعي)">أنخرطُ تحت إشراف جمعية الدوار (انخراط جماعي)</option>
+                    <option value="انخراط موحد" data-full="أنخرطُ مع أربعة منخرطين موحدين (موحد)">أنخرطُ مع أربعة منخرطين موحدين (انخراط موحد)</option>
+                    <option value="انخراط فردي" data-full="أنخرطُ لوحدي (فردي)">أنخرطُ لوحدي (انخراط فردي)</option>
+                </select>
+                <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
+            </div> 
 
         <script>
         function updateSelectLabel(selectElement) {
@@ -546,6 +596,7 @@
             const value = selectedOption.value;
             // Remplacer le texte visible dans le menu par la valeur seule
             selectedOption.text = value;
+        
         }
         </script>
 
@@ -759,7 +810,31 @@
         }
         return cleaned;
     }
-
+    document.addEventListener('DOMContentLoaded', function() {
+    const banner = document.getElementById('fill-blanks-banner');
+    const formFields = document.querySelectorAll('input, select, textarea');
+    
+    // Démarrer l'animation après 2 secondes
+    const startAnimation = setTimeout(() => {
+        banner.style.animation = 'gentlePulse 1.2s ease-in-out 3';
+    }, 2000);
+    
+    // Disparaître au début de la saisie
+    formFields.forEach(field => {
+        field.addEventListener('input', () => {
+            clearTimeout(startAnimation);
+            banner.style.animation = 'fadeOut 0.5s ease forwards';
+            setTimeout(() => banner.remove(), 500);
+        });
+        
+        // Pour les sélecteurs (clics)
+        field.addEventListener('change', () => {
+            clearTimeout(startAnimation);
+            banner.style.animation = 'fadeOut 0.5s ease forwards';
+            setTimeout(() => banner.remove(), 500);
+        });
+    });
+});
     // Initialisation de l'application
     document.addEventListener('DOMContentLoaded', function() {
         initApp();
