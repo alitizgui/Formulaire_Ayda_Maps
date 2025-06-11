@@ -91,13 +91,13 @@
         }
         
         .form-group {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             text-align: right;
         }
         
         label {
             display: block;
-            margin-bottom: 0.7rem;
+            margin-bottom: 1rem;
             color: #ffffff;
             font-size: 1.5rem;
             font-weight: 500;
@@ -125,7 +125,7 @@
             background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
             background-repeat: no-repeat;
             background-position: left 1rem center;
-            background-size: 1.5rem;
+            background-size: 2rem;
         }
         
         button {
@@ -208,6 +208,12 @@
             font-weight: bold;
         }
         
+        .form-group label {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Contrôle l'espace icône-texte */
+            margin-bottom: 1rem; /* Espace sous le label */
+        }
         .form-container h1 {
             font-size: 2.1rem;
             display: flex;
@@ -218,7 +224,7 @@
         }
         
         .form-container h1 i {
-            font-size: 2rem;
+            font-size: 3rem;
             order: 0;
         }
 
@@ -347,12 +353,11 @@
 
         /* Styles pour les conditions d'utilisation */
         .conditions-group {
-            margin: 1.5rem 0;
-            text-align: right;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            flex-direction: row-reverse;
+            padding: 1rem;
+            background: linear-gradient(135deg, rgba(163, 199, 231, 0.568) 0%, rgba(131, 226, 231, 0.1) 100%);
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 12px;
+            margin: 2.5rem 0;
         }
 
         .conditions-label {
@@ -475,47 +480,52 @@
             <h1><i class="fas fa-id-card"></i>بيانات المنخرط</h1>
             
             <form id="dataForm">
-                <div class="form-group">
-                    <label for="douar"><i class="fas fa-location-dot"></i>اسم الدوار</label>
-                    <input type="text" id="douar" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                    <div class="error" id="douarError">يسمح فقط بالأحرف العربية</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="afous"><i class="fas fa-sitemap"></i> اسم أَفُوس</label>
-                    <input type="text" id="afous" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                    <div class="error" id="afousError">يسمح فقط بالأحرف العربية</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="famille"><i class="fas fa-users"></i> اسم العائلة</label>
-                    <input type="text" id="famille" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                    <div class="error" id="familleError">يسمح فقط بالأحرف العربية</div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="nom"><i class="fas fa-user"></i> الاسم و اللقب</label>
-                    <input type="text" id="nom" required pattern="[\u0600-\u06FF\s]+" title="يجب إدخال أحرف عربية فقط">
-                    <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
-                </div>
+
+        <div class="form-group">
+            <label for="douar"><i class="fas fa-location-dot"></i>اسم الدوار</label>
+            <input type="text" id="douar" required pattern="^[\u0600-\u06FF\s]+$" 
+                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
+            <div class="error" id="douarError">يسمح فقط بالأحرف العربية</div>
+        </div>
+
+        <div class="form-group">
+            <label for="afous"><i class="fas fa-sitemap"></i> اسم أَفُوس</label>
+            <input type="text" id="afous" required pattern="^[\u0600-\u06FF\s]+$" 
+                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
+            <div class="error" id="afousError">يسمح فقط بالأحرف العربية</div>
+        </div>
+
+        <div class="form-group">
+            <label for="famille"><i class="fas fa-users"></i> اسم العائلة</label>
+            <input type="text" id="famille" required pattern="^[\u0600-\u06FF\s]+$" 
+                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
+            <div class="error" id="familleError">يسمح فقط بالأحرف العربية</div>
+        </div>
+
+        <div class="form-group">
+            <label for="nom"><i class="fas fa-user"></i> الاسم و اللقب</label>
+            <input type="text" id="nom" required pattern="^[\u0600-\u06FF\s]+$" 
+                title="يجب إدخال أحرف عربية فقط" oninput="validateArabic(this)">
+            <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
+        </div>
             
                 <div class="form-group">
                     <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
                     <input type="tel" id="telephone" required style="direction: ltr; text-align: right;"
                            pattern="(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})"
                            title="يجب أن يحتوي الرقم على 10 خانات">
-                    <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات</div>
+                    <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات وما فوق</div>
                 </div>
                 
                 <div class="form-group">
-                    <p style="font-size: 1.8rem; text-align: right; margin-bottom: 0.3rem; line-height: 1.3;">
+                    <p style="font-size: 1.6rem; text-align: right; margin-bottom: 0.5rem; line-height: 1.5;">
                         <i class="fas fa-handshake"></i> فئة الانخراط
                     </p>
                     <select id="system-type" required class="form-select">
-                        <option value="" selected disabled>إلى أية فئة تنتمون ؟</option>
-                        <option value="جماعي">جماعي (انخراط تحت إشراف جمعية الدوار)</option>
-                        <option value="موحد">موحد (انخراط خمس عائلات فقط من نفس الدوار)</option>
-                        <option value="فردي">فردي (انخراط عائلة واحدة فقط)</option>
+                        <option value="" selected disabled>المرجو اختيار الفئة الخاصة بكم</option>
+                        <option value="جماعي">جماعي (أنخرطُ تحت إشراف جمعية الدوار)</option>
+                        <option value="موحد">موحد (أنخرطُ مع أربعة منخرطين ضمن مجموعة موحدة)</option>
+                        <option value="فردي">فردي (أنخرطُ لوحدي)</option>
                     </select>
                     <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
                 </div>
@@ -619,7 +629,7 @@
         <div class="capture-container">
             <div class="capture-header">
                 <img src="aydammaps logo.jpg" class="capture-logo" crossorigin="anonymous">
-                <div class="capture-ayda-maps-title">QR DATA AYDA</div>
+                <div class="capture-ayda-maps-title">ticket qrdata</div>
             </div>
             
             <div class="capture-form-container">
@@ -681,7 +691,7 @@
     let inactivityTimer;
     let userInteracted = false;
     let qrCodeGenerated = false;
-    const scriptURL = 'https://script.google.com/macros/s/AKfycbxujHPuyKxjENRpDSLlrIdE6yZDwqZeRD_1_dYkLMgtKH5-iWMzOVTwmjnYOD1X2iJd/exec';
+    const scriptURL ='https://script.google.com/macros/s/AKfycbxI32NL5evOJT-EE5O9VvM7NZ-2skTXkO7CmCtSwmd4kmCVle-S-EPRhYJtuKnjNGdo/exec';
     async function sendDataToGoogleSheets(formData) {
     try {
         const response = await fetch(scriptURL, {
@@ -706,6 +716,21 @@
             return cleaned;
         }
         return value;
+    } 
+
+    function validateArabic(input) {
+        const arabicRegex = /^[\u0600-\u06FF\s]+$/;
+        const errorElement = document.getElementById(`${input.id}Error`);
+        
+        if (!arabicRegex.test(input.value)) {
+            input.style.borderColor = '#f87171';
+            errorElement.style.display = 'block';
+            return false;
+        } else {
+            input.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+            errorElement.style.display = 'none';
+            return true;
+        }
     }
 
     function cleanPhoneNumber(phone) {
@@ -820,28 +845,40 @@
 
     // Fonction de validation du formulaire
     function validateForm() {
-        let isValid = true;
-        const inputs = document.querySelectorAll('input[required], select[required]');
-        
-        inputs.forEach(input => {
-            const errorElement = document.getElementById(`${input.id}Error`);
-            const fieldValid = input.value && input.value.trim();
-            
-            input.style.borderColor = fieldValid ? 'rgba(239, 68, 68, 0.3)' : '#f87171';
-            if (errorElement) errorElement.style.display = fieldValid ? 'none' : 'block';
-            
-            if (!fieldValid) isValid = false;
-        });
-        
-        // Validation des conditions
-        const conditionsChecked = document.getElementById('conditions').checked;
-        if (!conditionsChecked) {
-            document.getElementById('conditionsError').style.display = 'block';
+    let isValid = true;
+    
+    // Valider les champs arabes
+    const arabicFields = ['douar', 'afous', 'famille', 'nom'];
+    arabicFields.forEach(fieldId => {
+        const input = document.getElementById(fieldId);
+        if (!validateArabic(input)) {
             isValid = false;
         }
-        
-        return isValid && validatePhone();
+    });
+    
+    // Validation du téléphone
+    if (!validatePhone()) isValid = false;
+    
+    // Validation des conditions
+    const conditionsChecked = document.getElementById('conditions').checked;
+    if (!conditionsChecked) {
+        document.getElementById('conditionsError').style.display = 'block';
+        isValid = false;
     }
+    
+    // Validation du type de système
+    const systemType = document.getElementById('system-type');
+    if (!systemType.value) {
+        document.getElementById('systemTypeError').style.display = 'block';
+        systemType.style.borderColor = '#f87171';
+        isValid = false;
+    } else {
+        document.getElementById('systemTypeError').style.display = 'none';
+        systemType.style.borderColor = 'rgba(239, 68, 68, 0.3)';
+    }
+    
+    return isValid;
+}
 
     // Fonction pour envoyer les données à Google Sheets
     async function sendDataToGoogleSheets(formData) {
@@ -866,22 +903,39 @@
 
 async function generateQR() {
     if (!validateForm()) {
-        alert("يرجى إدخال جميع البيانات المطلوبة بشكلٍ صحيح")
+        alert("الرجاء ملء جميع البيانات المطلوبة بشكل صحيح");
         return;
     }
     
     const btn = document.getElementById('generate-btn');
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>جاري المعالجة...';
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري المعالجة...';
     btn.disabled = true;
-
+    
+    // Récupérer le type d'adhésion
+    const membershipType = document.getElementById('system-type').value;
+    let suffix = '';
+    
+    // Ajouter la lettre correspondante
+    if (membershipType === "جماعي") {
+        suffix = 'A';
+    } else if (membershipType === "موحد") {
+        suffix = 'B';
+    } else if (membershipType === "فردي") {
+        suffix = 'C';
+    }
+    
+    // Créer le numéro complet avec la lettre
+    const baseNumber = document.getElementById('uniqueCode').textContent;
+    const fullRegistrationNumber = baseNumber + suffix;
+    
     const formData = {
-        "رقم التسجيل": document.getElementById('uniqueCode').textContent,
+        "رقم التسجيل": fullRegistrationNumber, // Utiliser le numéro complet
         "الدوار": cleanInput(document.getElementById('douar').value),
         "أَفُوس": cleanInput(document.getElementById('afous').value),
         "العائلة": cleanInput(document.getElementById('famille').value),
         "الاسم واللقب": cleanInput(document.getElementById('nom').value),
         "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
-        "فئة الانخراط": document.getElementById('system-type').value
+        "فئة الانخراط": membershipType
     };
     
     // Envoyer les données à Google Sheets

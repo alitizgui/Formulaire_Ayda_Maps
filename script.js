@@ -62,13 +62,13 @@ function generateQR() {
     
     const formData = {
         "رقم التسجيل": document.getElementById('uniqueCode').textContent,
-        "الدوار": document.getElementById('douar').value,
-        "أَفُوس": document.getElementById('afous').value,
-        "العائلة": document.getElementById('famille').value,
-        "الاسم واللقب": document.getElementById('nom').value,
-        "رقم الهاتف واتساب": document.getElementById('telephone').value,
-        "فئة الانخراط": document.getElementById('system-type').value,
-    };
+        "الدوار": cleanInput(document.getElementById('douar').value),
+        "أَفُوس": cleanInput(document.getElementById('afous').value),
+        "العائلة": cleanInput(document.getElementById('famille').value),
+        "الاسم واللقب": cleanInput(document.getElementById('nom').value),
+        "رقم الهاتف واتساب": cleanPhoneNumber(document.getElementById('telephone').value),
+        "فئة الانخراط": document.getElementById('system-type').value // <- Retire encodeURIComponent  
+      };
     
     const qrElement = document.getElementById('qrcode');
     qrElement.innerHTML = '';
