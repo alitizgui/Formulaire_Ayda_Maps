@@ -509,26 +509,38 @@
             <div class="error" id="nomError">يسمح فقط بالأحرف العربية</div>
         </div>
             
-                <div class="form-group">
-                    <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
-                    <input type="tel" id="telephone" required style="direction: ltr; text-align: right;"
-                           pattern="(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})"
-                           title="يجب أن يحتوي الرقم على 10 خانات">
-                    <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات وما فوق</div>
-                </div>
+            <div class="form-group">
+                <label for="telephone"><i class="fas fa-phone"></i> رقم الهاتف (واتساب)</label>
+                <input type="tel" id="telephone" required style="direction: ltr; text-align: right;"
+                        pattern="(\+[0-9]{10,}|00[0-9]{10,}|0[0-9]{9})"
+                        title="يجب أن يحتوي الرقم على 10 خانات">
+                <div id="phoneError" class="error">الرقم يجب أن يكون 10 خانات وما فوق</div>
+            </div>
                 
-                <div class="form-group">
-                    <p style="font-size: 1.6rem; text-align: right; margin-bottom: 0.5rem; line-height: 1.5;">
-                        <i class="fas fa-handshake"></i> فئة الانخراط
-                    </p>
-                    <select id="system-type" required class="form-select">
-                        <option value="" selected disabled>المرجو اختيار الفئة الخاصة بكم</option>
-                        <option value="جماعي">جماعي (أنخرطُ تحت إشراف جمعية الدوار)</option>
-                        <option value="موحد">موحد (أنخرطُ مع أربعة منخرطين ضمن مجموعة موحدة)</option>
-                        <option value="فردي">فردي (أنخرطُ لوحدي)</option>
-                    </select>
-                    <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
-                </div>
+<div class="form-group">
+    <p style="font-size: 1.6rem; text-align: right; margin-bottom: 0.8rem; line-height: 1.5;">
+        <i class="fas fa-handshake"></i>فئة الانخراط
+    </p>
+    <select id="system-type" required class="form-select" onchange="updateSelectLabel(this)">
+        <option value="" selected disabled>المرجو اختيار فئة الانخراط</option>
+        <option value="انخراط جماعي" data-full="أنخرطُ تحت إشراف جمعية الدوار (جماعي)">أنخرطُ تحت إشراف جمعية الدوار (انخراط جماعي)</option>
+        <option value="انخراط موحد" data-full="أنخرطُ مع أربعة منخرطين ضمن مجموعة موحدة (موحد)">أنخرطُ مع أربعة منخرطين ضمن مجموعة موحدة (انخراط موحد)</option>
+        <option value="انخراط فردي" data-full="أنخرطُ لوحدي (فردي)">أنخرطُ لوحدي (انخراط فردي)</option>
+    </select>
+    <div class="error" id="systemTypeError">الرجاء تحديد فئة الانخراط</div>
+</div> 
+
+        <script>
+        function updateSelectLabel(selectElement) {
+            // Récupérer l'option sélectionnée
+            const selectedOption = selectElement.options[selectElement.selectedIndex];
+            // Récupérer la valeur simple (avant parenthèses)
+            const value = selectedOption.value;
+            // Remplacer le texte visible dans le menu par la valeur seule
+            selectedOption.text = value;
+        }
+        </script>
+
 
                 <!-- Ajout des conditions d'utilisation -->
                 <div class="conditions-group">
