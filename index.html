@@ -65,8 +65,8 @@
         }
         
         h1 {
-            color: #2a7f62;
-            font-size: 1.5rem;
+            color: #0f7918;
+            font-size: 1.7rem;
             margin: 0;
             font-weight: 100;
             opacity: 0;
@@ -78,8 +78,8 @@
         
         /* Animation d'apparition */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 2; transform: translateY(20px); }
+            to { opacity: 5; transform: translateY(0); }
         }
         
         /* Animation d'éclatement pour la disparition */
@@ -290,6 +290,97 @@
             40% {transform: translateY(-10px);}
             60% {transform: translateY(-5px);}
         }
+
+    .testimonials-container {
+    max-width: 1100px;
+    margin: 10px auto;
+    padding: 40px;
+    background: rgba(60, 177, 192, 0.514);
+    border-radius: 55px;
+    border-top: 3px solid #4cc9f0;
+    }
+
+    .section-header {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .section-header i {
+        font-size: 5rem;
+        color: #ffffff;
+        margin-bottom: 15px;
+    }
+
+    .section-header h2 {
+        font-family: 'Noto Naskh Arabic', serif;
+        font-size: 3rem;
+        color: #1d2022;
+    }
+
+    .messages-container {
+        margin-bottom: 5px;
+    }
+
+    .testimonial-card {
+        background: rgba(46, 139, 192, 0.1);
+        border-right: 2px solid #3a86ff;
+        padding: 10px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        animation: fadeIn 0.6s ease-out;
+    }
+
+    .testimonial-text {
+        font-size: 1.8rem;
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+
+    .testimonial-meta {
+        display: flex;
+        justify-content: space-between;
+        font-size: 2rem;
+        color: #a8dadc;
+    }
+
+    .testimonial-form {
+        background: rgba(37, 106, 161, 0.08);
+        padding: 100px;
+        border-radius: 100px;
+        border: 1px dashed rgba(74, 144, 226, 0.3);
+    }
+
+    .input-group {
+        margin-bottom: 30px;
+    }
+
+    .input-group input, 
+    .input-group textarea {
+        width: 100%;
+        padding: 15px 15px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        font-family: 'Tajawal', sans-serif;
+        font-size: 1rem;
+    }
+
+    .submit-btn {
+        background: linear-gradient(135deg, #3a86ff 0%, #4cc9f0 100%);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.2rem;
+        transition: all 0.3s;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(15px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+     
     </style>
 </head>
 <body>
@@ -298,7 +389,7 @@
             <div class="logo-header">
                 <img src="aydamapsprojets.png" alt="شعار أيدا مابس" class="logo-img">
                 <div class="title-box">
-                    <h1>أيدا مابس تفتح آفاقًا جديدة لموروثنا الفلاحي الثمين</h1>
+                    <h1><strong>أيدا مابس تفتح آفاقًا جديدة لموروثنا الفلاحي الثمين</strong></h1>
                 </div>
             </div>
         </div>
@@ -306,49 +397,53 @@
     
     <main class="container">
         <section>
-            <h2><i class="fas fa-map-marked-alt feature-icon"></i>نحو ذاكرة رقمية تحفظ موروث سوس الفلاحي</h2>
+            <h2><i class="fas fa-map-marked-alt feature-icon"></i>نحو ذاكرة رقمية لممتلكاتنا الفلاحية</h2>
             <div class="highlight-box">       
-                <p> تشهد الأراضي الزراعية في منطقة سوس، جنوب المغرب، ضياعًا تدريجيًا لإرث معرفي ثمين متعلق بحدود الأراضي ومعالمها التقليدية. ويَعود هذا الضياع إلى جملة من الأسباب، من بينها :</p>
+                <P>تشهد الأراضي الزراعية في جهة سوس، جنوب المغرب، ضياعًا تدريجيًا للمعلومات الخاصة بأماكن وحدود أراضي كل عائلة. ويعود هذا الضياع إلى عدة أسباب، من بينها :</P>
                 <section>
                     <li>هجرة السكان الأصليين نحو المدن</li>
-                    <li>ضعف وتَراجُع استغلال الأراضي</li>
-                    <li>الإتلاف المتواصل لمعالم الأراضي نتيجة تحرّكات الحيوانات البرّية</li>
-                    <li>وفاة كبار السن الحاملين لهذه المعارف الميدانية الأصيلة</li>
+                    <li>تراجع استغلال الأراضي</li>
+                    <li>التلف المستمر لمعالم الحدود بسبب تحركات الحيوانات البرية</li>
+                    <li>وفاة كبار السن الحاملين لهذه المعارف</li>
                 </section>
+                <p>هذه المعلومات الخاصة بأماكن وحدود أراضي كل عائلة هي اليوم محصورة في ذاكرة قلة من كبار السن، مما يجعلها مهددة بالضياع في أي لحظة. وإن لم يتداركها المعنيون بسرعة، فلن يبقَ منها أثرٌ يُذكر للأجيال القادمة.</p>
+                <p><strong>"أيدا مابس": حل رقمي للحفاظ على ذاكرة الأرض</strong></p>
+                <p>في ظل هذه التحديات الحقيقية التي تواجهها أراضينا الأصلية بسوس، تبرز " أيدا مابس " كحلّ فعّال و نهائي، من خلال رقمنة الممتلكات الفلاحية وحماية  مواقعها وحدودها من النسيان.</p>
 
-                <p>هذه الحدود الأرضية ومعالمها لم تعد محفوظة إلا في صدور قلة من الشيوخ، ما يجعلها عرضة للضياع والاندثار في أي لحظة. وإن لم يتداركها المعنيون بسرعة، فلن يبقى منها أثر للأجيال القادمة.</p>
-
-                <p><strong>في ظل هذه التحديات، ولحماية هذا الإرث المعرفي الثمين، ظهرت " أيدا مابس " كحل فعّال وبسيط. بحيث تمكّن كل مستخدميها من :</strong></p>
-
-                <section>
-                    <li>تحديد مواقع وحدود البقع الفلاحية بدقة عالية، وتثبيتها على خرائط رقمية</li>
-                    <li>حفظ منظم وآمن للبيانات الخاصة بكل ملكية</li>
-                </section>
-
-                <p>كل ذلك عبر واجهة بسيطة على هاتفك الذكي، لتوثّق ذاكرتك الفلاحية وتحميها... قبل أن يفوت الأوان.</p>
-
-                <p class="note" style="margin-top: 20px; font-weight: bold; color: #a00;">
-                </ul> <div class="warning-box"> <strong>❗ تنبيه مهم:</strong><br> "أيدا مابس" لا تُعدّ بديلاً عن الوثائق القانونية، لكنها تشكّل خطوة محورية في توثيق المعرفة المحلية، وحمايتها من النسيان. </div>
-            </div>
         </section>
         
         <section>
             <h2><i class="fas fa-mobile-alt feature-icon"></i> أيدا مابس : خريطة ذكية بين يديك</h2>
             <div class="highlight-box">
-                <p2>تمكّن "أيدا مابس" كل منخرط من رقمنة المعطيات الميدانية المرتبطة بممتلكاته الفلاحية (كالأراضي، الأشجار، المرافق...) وربطها بمواقعها وحدودها الدقيقة على خريطة ذكية سهلة الاستعمال، وآمنة.</p2> 
-                <section>
-                    <p>من خلال هاتفك فقط، يمكن لك تصفّح هذه البيانات والتنقّل نحو ممتلكاتك الفلاحية و حدودها بدقة تصل إلى 50 سنتيمترًا، دون حاجة إلى مرشد أو ذاكرة شخصية.</p>  
-                    <p>وبذلك، يتحوّل الإرث المعرفي المتعلق بالأرض إلى رصيد رقمي محفوظ، جاهز للاستعمال في أي وقت، وسهل الاسترجاع.</p>            
-                </section>
-            </div>
-        </section>
-
+                <p><strong>كيف تتم رقمنة ممتلكاتكم الفلاحية ؟</strong></p>
+        
+                <li>نرافقكم ميدانيًا إلى كل ممتلكاتكم الفلاحية (أراضٍ، أشجار، مرافق...)</li>
+                <li>ترشدوننا إلى نقاط حدودها</li>
+                <li>نسجّل كل نقطة بدقة باستخدام أجهزة تحديد مواقع عالية الجودة</li>
+                <li>ندوِّن مباشرة جميع المعلومات الخاصة بالملكية على الخريطة، مثل:</li>
+            <ul>
+                <li>اسم العائلة المالكة</li>
+                <li>موقع الملك</li>
+                <li>محتوى الملكية (أشجار، بئر، مرافق...)</li>
+                <li>أسماء الجيران</li>
+                <li>ومعطيات ميدانية دقيقة أخرى</li>
+            </ul>
+                <p>كل هذه البيانات تُخزَّن بشكل آمن، وتُربَط أوتوماتيكيًا بكل بقعة مُسجّلة على الخريطة.</p>
+                <p><strong>ماذا يُسلَّم لكم بعد الانتهاء؟</strong></p>
+                <li>خريطة رقمية ذكية باسم العائلة، صالحة للاستعمال على الهاتف، الحاسوب، وغيرها</li>
+                <li>إمكانية التصفّح والتنقّل نحو ممتلكاتكم بدقة تصل إلى 50 سنتيمترًا، فقط باستعمال هاتفكم المحمول</li>
+                <li>إمكانية مشاركة الخريطة مع الأبناء أو الورثة بسهولة</li>
+                <li>حصص إرشادية فردية أو جماعية لشرح طريقة الاستعمال خطوة بخطوة</li>
+                <p><strong>وبذلك، يتحوّل الإرث المعرفي المرتبط بالأرض إلى رصيد رقمي مؤمَّن، جاهز للاستعمال في التخطيط والإحياء والاستثمار.</strong></p>  
+                <p class="note" style="margin-top: 20px; font-weight: bold; color: #a00;">
+                </ul> <div class="warning-box"> <strong>❗ تنبيه مهم:</strong><br> "أيدا مابس" لا تُعدّ بديلاً عن الوثائق القانونية، لكنها تشكّل خطوة محورية في توثيق المعرفة المحلية، وحمايتها من النسيان. </div>
+            </div>          
         <section>
-            <h2><i class="fas fa-chart-line feature-icon"></i> ما الذي حققته أيدا مابس إلى حدود الساعة ؟</h2>
+            
+            <h2><i class="fas fa-chart-line feature-icon"></i>نتائج ملموسة... في ثلاث سنوات فقط!</h2>
                 
             <div class="highlight-box">
-                <p>بالاعتماد على توفيق الله، وثقة منخرطي "أيدا مابس" الذين يتميّزون بوضوح الرؤية ووعيٍ عميق بأهمية الرقمنة الدقيقة لأملاكهم الفلاحية، تمكّنّا في غضون ثلاث سنوات فقط من تحقيق نتائج ملموسة تعكس جدّية المشروع وفاعليته.</p>
-                <p>"معظم المنخرطين المشكورين صرّحوا بأن عملية الرقمنة عززت ثقتهم في مستقبل ممتلكاتهم الفلاحية."</p>
+                    <p><strong>بفضل توفيق الله، وثقة منخرطي "أيدا مابس"، تمكّنا من تحقيق نتائج ملموسة تعكس جدّية المشروع وفاعليته : </strong></p>
             </div>
         </section>
             <div class="stats">
@@ -367,33 +462,30 @@
                 <div class="stat-card">
                     <i class="fas fa-database" style="font-size: 2rem; color: var(--primary);"></i>
                     <div class="stat-number">3 سنوات</div>
-                    <p>ثلاث سنوات من العمل الميداني المكثف أسهمت في تطوير خبرتنا التقنية و إدارة المهام</p>
+                    <p> 3 سنوات من العمل الميداني في مختلف دواوير سوس</p>
                 </div>
             </div>
         
         <section>
-            <h2><i class="fas fa-star feature-icon"></i>  انخراطكم... مهمّتنا !</h2>
+            <h2><i class="fas fa-star feature-icon"></i>  انخراطكم.....مهمّتنا !</h2>
             <div class="highlight-box">
-                <p>بفضل رقمنة ممتلكاتهم الفلاحية، استطاع منخرطو "أيدا مابس" أن ينعموا براحة بال حقيقية.
+                                
+            <p>انخراطكم في "أيدا مابس" ليس مجرد خطوة تقنية، بل وفاء لأمانة الأجداد، وإحياء لذاكرة الأرض.</p>
+            <p><strong>لا تنتظروا حتى تضيع معالم أراضيكم، أو يرحل من يحفظ تفاصيلها... فكل يوم تأخير قد يُكلّفكم فقدانًا لا يُعوّض.</strong></p>
 
-لم تعد تلك المعارف حبيسة ذاكرة فردية، بل أصبحت محفوظة بشكل آمن، متاحة في أي وقت، وجاهزة للاستعمال في التخطيط، والإحياء، والاستثمار.<p/>
-
-الأهم من ذلك، أنهم ربطوا أبناءهم وأحفادهم بإرثهم العائلي، قبل أن يضيع أو يُنسى.</p>
-                
-                <p><strong>لا تنتظر حتى تضيع معالم أرضك، أو يرحل من كان يحفظ تفاصيلها... فكل يوم تأخير، قد يُكلفك فقدانًا لا يُعوّض.</strong></p>
-                
-                <p>انخراطك في "أيدا مابس" ليس خطوة تقنية فقط، بل وفاء لأمانة الأجداد وإعادة الحياة لذاكرة الأرض.</p>
             </div>
         </section>
                 <section>
-            <h2><i class="fas fa-tags feature-icon"></i>هل أسعارنا في متناولك ؟</h2>
+            <h2><i class="fas fa-tags feature-icon"></i>هل أسعارنا مناسبة لكم؟</h2>
             <table class="pricing-politic">
                   <div class="highlight-box">
-                <p2>نعم، وبكل تأكيد، نراعي احتياجات الجميع من خلال تسعيرة منخفضة جدًا للمتر المربع، تتناقص تدريجيًا مع زيادة المساحة، مما يُخفض الكلفة الإجمالية على العائلات المالكة إلى أدنى حد ممكن.</p2> 
                 <section>
-                    <p>في أغلب الحالات، تبقى أراضي العائلة الواحدة غير مقسمة، مما يسمح بتقاسم التكلفة بين الورثة، فتتحول إلى مبلغ رمزي يسهل تحمله.</p>  
-                    <p>ولتلبية جميع الحالات، وضعنا ثلاث صيغ للانخراط تراعي مختلف الأوضاع، من الفردية إلى الجماعية، بأسعار مدروسة تُسهّل الولوج إلى خدماتنا دون عناء.</p>
-                    <P><strong>ملاحظة : الأسعار المعلَنة تشمل جميع المصاريف والأتعاب بالكامل، دون أي زيادات أو رسوم خفية.</strong></P>           
+                    <p><strong>نعم، وبكل وضوح:</strong></p>
+                    <li>نعتمد تسعيرة منخفضة جدًا للمتر المربع.</li>
+                    <li>تنخفض الكلفة الإجمالية كلما زادت مساحة الأرض.</li>
+                    <li>وغالبًا ما تُقسَّم بين الورثة، فتُصبح رمزية.</li>
+                    <li>نوفر 3 صيغ انخراط: فردية، موحَّدة، أو جماعية.</li> 
+                    <P><strong>الأسعار المعلَنة تشمل جميع المصاريف والأتعاب بالكامل، دون أي زيادات أو رسوم خفية.</strong></P>           
                 </section>
                 <thead> 
                     <section>
@@ -474,7 +566,11 @@
             </a>
         </div>
         <section>
-            <h2><i class="fas fa-mobile-alt feature-icon"></i>للمزيد من المعلومات الاتصال : 86 11 68 0600 - 01 63 82 0643</h2>  
+            <h2>
+            <i class="fas fa-mobile-alt feature-icon"></i> لأي معلومات إضافية :
+            <br>
+            86 11 68 0600 - 01 63 82 0643
+            </h2>
         <section>
     </main>
      <div class="scroll-prompt" id="scrollPrompt">
@@ -533,6 +629,108 @@
 
         // Démarrer le timer initial
         resetInactivityTimer();
+        document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('new-testimonial');
+    const display = document.getElementById('testimonials-display');
+    
+    // Charger les témoignages validés
+    function loadTestimonials() {
+        fetch('/api/testimonials?status=approved')
+            .then(res => res.json())
+            .then(data => {
+                display.innerHTML = '';
+                data.sort((a, b) => new Date(b.date) - new Date(a.date))
+                   .forEach(item => {
+                       const testimonialHTML = `
+                           <div class="testimonial-card">
+                               <p class="testimonial-text">${item.experience}</p>
+                               <div class="testimonial-meta">
+                                   <span>${item.tribe} - ${item.fullname}</span>
+                                   <span>${new Date(item.date).toLocaleDateString('ar-EG')}</span>
+                               </div>
+                           </div>
+                       `;
+                       display.insertAdjacentHTML('beforeend', testimonialHTML);
+                   });
+            });
+    }
+    
+        // Validation en temps réel
+        const arabicValidator = (value) => /^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s.,!؟]+$/.test(value);
+        
+        document.querySelectorAll('#new-testimonial input, #new-testimonial textarea').forEach(el => {
+            el.addEventListener('input', function() {
+                this.style.borderColor = arabicValidator(this.value) ? '#4cc9f0' : '#ff6b6b';
+            });
+        });
+        
+        // Soumission
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const testimonial = {
+                tribe: document.getElementById('user-tribe').value,
+                fullname: document.getElementById('user-fullname').value,
+                experience: document.getElementById('user-experience').value,
+                date: new Date().toISOString(),
+                status: 'pending'
+            };
+            
+            fetch('/api/testimonials', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(testimonial)
+            })
+            .then(() => {
+                alert('شكراً لك! سيتم نشر تجربتك بعد المراجعة');
+                form.reset();
+            });
+        });
+        
+        // Initialisation
+        loadTestimonials();
+    });
     </script>
+    <section class="testimonials-container">
+    <!-- Section Titre -->
+    <div class="section-header">
+        <i class="fas fa-comments"></i>
+        <h2>آراء مستعملي خدمة أيدا مابس</h2>
+        <p>نحن نقدّر ملاحظاتكم وتجاربكم مع خدماتنا</p>
+    </div>
+
+    <!-- Messages Validés -->
+    <div id="testimonials-display" class="messages-container">
+        <!-- Les messages apparaîtront ici dynamiquement -->
+    </div>
+
+    <!-- Formulaire de Soumission -->
+    <div class="testimonial-form">
+        <h3><i class="fas fa-edit"></i> شاركنا تجربتك</h3>
+        <form id="new-testimonial">
+            <div class="input-group">
+                <input type="text" id="user-tribe" 
+                       pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s]+$"
+                       placeholder="الدوار والقبيلة" required>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" id="user-fullname"
+                       pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s]+$"
+                       placeholder="الاسم الكامل" required>
+            </div>
+            
+            <div class="input-group">
+                <textarea id="user-experience" 
+                          pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s.,!؟]+$"
+                          placeholder="اكتب تجربتك بالتفصيل..." required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> إرسال
+        </button>
+            </form>
+        </div>
+    </section>
 </body>
 </html>

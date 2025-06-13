@@ -238,3 +238,28 @@ function showThankYouPage() {
     document.getElementById('main-content').style.display = 'none';
     document.getElementById('thank-you-page').style.display = 'block';
 }
+// Envoyer un témoignage
+document.getElementById('new-testimonial').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const response = await fetch('http://localhost:3000/api/testimonials', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            tribe: document.getElementById('user-tribe').value,
+            fullname: document.getElementById('user-fullname').value,
+            experience: document.getElementById('user-experience').value
+        })
+    });
+    
+    if (response.ok) {
+        alert('شكراً لك! سيتم نشر تجربتك بعد المراجعة');
+    }
+});
+
+// Charger les témoignages
+async function loadTestimonials() {
+    const response = await fetch('http://localhost:3000/api/testimonials');
+    const data = await response.json();
+    // ... Afficher les données ...
+}
