@@ -677,13 +677,13 @@
   <!-- Section Titre -->
   <div class="section-header">
     <i class="fas fa-comments"></i>
-    <h2>آراء مستعملي خدمة أيدا مابس</h2>
+    <h2>خاص بمستعملي خدمة أيدا مابس</h2>
     <p>نحن نقدّر ملاحظاتكم وتجاربكم مع خدماتنا</p>
   </div>
 
   <!-- Formulaire de Soumission -->
   <div class="testimonial-form">
-    <h3><i class="fas fa-edit"></i> شاركنا تجربتك</h3>
+    <h3><i class="fas fa-edit"></i> شاركُونا تجارُبكم</h3>
 
     <form action="https://formspree.io/f/xkgbrlgp" method="POST">
       <div class="input-group">
@@ -710,7 +710,7 @@
         <textarea
           name="experience"
           pattern="^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\s.,!؟\n\r]+$"
-          placeholder="اكتب تجربتك بالتفصيل..."
+          placeholder="اكتبوا من فضلكم تجربتكم بالتفصيل..."
           required
         ></textarea>
       </div>
@@ -719,7 +719,31 @@
         <i class="fas fa-paper-plane"></i> إرسال
       </button>
     </form>
-  </div>
+    <!-- Message de remerciement caché -->
+<div id="thank-you-message" style="display: none; margin-top: 20px; text-align: center; color: green;">
+  <p>شكراً لكم على مشاركتكم! سيتم مراجعة رسالتكم ونشرها قريباً إن شاء الله.</p>
+</div>
+<script>
+  document.getElementById('testimonial-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = new FormData(form);
+
+    const response = await fetch('https://formspree.io/f/xkgbrlgp', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      form.style.display = 'none';
+      document.getElementById('thank-you-message').style.display = 'block';
+    } else {
+      alert('حدث خطأ أثناء الإرسال. حاول مرة أخرى من فضلك.');
+    }
+  });
+</script>
 </section>
 </body>
 </html>
