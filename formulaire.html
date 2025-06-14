@@ -828,8 +828,8 @@
     formFields.forEach(field => {
         field.addEventListener('input', () => {
             clearTimeout(startAnimation);
-            banner.style.animation = 'fadeOut 0.5s ease forwards';
-            setTimeout(() => banner.remove(), 500);
+            banner.style.animation = 'fadeOut 0.2s ease forwards';
+            setTimeout(() => banner.remove(), 200);
         });
         
         // Pour les sélecteurs (clics)
