@@ -819,10 +819,10 @@
     const banner = document.getElementById('fill-blanks-banner');
     const formFields = document.querySelectorAll('input, select, textarea');
     
-    // Démarrer l'animation après 0 seconde
+    // Démarrer l'animation après 15 secondes
     const startAnimation = setTimeout(() => {
-        banner.style.animation = 'gentlePulse 3s ease-in-out 1';
-    }, 0);
+        banner.style.animation = 'gentlePulse 1s ease-in-out 3';
+    }, 15000);
     
     // Disparaître au début de la saisie
     formFields.forEach(field => {
