@@ -2,6 +2,7 @@
 <html dir="rtl" lang="ar">
 <head>
     <meta charset="UTF-8">
+    <link rel="icon" href="/logo.jpg" type="image/jpg">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أيدا مابس - الذاكرة الرقمية لموروثنا الفلاحي</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -276,7 +277,7 @@
         }
 
         .scroll-prompt.visible {
-            opacity: 1;
+            opacity: 10;
             transform: translateY(0);
         }
 
@@ -317,70 +318,6 @@
 
         .testimonial-card {
             background: rgba(46, 139, 192, 0.1);
-            border-right: 2px solid #3a86ff;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .testimonial-text {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .testimonial-meta {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: #a8dadc;
-        }
-
-        .testimonial-form {
-            background: rgba(100, 181, 246, 0.08);
-            padding: 25px;
-            border-radius: 10px;
-            border: 1px dashed rgba(74, 144, 226, 0.3);
-        }
-
-        .input-group {
-            margin-bottom: 20px;
-        }
-
-        .input-group input, 
-        .input-group textarea {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            border-radius: 6px;
-            font-family: 'Tajawal', sans-serif;
-            font-size: 1rem;
-        }
-
-        .submit-btn {
-            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .messages-container {
-            margin-bottom: 50px;
-        }
-
-        .testimonial-card {
-            background: rgba(46, 139, 192, 0.1);
             border-right: 2px solid #ffffff;
             padding: 20px;
             margin-bottom: 20px;
@@ -398,15 +335,27 @@
             margin-bottom: 20px;
         }
 
-        .input-group input, 
-        .input-group textarea {
+        .input-group input {
             width: 100%;
-            padding: 15px 5px;
+            padding: 15px 10px;
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid rgba(0, 0, 0, 0.1);
             border-radius: 6px;
             font-family: 'Tajawal', sans-serif;
             font-size: 1rem;
+        }
+
+        .input-group textarea {
+            width: 100%;
+            padding: 10px 10px;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border-radius: 6px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1rem;
+            min-height: 200px;      /* espace confortable */
+            resize: vertical;       /* l’utilisateur peut agrandir */
+            line-height: 1.6;       /* lisibilité améliorée */
         }
 
         .submit-btn {
